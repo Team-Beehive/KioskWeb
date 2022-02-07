@@ -1,0 +1,15 @@
+#campus_map {
+  position: relative;
+  overflow: auto;
+}
+
+#campus_map a {
+  display: block;
+  position: absolute;
+}
+
+#campus_map img {
+  max-height: 100%;
+  max-width: 100%;
+}
+/*# sourceMappingURL=campus_map.css.map */

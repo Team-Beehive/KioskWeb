@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAA;EACP,QAAQ,EAAE,QAAQ;EAClB,QAAQ,EAAE,IAAI;CAYjB;;AAdD,AAII,WAJO,CAIP,CAAC,CAAA;EACG,OAAO,EAAE,KAAK;EACd,QAAQ,EAAE,QAAQ;CAErB;;AARL,AAUI,WAVO,CAUP,GAAG,CAAA;EACC,UAAU,EAAE,IAAI;EAChB,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "campus_map.scss"
+    ],
+    "names": [],
+    "file": "campus_map.css"
+}

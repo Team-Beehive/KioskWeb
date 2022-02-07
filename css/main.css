@@ -3,7 +3,7 @@
 }
 
 #building-crop-1 img {
-  margin: -100px -1 0 10 !important;
+  margin: -100px   -1 0 10 !important;
 }
 
 .crop {
@@ -30,7 +30,7 @@
   color: white;
 }
 
-h1 {
+h1.title {
   text-align: center;
 }
 

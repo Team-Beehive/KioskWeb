@@ -1,0 +1,15 @@
+#campus_map{
+    position: relative;
+    overflow: auto;
+
+    a{
+        display: block;      
+        position: absolute;
+        // border: 1px solid magenta;
+    }
+
+    img{
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
