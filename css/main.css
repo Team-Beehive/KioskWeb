@@ -2,8 +2,13 @@
   font-family: sans-serif;
 }
 
+#building-crop-1 img {
+  margin: -100px -1 0 10 !important;
+}
+
 .crop {
   overflow: hidden;
+  padding: 0px 5px 10px  !important;
 }
 
 .crop img {
@@ -18,9 +23,10 @@
 
 .blue-box {
   background-color: #003767;
+  padding: 10px;
 }
 
-.blue-box p {
+.blue-box * {
   color: white;
 }
 
@@ -38,5 +44,6 @@ h1 {
 .scroll .scroll-card {
   display: inline-block;
   float: none;
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */

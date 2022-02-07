@@ -4,61 +4,97 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <!-- <link rel="manifest" href="manifest.json"> -->
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Main</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-12 crop">
+<table class="container-fluid">
+    <tr class="row">
+        <td class="col-12 crop" id="building-crop-1">
             <img src="images/purvine1.jpg" alt="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4 crop cover">
-            <img src="images/purvine2.jpg" alt="">
-        </div>
-        <div class="col-4 crop cover">
-            <img src="images/purvine3.jpg" alt="">
-        </div>
-        <div class="col-4 crop cover">
-            <img src="images/purvine4.png" alt="">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h1>Purvine Hall</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4 blue-box">
-            <p>the</p>  
-        </div>
-        <div class="col-8">
-            <p>the as well</p>
-        </div>
-    </div>
-    </div>
+        </td>
+    </tr>
+    <tr class="row">
+        <td class="col-4 crop"><img src="images/purvine2.jpg" alt=""></td>
+        <td class="col-4 crop"><img src="images/purvine3.jpg" alt=""></td>
+        <td class="col-4 crop"><img src="images/purvine4.png" alt=""></td>
+    </tr>
+    <tr class="row">
+        <td class="col-12">
+            <marquee behavior="alternate" direction="">
+                <marquee behavior="alternate" direction="up">
+                    <h1>Purvine Hall</h1>
+                </marquee>
+            </marquee>
+            
+        </td>
+    </tr>
+    <tr class="row">
+        <td class="col-4 blue-box">
+            <h4>Quick Facts</h4>
+            <h5>Built</h5>
+            <p>0000</p>
+            <h5>Primary Majors</h5>
+            <p>Software Engineering</p>
+            <p>Embedded Egineering</p>
+            <p>Electical Engineering</p>
+        </td>
+        <td class="col-8">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error cupiditate minima voluptate tempore, aliquam
+                quis enim. Ut totam eligendi molestiae molestias ullam quae natus alias deleniti exercitationem, sit saepe.
+                Possimus!
+                Maiores voluptate distinctio quas. Dolor sequi odit similique quibusdam, amet laborum fugit tempore eos
+                numquam aliquam incidunt maiores facilis accusamus vero aperiam, laudantium animi veritatis vel eveniet
+                pariatur odio inventore!
+                Dolorem impedit quae ducimus beatae? Expedita reprehenderit doloribus explicabo officiis minus, corporis
+                velit eos dolorem ipsum ratione libero magnam placeat sequi quae ullam rerum iure, minima nemo quisquam
+                blanditiis est.
+                Error commodi deleniti necessitatibus voluptate magni praesentium totam et, numquam ducimus reprehenderit,
+                accusantium temporibus, alias veritatis quae illum. Quia iure asperiores impedit sequi sit nulla magnam
+                culpa cupiditate placeat vero.
+                Voluptatum voluptate ad maiores recusandae atque odio repellat consectetur. Consequatur aliquid expedita
+                totam ex sapiente quae facilis, est animi et nemo adipisci eum rem. Ipsum tempora sed accusantium minima
+                enim!
+                Odio eveniet repellat fugit explicabo, unde voluptas! Perferendis rem fuga et beatae voluptates ex natus
+                quos nesciunt asperiores aspernatur culpa iusto doloribus quis temporibus, vitae recusandae dicta debitis
+                illo iure!
+                Velit voluptatibus quam impedit sint, praesentium, eum rerum dolor cumque vel soluta dicta, totam deserunt
+                nisi. Illo atque saepe sequi debitis iusto molestiae! Doloremque maxime ad, non officiis distinctio fuga!
+                Dolor, atque! Saepe quae nisi corporis minima? Quae, voluptatum asperiores! Dolores earum aliquam
+                dignissimos quos dolorum, corrupti reprehenderit vel, blanditiis est reiciendis dolor tempora explicabo
+                facilis minima quod doloribus tempore.
+                Reprehenderit, quaerat! Amet consequatur illo voluptatibus molestiae. Consectetur illum unde totam omnis
+                incidunt quia aperiam error voluptates praesentium suscipit natus non nemo quaerat, asperiores facere in
+                nobis, inventore ut libero.
+                Fugit tempore temporibus numquam, perspiciatis beatae quisquam expedita ullam, repellat eum dolor delectus
+                pariatur reiciendis velit id esse eius non. Laboriosam, eius ad. Modi inventore placeat suscipit quod cum
+                quaerat.</p>
+            </td>
+        </tr>
+</table>
 
-    <div class="scroll">
-        <div class="scroll-card crop">
-            <img src="images/ceet1.jpg" alt="CEET">
-            <p>CEET</p>
-        </div>
-        <div class="scroll-card crop">
-            <img src="images/cu1.jpg" alt="College Union building">
-            <p>College Union</p>
-        </div>
-        <div class="scroll-card crop">
-            <img src="images/dow1.jpg" alt="Martha Anne Dow building">
-            <p>Dow</p>
-        </div>
-        <div class="scroll-card crop">
-            <img src="images/snell1.jpg" alt="Snell">
-            <p>Snell Hall</p>
-        </div>
+<div class="scroll">
+    <div class="scroll-card crop">
+        <img src="images/ceet1.jpg" alt="CEET">
+        <p>CEET</p>
+    </div>
+    <div class="scroll-card crop">
+        <img src="images/cu1.jpg" alt="College Union building">
+        <p>College Union</p>
+    </div>
+    <div class="scroll-card crop">
+        <img src="images/dow1.jpg" alt="Martha Anne Dow building">
+        <p>Dow</p>
+    </div>
+    <div class="scroll-card crop">
+        <img src="images/snell1.jpg" alt="Snell">
+        <p>Snell Hall</p>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
