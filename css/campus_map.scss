@@ -2,14 +2,16 @@
     position: relative;
     overflow: auto;
 
-    a{
+    a
+    {
         display: block;      
         position: absolute;
-        // border: 1px solid magenta;
+        border: 1px solid magenta;
     }
 
-    img{
-        max-height: 100%;
+    img
+    {
+        // max-height: 100%;
         max-width: 100%;
     }
 }

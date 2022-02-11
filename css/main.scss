@@ -6,7 +6,6 @@ $oit_gold: #ffd14e;
     font-family: sans-serif;
 }
 
-
 // TODO: Move to correct file
 #building-crop-1 img
 {
@@ -19,7 +18,8 @@ $oit_gold: #ffd14e;
 
     padding: 0px 5px 10px  !important;
     
-    img {
+    img
+    {
 
         object-fit: cover;
         object-position: center; /* Center the image within the element */
