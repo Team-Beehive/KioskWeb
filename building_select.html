@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,24 +10,40 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Campus Map</title>
 </head>
 <body>
     <table class="container-fluid">
+        <div id="page_banner">
+            <div class="banner_row">
+                <div class="oit_logo">
+                    <img src="https://www.oit.edu/themes/custom/oregontech/images/logo.png">
+                </div>
+                <div class="hootie_logo">
+                    <img src="https://oregontechowls.com/images/main_logo.png">
+                </div>
+            </div>
+        </div>
         <tr class="row">
             <td class="col-12">
-                <h1 class="title">Select a building!</h1>
+                <h1 class="page_title" style="text-align:center">Klamath Falls Campus Map</h1>
+            </td>
+            <td class="col-12">
+                <h2 class="welcome_message" style="text-align:center">Get to know your campus!</h1>
+            </td>
+            <td class="col-12">
+                <h3 class="info_statement" style="text-align:center">Click a building to learn more.</h2>
             </td>
         </tr>
         <tr class="row">
             <td class="col-12">
                 <div id="campus_map">
                     <!-- TODO: Replace with better map -->
-                    <img src="images/campus-map-2.png" alt="Campus Map"> 
-                    <a href="buildings/purvine.html" style="top: 48%; left: 28.5%; width: 6.5%; height: 12%;"></a>
-                    <a href="buildings/cornett.html" style="top: 29.5%; left: 30.2%; width: 10.3%; height: 16%;"></a>
-                    <a href="buildings/lrc.html" style="top: 34.5%; left: 45%; width: 7%; height: 11%;"></a>
-                    <a href="buidlings/owens.html" style="top: 48.8%; left: 45%; width: 6.6%; height: 10.3%;"></a>
+                    <img src="images/campus-map-2.png" alt="Campus Map" class="center"> 
+                    <a href="buildings/purvine.html" style="top: 49.5%; left: 31.75%; width: 5.25%; height: 11%;"></a>
+                    <a href="buildings/cornett.html" style="top: 33.75%; left: 31.75%; width: 10.3%; height: 14.5%;"></a>
+                    <a href="buildings/lrc.html" style="top: 38%; left: 45%; width: 7%; height: 10%;"></a>
+                    <a href="buidlings/owens.html" style="top: 50%; left: 45.25%; width: 6.5%; height: 9.5%;"></a>
                 </div>
             </td>
         </tr>

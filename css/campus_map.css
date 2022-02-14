@@ -9,6 +9,20 @@
   border: 1px solid magenta;
 }
 
+.oit_logo img {
+  width: 70%;
+  padding-right: 5%;
+}
+.hootie_logo img {
+  width: 20%;
+}
+
+.center{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 75%;
+}
 #campus_map img {
   max-width: 100%;
 }
