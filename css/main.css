@@ -6,6 +6,20 @@
   margin: -100px   -1 0 10 !important;
 }
 
+.navbar-brand img {
+  width: 50%;
+}
+
+.hootie_logo img {
+  width: 20%;
+}
+
+.center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .crop {
   overflow: hidden;
   padding: 0px 5px 10px  !important;
