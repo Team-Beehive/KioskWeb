@@ -1,4 +1,5 @@
-#campus_map{
+#campus_map
+{
     position: relative;
     overflow: auto;
 
@@ -6,7 +7,7 @@
     {
         display: block;      
         position: absolute;
-        // border: 1px solid magenta;
+        // border: 1px solid magenta; // Uncomment to show bounding boxes of border
     }
 
     img
