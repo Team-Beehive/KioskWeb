@@ -65,8 +65,10 @@ $oit_gold: #ffd14e;
 
 .blue-box
 {
+    &.col-4{
+        padding: 15px 5px !important;
+    }
     background-color: $oit_blue;
-    padding: 10px;
 
     *
     {
@@ -75,13 +77,17 @@ $oit_gold: #ffd14e;
 
     p
     {
-        margin: 0 15px 5px;
+        margin: 0
+        {
+            left: 5px;
+            bottom: 5px;
+        }
     }
 
     // See @mixins above
     @include headings 
     {
-        margin: 5px;
+        margin: 0px;
     }
 }
 
