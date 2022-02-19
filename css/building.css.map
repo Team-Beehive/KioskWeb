@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,WAAW,CACX;EACI,gBAAgB,EAAE,0BAA0B;CAC/C;;AAED,AAAA,WAAW,CACX;EACI,gBAAgB,EAAE,wBAAwB;CAC7C;;AAED,AAAA,WAAW,CACX;EACI,gBAAgB,EAAE,yBAAyB;CAC9C;;AAED,AAAA,WAAW,CACX;EACI,gBAAgB,EAAE,2BAA2B;CAChD",
+    "sources": [
+        "building.scss"
+    ],
+    "names": [],
+    "file": "building.css"
+}
