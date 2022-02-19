@@ -1,6 +1,7 @@
 //Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
+import { collection, doc, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,3 +25,6 @@ const database = getDatabase(app);
 
 // the hello world program
 console.log('Hello World');
+
+const querySnapshot = await getDocs(collections(db, "pages").getDocs("Map").collection("Buildings"));
+querySnapshot.forEach(doc => { console.log(`${doc.id} => ${doc.data()}`) });
