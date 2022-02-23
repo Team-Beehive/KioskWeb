@@ -32,28 +32,42 @@ h4, h5, h6 {
 
 .crop {
   overflow: hidden;
-  padding: 0px 5px 10px  !important;
 }
 
-.crop img {
+.cover {
+  overflow: hidden;
+  padding: 0px 2px 2px 0px;
+}
+
+.cover img {
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
   width: 100%;
-  height: 15vh;
+  height: 35vh;
 }
 
-.crop .cover {
-  height: 20vh;
+@media screen and (max-width: 768px) {
+  .cover img {
+    height: 15vh;
+  }
+}
+
+.cover.main img {
+  height: 40vh;
+}
+
+@media screen and (max-width: 768px) {
+  .cover.main img {
+    height: 20vh;
+  }
 }
 
 .blue-box {
-  background-color: #003767;
-}
-
-.blue-box.col-4 {
   padding: 15px 5px !important;
+  margin-bottom: 2px;
+  background-color: #003767;
 }
 
 .blue-box * {
@@ -78,18 +92,22 @@ h4, h5, h6 {
   white-space: nowrap;
 }
 
-.scroll margin {
-  top: 10px;
-  left: 10px;
+@media screen and (max-width: 768px) {
+  .scroll .oit-card [id^=card-img] {
+    width: 57vw;
+    height: 57vw;
+  }
 }
 
-.scroll-card {
+.oit-card {
   display: inline-block;
   float: none;
   text-align: center;
+  margin: 0;
+  margin-right: 1px;
 }
 
-.scroll-card [id^=card-img] {
+.oit-card [id^=card-img] {
   width: 20vw;
   height: 20vw;
   background-size: cover;
@@ -99,17 +117,17 @@ h4, h5, h6 {
 }
 
 @media screen and (max-width: 768px) {
-  .scroll-card [id^=card-img] {
-    width: 57vw;
-    height: 57vw;
+  .oit-card [id^=card-img] {
+    width: 50vw;
+    height: 50vw;
   }
 }
 
-.scroll-card:hover .card-text {
+.oit-card:hover .oit-card-text {
   height: 30%;
 }
 
-.scroll-card .card-text {
+.oit-card-text {
   height: 20%;
   -webkit-transition: height 0.1s;
   transition: height 0.1s;
@@ -120,7 +138,7 @@ h4, h5, h6 {
   background-color: rgba(0, 55, 103, 0.9);
 }
 
-.scroll-card .card-text p {
+.oit-card-text p {
   font-size: large;
   position: relative;
   top: 50%;

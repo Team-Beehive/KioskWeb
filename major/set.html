@@ -10,24 +10,49 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/major.css">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
 
     <title>Software Engineering Technology</title>
 </head>
 
 <body>
-    <table class="container-fluid">
-        <tr class="row">
-            <div class="col-12 carousel">
+    <table class="container-fluid p-0">
 
-            </div>
+        <tr class="row m-auto">
+            <td class="col-12 carousel">
+                <div class="slides">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="../images/cset1.jpg" style="width:100%">
+                    <div class="text">Caption Text</div>
+                </div>
+                
+                <div class="slides">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="../images/cset2.jpg" style="width:100%">
+                    <div class="text">Caption Two</div>
+                </div>
+                
+                <div class="slides">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="../images/cset3.jpg" style="width:100%">
+                    <div class="text">Caption Three</div>
+                </div>
+                
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </td>
         </tr>
-        <tr class="row">
+        <tr class="row m-auto">
             <td class="col-12">
                 <h2 class="center">Software Engineering Technology</h2>
                 <h3 class="center">- Bachelor and Associates Degrees -</h3>
             </td>
         </tr>
-        <tr class="row">
+        <tr class="row m-auto">
             <td class="col-4 blue-box">
                 <h4>Quick Facts</h4>
                 <h5>First Offered</h5>
@@ -46,7 +71,6 @@
                 <p>Software Engineering Technology is an engineering discipline that deals with all aspects of software production. Students learn to design software systems, writhe the code that implements those systems, and test systems to make sure they meet requirements. Our graduates are contribiting to solutions in medical, industrial, communications, aerospace, business, and scientific fields.</p>
             </td>
         </tr>
-
     </table>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -58,6 +82,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQlgfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-</body>
 
+    <script src="../js/major.js"></script>
+</body>
 </html>

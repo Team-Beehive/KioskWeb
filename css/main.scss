@@ -1,5 +1,6 @@
 // Variable delcarations
 $oit_blue: #003767;
+$techweb_lightblue: #5e9ccc;
 $oit_gold: #ffd14e;
 
 // When calling 'headings', makes all headings receive the content
@@ -15,8 +16,8 @@ $oit_gold: #ffd14e;
 {
     font-family: "Roboto", Arial, sans-serif;
 
-    // Disallow selecting of text for a better user experience
-    user-select: none; 
+    // Disallow selecting of text for a better user experience on the kiosk
+    user-select: none;
 }
 
 @include headings
@@ -50,37 +51,58 @@ $oit_gold: #ffd14e;
 .crop 
 {
     overflow: hidden;
+}
 
-    padding: 0px 5px 10px  !important;
-    
-    
+.cover
+{
+    overflow: hidden;
+    padding: 0px 2px 2px 0px;
     img
     {
 
         object-fit: cover;
         object-position: center; // Center the image within the element
         width: 100%;
-        height: 15vh;
+
+        @media screen and (max-width: 768px) 
+        {
+            &
+            {
+                height: 15vh;
+            }
+        }
+
+        height: 35vh;
     }
 
-    .cover
+    &.main
     {
-        height: 20vh;
+        img
+        {
+            @media screen and (max-width: 768px) 
+            {
+                &
+                {
+                    height: 20vh;
+                }
+            }
+
+            height: 40vh;
+        }
     }
 }
 
 .blue-box
 {
-    &.col-4{
-        padding: 15px 5px !important;
-    }
+    
+    padding: 15px 5px !important;
+    margin-bottom: 2px;
+    
     background-color: $oit_blue;
-
     *
     {
         color: white;
     }
-
     p
     {
         margin: 0
@@ -99,28 +121,17 @@ $oit_gold: #ffd14e;
 
 .scroll
 {
-    margin // Shorthand for margin-top, margin-left, etc.
-    {
-        top: 10px;
-        left: 10px;
-    }
 
     width: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
 
-    &-card // Shorthand for .scroll-card. Does not become child of parent element.
+    .oit-card
     {
-        display: inline-block;
-        float: none;
-        text-align: center;
-
-        
-        
-        [id^=card-img] // identifiers that start with 'card-img'
+        [id^=card-img]
         {
-            // Sizing for phone displays, shows concepts better for presentations
+            // Gives some extra size to make it obvious to scroll
             @media screen and (max-width: 768px) {
                 &
                 {
@@ -128,41 +139,66 @@ $oit_gold: #ffd14e;
                     height: 57vw;
                 }
             }
-            
-            // Sizing for non-phone displays. Gets overwritten when the other one is done.
-            width: 20vw;
-            height: 20vw;
-            // position: absolute;
-            background-size: cover; // Fill entire space
-            background-position: 50% 50%; // Center on div
-            background-repeat: no-repeat; // Don't repeat background
-
-            position: relative;
         }
+    }
+}
 
-        &:hover .card-text
-        {
-            height: 30%;
-        }
+.oit-card
+{
+    display: inline-block;
+    float: none;
+    text-align: center;
 
-        .card-text
-        {
-            height: 20%;
-            transition: height 0.1s;
-            position: absolute;
-            width: 100%;
-            bottom: 0px;
-            color: white;
-
-            background-color: rgba($color: $oit_blue, $alpha: 0.9);
-
-            p
+    margin: 0
+    {
+        right: 1px;
+    }
+    
+    
+    [id^=card-img] // identifiers that start with 'card-img'
+    {
+        // Sizing for phone displays, shows concepts better for presentations
+        @media screen and (max-width: 768px) {
+            &
             {
-                font-size: large;
-                position: relative;
-                top: 50%;
-                transform: translateY(-50%);
+                width: 50vw;
+                height: 50vw;
             }
+        }
+        
+        // Sizing for non-phone displays. Gets overwritten when the other one is done.
+        width: 20vw;
+        height: 20vw;
+        // position: absolute;
+        background-size: cover; // Fill entire space
+        background-position: 50% 50%; // Center on div
+        background-repeat: no-repeat; // Don't repeat background
+
+        position: relative;
+    }
+
+    &:hover &-text
+    {
+        height: 30%;
+    }
+
+    &-text // & can be used to concatinate on other text. Will become .oit-card-text
+    {
+        height: 20%;
+        transition: height 0.1s;
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        color: white;
+
+        background-color: rgba($color: $oit_blue, $alpha: 0.9);
+
+        p
+        {
+            font-size: large;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 }
