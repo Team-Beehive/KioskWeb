@@ -1,7 +1,16 @@
+// with npm
+
 //Import the functions you need from the SDKs you need
+/*
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js";
 import { collection, doc, setDoc } from "firebase/firestore";
+*/
+
+// with Commonjs syntax (if using Node)
+const firebase = require("firebase/app");
+require("firebase/firestore");
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
