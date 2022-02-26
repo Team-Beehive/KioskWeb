@@ -10,20 +10,22 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/campus_map.css">
-
-
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <title>Campus Map</title>
 </head>
 <body>
     <table class="container-fluid">
-        <tr class="row" id="page_banner">
-            <td class="col-8">
-                <img src="https://www.oit.edu/themes/custom/oregontech/images/logo.png">
-            </td>
-            <td class="col-4">
-                <img src="https://oregontechowls.com/images/main_logo.png">
-            </td>
-        </tr>
+        <div id="page_banner">
+            <tr class="row">
+                <td class="col-8">
+                    <img class="img-fluid" src="https://www.oit.edu/themes/custom/oregontech/images/logo.png">
+                </td>
+                <td class="col-4">
+                    <img class="img-fluid" src="https://oregontechowls.com/images/main_logo.png">
+                </td>
+            </tr>
+        </div>
         <tr class="row">
             <td class="col-12">
                 <h1 class="page_title" style="text-align:center">Klamath Falls Campus Map</h1>
@@ -110,7 +112,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    <script type="module" src="js/building_select.js"></script>
+    <script type="text/JavaScript" src="js/building_select.js"></script>
 
 </body>
 </html>
