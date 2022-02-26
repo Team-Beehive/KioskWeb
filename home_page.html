@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/campus_map.css">
 
 
-    <title>Campus Map</title>
+    <title>OIT Info Home</title>
 </head>
 <body>
     <table class="container-fluid">
@@ -24,27 +24,38 @@
                 <img src="https://oregontechowls.com/images/main_logo.png">
             </td>
         </tr>
-        <tr class="row">
+        <tr class="row" id="major_exploration">
             <td class="col-12">
-                <h1 class="page_title" style="text-align:center">Klamath Falls Campus Map</h1>
-            </td>
-            <!-- <td class="col-12">
-                <h2 class="welcome_message" style="text-align:center">Get to know your campus!</h1>
-            </td> -->
-            <td class="col-12">
-                <h2 class="info_statement" style="text-align:center">Click a building to learn more.</h2>
+                <h1>
+                    Get to know your options
+                </h1>
+                <a src="/major_select.html"></a>
             </td>
         </tr>
-        <tr class="row">
+        <tr class="row" id="popular_majors">
             <td class="col-12">
-                <div id="campus_map">
-                    <!-- TODO: Replace with better map -->
-                    <img src="images/campus-map-2.png" alt="Campus Map" class="center">
-                    <a href="buildings/purvine.html" style="top: 49.5%; left: 31.75%; width: 5.25%; height: 11%;"></a>
-                    <a href="buildings/cornett.html" style="top: 33.75%; left: 31.75%; width: 10.3%; height: 14.5%;"></a>
-                    <a href="buildings/lrc.html" style="top: 38%; left: 45%; width: 7%; height: 10%;"></a>
-                    <a href="buidlings/owens.html" style="top: 50%; left: 45.25%; width: 6.5%; height: 9.5%;"></a>
-                </div>
+                <h2>Most Popular Majors</h2>
+            </td>
+        </tr>
+        <tr class="row" id="top-3_majors">
+            <td class="col-4">
+                <!--Insert Major 1 here-->
+            </td>
+            <td class="col-4">
+                <!--Insert Major 2 here-->
+            </td>
+            <td class="col-4">
+                <!--Insert Major 3 here-->
+            </td>
+        </tr>
+        <tr class="row" id="professors_heading">
+            <td class="col-12">
+                <h1>Get to know the staff</h1>
+            </td>
+        </tr>
+        <tr class="row" id="professor_directory">
+            <td class="col-12">
+                <p>click <a href="/professors_page.html">here</a> to view directory</p>
             </td>
         </tr>
     </table>
@@ -97,20 +108,4 @@
             </form> -->
         </div>
     </nav>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-
-    <script type="module" src="js/building_select.js"></script>
-
 </body>
-</html>
