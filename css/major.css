@@ -1,5 +1,4 @@
 .carousel {
-  max-height: 40px;
   position: relative;
   margin: 0;
   padding: 0;
@@ -15,6 +14,7 @@
 /* Hide the images by default */
 .slides {
   display: none;
+  max-height: 40px;
 }
 
 /* Next & previous buttons */
