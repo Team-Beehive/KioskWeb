@@ -1,3 +1,4 @@
+//https://firebase.google.com/docs/reference/js/v8
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 firebase.initializeApp({
@@ -15,11 +16,12 @@ firebase.initializeApp({
 
 var db = firebase.firestore();
 
-db.collection("pages").get().then((querySnapshot) => {
+//gets a snapshot of Majors page
+db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
+        console.log(doc.id)
     });
 });
 
-// the hello world program
+
 console.log('Hello World');
