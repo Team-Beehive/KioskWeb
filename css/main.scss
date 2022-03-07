@@ -11,7 +11,7 @@ $oit_gold: #ffd14e;
     }
 }
 
-// Font family decisions copied from OIT website
+// Font family copied from OIT website
 *
 {
     font-family: "Roboto", Arial, sans-serif;
@@ -95,10 +95,11 @@ $oit_gold: #ffd14e;
 .blue-box
 {
     
-    padding: 15px 5px !important;
+    padding: 5px 5px !important;
     margin-bottom: 2px;
     
     background-color: $oit_blue;
+
     *
     {
         color: white;
@@ -121,7 +122,6 @@ $oit_gold: #ffd14e;
 
 .scroll
 {
-
     width: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -169,7 +169,6 @@ $oit_gold: #ffd14e;
         // Sizing for non-phone displays. Gets overwritten when the other one is done.
         width: 20vw;
         height: 20vw;
-        // position: absolute;
         background-size: cover; // Fill entire space
         background-position: 50% 50%; // Center on div
         background-repeat: no-repeat; // Don't repeat background
