@@ -16,14 +16,16 @@
 </head>
 <body>
     <table class="container-fluid">
-        <tr class="row" id="page_banner">
-            <td class="col-8">
-                <img src="https://www.oit.edu/themes/custom/oregontech/images/logo.png">
-            </td>
-            <td class="col-4">
-                <img src="https://oregontechowls.com/images/main_logo.png">
-            </td>
-        </tr>
+        <div id="page_banner">
+            <tr class="row">
+                <td class="col-8">
+                    <img class="img-fluid" src="https://www.oit.edu/themes/custom/oregontech/images/logo.png">
+                </td>
+                <td class="col-4">
+                    <img class="img-fluid" src="https://oregontechowls.com/images/main_logo.png">
+                </td>
+            </tr>
+        </div>
         <tr class="row" id="major_exploration">
             <td class="col-12">
                 <h1>
@@ -34,18 +36,38 @@
         </tr>
         <tr class="row" id="popular_majors">
             <td class="col-12">
-                <h2>Most Popular Majors</h2>
+                <h2 text-align="center">Most Popular Majors</h2>
             </td>
         </tr>
-        <tr class="row" id="top-3_majors">
-            <td class="col-4">
-                <!--Insert Major 1 here-->
+        <tr class="row">
+            <td class="oit-card">
+                <div id="card-img-1">
+                    <div class="oit-card-text">
+                        <p id="major-1">Software Engineering</p>
+                    </div>
+                </div>
             </td>
-            <td class="col-4">
-                <!--Insert Major 2 here-->
+            <td class="oit-card">
+                <div id="card-img-2">
+                    <div class="oit-card-text">
+                        <p id="major-2">Civil Engineering</p>
+                    </div>
+                </div>
+                
             </td>
-            <td class="col-4">
-                <!--Insert Major 3 here-->
+            <td class="oit-card">
+                <div id="card-img-3">
+                    <div class="oit-card-text">
+                        <p id="major-3">Echocardiology</p>
+                    </div>
+                </div>
+            </td>
+            <td class="oit-card">
+                <div id="card-img-4">
+                    <div class="oit-card-text">
+                        <p id="major-4">Mechanical Engineering</p>
+                    </div>
+                </div>
             </td>
         </tr>
         <tr class="row" id="professors_heading">
@@ -53,7 +75,7 @@
                 <h1>Get to know the staff</h1>
             </td>
         </tr>
-        <tr class="row" id="professor_directory">
+        <tr class="row page_bottom" id="professor_directory">
             <td class="col-12">
                 <p>click <a href="/professors_page.html">here</a> to view directory</p>
             </td>
@@ -74,12 +96,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-link">
-                    <a href="index.html" class="nav-link">
+                    <a href="home_page.html" class="nav-link">
                         Home
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="building_select.html">
                         Campus Map
                         <span class="sr-only">
                             (current)
