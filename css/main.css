@@ -28,6 +28,10 @@ h4, h5, h6 {
   width: 20%;
 }
 
+.page_bottom {
+  padding-bottom: 100px;
+}
+
 .center {
   display: block;
   margin-right: auto;
