@@ -34,15 +34,17 @@ db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnap
     //Gets the data and saves it into the PageData class
     querySnapshot.forEach((doc) => {
         temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
-        major_data[major_data.length] = temp_data;
+        major_data.push(temp_data);
     });
+
+    major_data.forEach(element => PrintData(element));
     
 });
 
-function PrintData(page_data, index)
+function PrintData(page_data)
 {
-    console.log(page_data[index].id, page_data[index].about, page_data[index].campuses, page_data[index].type)
+    console.log(page_data.id, page_data.about, page_data.campuses, page_data.type)
 }
 
-major_data.forEach(PrintData);
+
 console.log('Hello World');
