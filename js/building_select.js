@@ -25,8 +25,6 @@ class PageData
     }
 }
 
-
-
 let major_data = new Array();
 var db = firebase.firestore();
 
@@ -37,9 +35,8 @@ db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnap
     querySnapshot.forEach((doc) => {
         temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
         major_data[major_data.length] = temp_data;
-        //console.log(temp_data.id, temp_data.about, temp_data.campuses, temp_data.type);
     });
-
+    
 });
 
 function PrintData(page_data, index)
