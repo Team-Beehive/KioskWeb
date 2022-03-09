@@ -14,30 +14,38 @@ firebase.initializeApp({
     measurementId: "G-BYNMKM80XC"
 });
 
-function saveData(id, about, campuses, type)
+class PageData
 {
-
+    constructor(id, about, campuses, type)
+    {
+        this.id = id;
+        this.about = about;
+        this.campuses = campuses;
+        this.type = type;
+    }
 }
 
 
 
+let major_data = new Array();
 var db = firebase.firestore();
+
 //gets doccument snapshot for every doc in collection
 db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnapshot) => {
-    let major_data = new Map();
+
+    //Gets the data and saves it into the PageData class
     querySnapshot.forEach((doc) => {
-
-        //Prints of id of each doc in collection
-        major_data.set("id", doc.id);
-        //Prints the about section of the doc
-        major_data.set("about", doc.get("about"));
-        //Prints the campuses section of the doc
-        major_data.set("campuses", doc.get("campuses"));
-        //Prints the type section of the doc
-        major_data.set("type", doc.get("type"));
-        console.log(major_data.get("id"), major_data.get("about"), major_data.get("campuses"), major_data.get("type"));
-
+        temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+        major_data[major_data.length] = temp_data;
+        //console.log(temp_data.id, temp_data.about, temp_data.campuses, temp_data.type);
     });
+
 });
 
+function PrintData(page_data, index)
+{
+    console.log(page_data[index].id, page_data[index].about, page_data[index].campuses, page_data[index].type)
+}
+
+major_data.forEach(PrintData);
 console.log('Hello World');
