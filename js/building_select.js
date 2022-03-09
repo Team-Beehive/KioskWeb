@@ -14,6 +14,7 @@ firebase.initializeApp({
     measurementId: "G-BYNMKM80XC"
 });
 
+//Class to hold each majors data from the database
 class PageData
 {
     constructor(id, about, campuses, type)
@@ -37,14 +38,14 @@ db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnap
         major_data.push(temp_data);
     });
 
-    major_data.forEach(element => PrintData(element));
-    
+    //Prints all the data to the console
+    major_data.forEach(PrintData);
 });
 
+//Function that take a PageData and prints out its data
 function PrintData(page_data)
 {
     console.log(page_data.id, page_data.about, page_data.campuses, page_data.type)
 }
-
 
 console.log('Hello World');
