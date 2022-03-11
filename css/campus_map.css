@@ -6,6 +6,7 @@
 #campus_map a {
   display: block;
   position: absolute;
+  border: 1px solid magenta;
 }
 
 #campus_map img {
