@@ -1,4 +1,4 @@
-# WebApp
+# KioskWeb
 
 Build steps:
 1. run `npm i` to download all external scripts
