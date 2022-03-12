@@ -1,9 +1,6 @@
+import { initializeApp, collection, getDocs, getFirestore } from '../build/firebase.bundle.js'
 
-//https://firebase.google.com/docs/reference/js/v8
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-firebase.initializeApp({
+const app = initializeApp({
 
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
     authDomain: "oit-kiosk.firebaseapp.com",
@@ -43,18 +40,19 @@ class PageData
 }
 
 //Database obj
-var db = firebase.firestore();
+const db = getFirestore(app);
 
-//gets doccument snapshot for every doc in collection
-db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnapshot) => {
+
+
+getDocs(collection(db, 'pages', "Majors", "Degrees")).then((querySnapshot) => {
 
     //clears local stoarage before writing to it, dont know how it cleans up
     localStorage.clear();
 
     //Gets the data and saves it into the PageData class
     querySnapshot.forEach((doc) => {
-        temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
-        localStorage.setObj(doc.id, temp_data)
+        var temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+        localStorage.setObj(doc.id, temp_data);
     });
 
     //test to see if it gets everything
@@ -64,4 +62,4 @@ db.collection("pages").doc("Majors").collection("Degrees").get().then((querySnap
 
 });
 
-console.log('Hello World');
+// console.log('Hello World');

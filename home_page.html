@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/campus_map.css">
 
@@ -86,7 +85,7 @@
             <img src="https://www.oit.edu/themes/custom/oregontech/images/logo.png" alt="oit logo">
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        <button class="navbar-toggler" type="button" data-sr-toggle="collapse" data-sr-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -103,7 +102,7 @@
                 <li class="nav-item active">
                     <a class="nav-link active" href="building_select.html">
                         Campus Map
-                        <span class="sr-only">
+                        <span class="visually-hidden">
                             (current)
                         </span>
                     </a>
@@ -130,4 +129,7 @@
             </form> -->
         </div>
     </nav>
+
+<script src="build/bootstrap.bundle.js"></script>
 </body>
+</html>
