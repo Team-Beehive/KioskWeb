@@ -1,5 +1,4 @@
 # WebApp
-https://team-beehive.github.io/KioskWeb/
 
 Build steps:
 1. run `npm i` to download all external scripts
