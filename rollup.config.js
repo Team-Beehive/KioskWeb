@@ -3,27 +3,27 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 export default
 [
     {
-        input: './bootstrap_import.js',
+        input: './imports/bootstrap_import.js',
         output: {
-            file: './build/bootstrap_import.js',
+            file: './build/bootstrap.bundle.js',
             format: 'iife',
-            name: 'bootstrap_import'
+            name: 'bootstrap',
         },
-        plugins: [nodeResolve()]
+        plugins: [nodeResolve()],
     },
     {
-        input: './firestore_import.js',
+        input: './imports/firebase_import.js',
         output: {
-            file: './build/firestore_import.js',
-            format: 'iife',
-            name: 'firestore_import'
+            file: './build/firebase.bundle.js',
+            format: 'es',
+            name: 'firebase'
         },
         plugins: [nodeResolve()]
     }
     // {
     //     input: './js/building_select.js',
     //     output: {
-    //         file: './build/building_select.js',
+    //         file: './build/building_select.bundle.js',
     //         format: 'iife',
     //         name: 'building_select'
     //     },
