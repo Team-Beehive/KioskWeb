@@ -1,7 +1,6 @@
-import { initializeApp, collection, getDocs, getFirestore } from '../build/firebase.bundle.js'
+import { initializeApp, collection, getDocs, getFirestore } from "../build/firebase.bundle.js";
 
 const app = initializeApp({
-
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
     authDomain: "oit-kiosk.firebaseapp.com",
     projectId: "oit-kiosk",
@@ -13,18 +12,18 @@ const app = initializeApp({
 
 //stack code
 Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj))
-}
+    return this.setItem(key, JSON.stringify(obj));
+};
 
 //stack code
 Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key))
-}
+    return JSON.parse(this.getItem(key));
+};
 
 //Function that take a PageData and prints out its data
 function PrintData(page_data)
 {
-    console.log(page_data.id, page_data.about, page_data.campuses, page_data.type)
+    console.log(page_data.id, page_data.about, page_data.campuses, page_data.type);
 }
 
 //Class to hold each majors data from the database
@@ -44,7 +43,7 @@ const db = getFirestore(app);
 
 
 
-getDocs(collection(db, 'pages', "Majors", "Degrees")).then((querySnapshot) => {
+getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
 
     //clears local stoarage before writing to it, dont know how it cleans up
     localStorage.clear();

@@ -1,23 +1,23 @@
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 export default
 [
     {
-        input: './imports/bootstrap_import.js',
+        input: "./imports/bootstrap_import.js",
         output: {
-            file: './build/bootstrap.bundle.js',
-            format: 'iife',
-            name: 'bootstrap',
+            file: "./build/bootstrap.bundle.js",
+            format: "iife",
+            name: "bootstrap",
         },
         plugins: [nodeResolve()]
     },
     {
-        input: './imports/firebase_import.js',
+        input: "./imports/firebase_import.js",
         output: {
-            file: './build/firebase.bundle.js',
-            format: 'es',
-            name: 'firebase'
+            file: "./build/firebase.bundle.js",
+            format: "es",
+            name: "firebase"
         },
         plugins: [nodeResolve()]
     }
-]
+];
