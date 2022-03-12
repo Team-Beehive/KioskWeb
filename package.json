@@ -4,8 +4,8 @@
   "description": "https://team-beehive.github.io/KioskWeb/",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx rollup --config"
+    "build": "npx sass scss/:css/ && npx rollup --config",
+    "watch": "npx sass --watch scss/:css/"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.1.3",
-    "rollup": "^2.70.0"
+    "rollup": "^2.70.0",
+    "sass": "^1.49.9"
   }
 }

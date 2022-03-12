@@ -1,4 +1,6 @@
 .vs/
-.vscode/
+.vscode/*
+!settings.json
 node_modules/
 build/
+css/

@@ -9,7 +9,7 @@ export default
             format: 'iife',
             name: 'bootstrap',
         },
-        plugins: [nodeResolve()],
+        plugins: [nodeResolve()]
     },
     {
         input: './imports/firebase_import.js',
@@ -20,13 +20,4 @@ export default
         },
         plugins: [nodeResolve()]
     }
-    // {
-    //     input: './js/building_select.js',
-    //     output: {
-    //         file: './build/building_select.bundle.js',
-    //         format: 'iife',
-    //         name: 'building_select'
-    //     },
-    //     plugins: [nodeResolve()]
-    // }
 ]
