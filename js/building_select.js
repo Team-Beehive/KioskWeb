@@ -60,5 +60,3 @@ getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
     });
 
 });
-
-// console.log('Hello World');
