@@ -7,7 +7,7 @@ export default
         output: {
             file: "./build/bootstrap.bundle.js",
             format: "iife",
-            name: "bootstrap",
+            name: "bootstrap"
         },
         plugins: [nodeResolve()]
     },
