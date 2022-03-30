@@ -140,9 +140,13 @@ $oit_gold: #ffd14e;
 {
     // display: inline-block;
     // float: none;
+    padding: 0;
+
     text-align: center;
 
     position: relative;
+
+    height: 100%;
 
     &::before
     {
