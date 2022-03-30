@@ -7,8 +7,19 @@
     <title>404</title>
 </head>
 <body>
-    Hey there! <br>
-    That page doesn't exist. <br>
-    Maybe try going back a page?
+    <p>
+Hey there! <br />
+That page doesn't exist. <br />
+Please let us know if you see this page! <br /> <br />
+Info: Tried to access <span id="pathname">Unknown</span> <span id="query"></span>
+    </p>
+    
+
+    <a href="/">Go back home</a>
 </body>
+<script>
+    document.getElementById('pathname').innerHTML = window.location.pathname.split("/")[1]; 
+    var query = window.location.href.split(window.location.pathname + "?")[1].split("=")[1];
+    document.getElementById('query').innerHTML = query;
+</script>
 </html>

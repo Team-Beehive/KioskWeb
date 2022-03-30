@@ -32,7 +32,7 @@ express()
 
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
-    
+
     .get("/", (req, res) => res.render("pages/index"))
     .get("/building_select", (req, res) => res.render("pages/building_select"))
     .get("/home_page", (req, res) => res.render("pages/home_page"))
@@ -41,12 +41,22 @@ express()
         res.render("pages/building");
     })
     .get("/major", (req, res) => {
-        const major = req.query.page || "Software Engineering Technology";
-        getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
-            const data = snapshot.data(options);
-            var temp_data = new PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-            res.render("pages/major", {major: temp_data});
-        });
+        const major = req.query.page;
+        if (major != undefined)
+            getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
+                const data = snapshot.data(options);
+                if (data != undefined)
+                {
+                    var temp_data = new PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                    res.render("pages/major", { major: temp_data });
+                }
+                else
+                {
+                    res.render("pages/404");
+                }
+            });
+        else
+            res.render("pages/404");
     })
     .get("/ejs_test", (req, res) => res.render("pages/ejs_test", {PORT: PORT}))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
