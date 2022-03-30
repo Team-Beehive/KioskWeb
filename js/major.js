@@ -1,30 +1,29 @@
 // Mostly taken from https://www.w3schools.com/howto/howto_js_slideshow.asp
 const TIMER = 5000;
 
-$(() => {
+$(() => 
+{
     showSlides(slideIndex);
 });
 
 var slideIndex = 1;
 
-function atInterval() {
+function atInterval() 
+{
     plusSlides(1);
 }
 
 var interval = setInterval(atInterval, TIMER);
 
-
-
-function plusSlides(n) {
+function plusSlides(n) 
+{
     showSlides(slideIndex += n);
 }
 
-
-
 // Next/previous controls
 
-
-function showSlides(n) {
+function showSlides(n) 
+{
     var slides = $(".slides");
 
     if (n > slides.length) { slideIndex = 1; }

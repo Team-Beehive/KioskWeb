@@ -130,60 +130,25 @@ $oit_gold: #ffd14e;
 
 .scroll
 {
-
     width: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-
-    .oit-card
-    {
-        [id^=card-img]
-        {
-            // Gives some extra size to make it obvious to scroll
-            @media screen and (max-width: 768px) {
-                &
-                {
-                    width: 57vw;
-                    height: 57vw;
-                }
-            }
-        }
-    }
 }
 
 .oit-card
 {
-    display: inline-block;
-    float: none;
+    // display: inline-block;
+    // float: none;
     text-align: center;
 
-    margin: 0
-    {
-        right: 1px;
-    }
-    
-    
-    [id^=card-img] // identifiers that start with 'card-img'
-    {
-        // Sizing for phone displays, shows concepts better for presentations
-        @media screen and (max-width: 768px) {
-            &
-            {
-                width: 50vw;
-                height: 50vw;
-            }
-        }
-        
-        // Sizing for non-phone displays. Gets overwritten when the other one is done.
-        width: 20vw;
-        height: 20vw;
-        // position: absolute;
-        background-size: cover; // Fill entire space
-        background-position: 50% 50%; // Center on div
-        background-repeat: no-repeat; // Don't repeat background
+    position: relative;
 
-        position: relative;
+    &::before
+    {
+        content: "";
+        float: left;
+        padding-top: 100%;
     }
 
     &:hover &-text
@@ -210,4 +175,24 @@ $oit_gold: #ffd14e;
             transform: translateY(-50%);
         }
     }
+}
+
+[id^=card-img] // identifiers that start with 'card-img'
+{
+    background-size: cover; // Fill entire space
+    background-position: 50% 50%; // Center on div
+    background-repeat: no-repeat; // Don't repeat background
+
+    // position: relative;
+}
+
+.oit-button
+{
+    width: 100%;
+    p
+    {
+        color: white;
+    }
+
+    // [^=]
 }
