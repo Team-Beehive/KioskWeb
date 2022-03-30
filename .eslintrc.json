@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "jquery": true
+        "jquery": true,
+        "node": true
     },
     "ignorePatterns": [
         "build/*.js"
