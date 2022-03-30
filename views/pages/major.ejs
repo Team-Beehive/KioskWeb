@@ -11,7 +11,7 @@
 
     <meta name="mobile-web-app-capable" content="yes">
 
-    <title>Software Engineering Technology</title>
+    <title><%= major.id %></title>
 </head>
 
 <body>
@@ -38,8 +38,18 @@
         </tr>
         <tr class="row m-auto">
             <td class="col-12">
-                <h2 class="center">Software Engineering Technology</h2>
-                <h3 class="center">- Bachelor and Associates Degrees -</h3>
+                <h2 class="center"><%= major.id %></h2>
+                <h3 class="center">- 
+                <% major.type.forEach((type) =>
+                { %>
+                    <%= type %> 
+                    <%
+                    if (type != major.type[major.type.length - 1])
+                    { %>
+                        <%= "&" %>
+                    <% }
+                }); %> 
+                -</h3>
             </td>
         </tr>
         <tr class="row m-auto">
@@ -47,6 +57,13 @@
                 <h4>Quick Facts</h4>
                 <h5>First Offered</h5>
                 <p>1984</p>
+                <h5>Offered At</h5>
+                <% major.campuses.forEach((campus) => 
+                { %> 
+                    <p>
+                        <%= campus %>
+                    </p> <%
+                }); %>
                 <h5>Typical Employers</h5>
                 <p>SpaceX</p>
                 <p>Expedita</p>
@@ -58,7 +75,12 @@
                 <p>187 Credit Hours</p>
             </td>
             <td class="col-8">
-                <p>Software Engineering Technology is an engineering discipline that deals with all aspects of software production. Students learn to design software systems, write the code that implements those systems, and test systems to make sure they meet requirements. Our graduates are contribiting to solutions in medical, industrial, communications, aerospace, business, and scientific fields.</p>
+                <% major.about.forEach((paragraph) => 
+                { %> 
+                    <p> 
+                        <%= paragraph %>
+                    </p> 
+                <% }); %>
             </td>
         </tr>
     </table>
