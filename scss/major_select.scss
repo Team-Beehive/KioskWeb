@@ -1,10 +1,10 @@
-// Quick fix for divs not collapsing correctly
+// Quick fix for oit-cards not collapsing correctly. See js file
 .oit-card::before
 {
     padding-top: 0 !important;
 }
 
-.sp-3
+.width-25
 {
     width: 25%;
 }
