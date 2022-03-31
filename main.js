@@ -1,17 +1,9 @@
 const express = require("express");
 const { initializeApp } = require("firebase/app");
-const { getFirestore, /*collection,*/ doc, getDoc, /*getDocs*/ } = require("firebase/firestore");
+const { getFirestore, /*collection,*/ doc, getDoc/*, getDocs*/ } = require("firebase/firestore");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
-
-class PageData {
-    constructor(id, about, campuses, type) {
-        this.id = id;
-        this.about = about;
-        this.campuses = campuses;
-        this.type = type;
-    }
-}
+const models = require("./models");
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -38,7 +30,7 @@ express()
     .get("/major_select", (req, res) => res.render("pages/major_select"))
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
-        // console.log(req.query.page); // To specify page, use ?page=PAGE in the query string
+        // console.log(req.query.page); // To specify page, add ?page=PAGE to the href
         res.render("pages/building");
     })
     .get("/major", (req, res) => {
@@ -48,7 +40,7 @@ express()
                 const data = snapshot.data(options);
                 if (data != undefined)
                 {
-                    var temp_data = new PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                    var temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
                     res.render("pages/major", { major: temp_data });
                 }
                 else

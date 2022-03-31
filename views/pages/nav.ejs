@@ -1,5 +1,11 @@
+<style>
+    .navbar::before
+    {
+        padding-top: 100%;
+    }
+</style>
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="index">
         <img src="https://www.oit.edu/themes/custom/oregontech/images/logo.png" alt="oit logo">
     </a>
 
@@ -13,37 +19,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a href="home_page.html" class="nav-link">
+                <a href="home_page" class="nav-link">
                     Home
                 </a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link active" href="building_select.html">
+            <li class="nav-item">
+                <a class="nav-link" href="building_select">
                     Campus Map
-                    <span class="visually-hidden">
-                        (current)
-                    </span>
                 </a>
             </li>
-            <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropup">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Dropup</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown10">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li> -->
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> -->
     </div>
 </nav>
+<script src="build/bootstrap.bundle.js"></script>
+<script>
+    var current = <%- current %>;
+    var links = $(".nav-item");
+    for (let i = 0; i < links.length; i++) {
+        const link = links[i];
+        if ($($(link).children("a")[0]).attr("href") == current) {
+            console.log("Found!");
+            $(link).addClass("active")
+            $($(link).children("a")[0]).addClass("active");
+            $($(link).children("a")[0]).append(
+                "<span class=\"visually-hidden\">(current)</span>"
+            );
+        }
+    }
+</script>
