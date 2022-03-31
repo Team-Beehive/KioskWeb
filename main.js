@@ -61,4 +61,5 @@ express()
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
+    .disable("x-powered-by")
     .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));

@@ -44,7 +44,7 @@ const db = getFirestore(app);
 getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => 
 {
 
-    //clears local stoarage before writing to it, dont know how it cleans up
+    //clears local storage before writing to it, dont know how it cleans up
     localStorage.clear();
 
     //Gets the data and saves it into the PageData class

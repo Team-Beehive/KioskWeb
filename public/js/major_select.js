@@ -1,4 +1,4 @@
-// Quick fix for divs not collapsing correctly 
+// Quick fix for cards not collapsing correctly. See scss file
 $(() => 
 {
     $(".oit-card").before()
