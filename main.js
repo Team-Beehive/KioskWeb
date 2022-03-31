@@ -33,8 +33,9 @@ express()
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
 
-    .get("/", (req, res) => res.render("pages/index"))
+    .get("/", (req, res) => res.render("pages/links"))
     .get("/building_select", (req, res) => res.render("pages/building_select"))
+    .get("/major_select", (req, res) => res.render("pages/major_select"))
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         // console.log(req.query.page); // To specify page, use ?page=PAGE in the query string
@@ -58,6 +59,6 @@ express()
         else
             res.render("pages/404");
     })
-    .get("/ejs_test", (req, res) => res.render("pages/ejs_test", {PORT: PORT}))
+    .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));

@@ -1,0 +1,10 @@
+// Quick fix for divs not collapsing correctly
+.oit-card::before
+{
+    padding-top: 0 !important;
+}
+
+.sp-3
+{
+    width: 25%;
+}

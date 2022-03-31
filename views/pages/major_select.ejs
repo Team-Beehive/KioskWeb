@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,47 +8,56 @@
 
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-    
+    <link rel="stylesheet" href="css/major_select.css">
+
     <meta name="mobile-web-app-capable" content="yes">
     <title>Major Select</title>
 </head>
 
 <body>
-    <div id="category-parent">
-        <div class="oit-button" data-bs-toggle="collapse" href="#category1" role="button"
-            aria-expanded="false" aria-controls="category1">
-            <p>
-                Category 1
-            </p>
-        </div>
-        
-        <div class="collapse" id="category1">
-            <ul class="list-unstyled">
-                <li><a href="major.html">Major 1</a></li>
-                <li><a href="major.html">Major 2</a></li>
-                <li><a href="major.html">Major 3</a></li>
-                <li><a href="major.html">Major 4</a></li>
-            </ul>
-        </div>
-        
-        <div>
-            <p class="btn btn-outline-dark" data-bs-toggle="collapse" href="#category2" role="button" aria-expanded="false"
-                aria-controls="category2">
-                Category 2
-            </p>
-        </div>
-        
-        <div class="collapse" id="category2">
-            <ul class="list-unstyled">
-                <li><a href="#">Major 1</a></li>
-                <li><a href="#">Major 2</a></li>
-                <li><a href="#">Major 3</a></li>
-                <li><a href="#">Major 4</a></li>
-            </ul>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sp-3 collapser p-1" type="button" data-bs-toggle="collapse" data-bs-target=".collapse1" aria-expanded="false" aria-controls=".collapse1">
+                <div class="oit-card">
+                    <div class="oit-card-text">
+                        <p>the1</p>
+                    </div>
+                </div>
+            </div>
+                <div class="sp-3 collapse1 p-1 collapse">
+                    <div class="oit-card">
+                        <div class="oit-card-text">
+                            <p>the2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sp-3 collapse1 p-1 collapse">
+                    <div class="oit-card">
+                        <div class="oit-card-text">
+                            <p>the3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sp-3 collapse1 p-1 collapse">
+                    <div class="oit-card">
+                        <div class="oit-card-text">
+                            <p>the4</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sp-3 p-1">
+                    <div class="oit-card">
+                        <div class="oit-card-text">
+                            <p>the5</p>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 
-<script src="build/bootstrap.bundle.js"></script>
-<script src="js/major_select.js"></script>
+
+    <script src="build/bootstrap.bundle.js"></script>
+    <script src="js/major_select.js"></script>
 </body>
+
 </html>

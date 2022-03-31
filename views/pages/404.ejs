@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
 </head>
+
 <body>
     <p>
-Hey there! <br />
-That page doesn't exist. <br />
-Please let us know if you see this page! <br /> <br />
-Info: Tried to access <span id="pathname">Unknown</span> <span id="query"></span>
+        Hey there! <br />
+        That page doesn't exist. <br />
+        Please let us know if you see this page! <br /> <br />
+        Info: Tried to access <span id="pathname">unknown page</span> <span id="query"></span>
     </p>
-    
 
-    <a href="/">Go back home</a>
-</body>
+    <a href="/">Go back to home</a>
 <script>
-    document.getElementById('pathname').innerHTML = window.location.pathname.split("/")[1]; 
+    document.getElementById('pathname').innerHTML = window.location.pathname.substring(1);
     var query = window.location.href.split(window.location.pathname + "?")[1].split("=")[1];
     document.getElementById('query').innerHTML = query;
 </script>
+</body>
+
 </html>
