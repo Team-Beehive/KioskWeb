@@ -5,3 +5,4 @@ node_modules/
 build/
 css/
 public/css
+**/desktop.ini

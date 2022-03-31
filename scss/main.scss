@@ -146,6 +146,10 @@ $oit_gold: #ffd14e;
 
     position: relative;
 
+    background-size: cover; // Fill entire space
+    background-position: 50% 50%; // Center on div
+    background-repeat: no-repeat; // Don't repeat background
+
     height: 100%;
 
     &::before
@@ -179,15 +183,6 @@ $oit_gold: #ffd14e;
             transform: translateY(-50%);
         }
     }
-}
-
-[id^=card-img] // identifiers that start with 'card-img'
-{
-    background-size: cover; // Fill entire space
-    background-position: 50% 50%; // Center on div
-    background-repeat: no-repeat; // Don't repeat background
-
-    // position: relative;
 }
 
 .oit-button
