@@ -1,4 +1,4 @@
-import { initializeApp, collection, getDocs, getFirestore } from "../build/firebase.bundle.js";
+import { initializeApp, collection, getDocs, getFirestore, enableIndexedDbPersistence } from "../build/firebase.bundle.js";
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -10,15 +10,22 @@ const app = initializeApp({
     measurementId: "G-BYNMKM80XC"
 });
 
-//stack code
-Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj));
-};
+//Database obj
+const db = getFirestore(app);
 
-//stack code
-Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key));
-};
+//enables the offline persistance of the database
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+      if (err.code == 'failed-precondition') {
+          // Multiple tabs open, persistence can only be enabled
+          // in one tab at a a time.
+          // ...
+      } else if (err.code == 'unimplemented') {
+          // The current browser does not support all of the
+          // features required to enable persistence
+          // ...
+      }
+  });
 
 //Function that take a PageData and prints out its data
 function PrintData(page_data)
@@ -38,24 +45,31 @@ class PageData
     }
 }
 
-//Database obj
-const db = getFirestore(app);
+//holds the collection of pagedata's
+class CollectionData
+{
+    constructor()
+    {
+        this.data = [];
+    }
 
+    AddData(pageData)
+    {
+        this.data.push(pageData)
+    }
+}
+
+
+//Makes the snapshot that gets all the data from the database through query
 getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => 
 {
-
-    //clears local storage before writing to it, dont know how it cleans up
-    localStorage.clear();
+    cData = new CollectionData();
 
     //Gets the data and saves it into the PageData class
     querySnapshot.forEach((doc) => {
         var temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
-        localStorage.setObj(doc.id, temp_data);
-    });
-
-    //test to see if it gets everything
-    querySnapshot.forEach((doc) => {
-        PrintData(localStorage.getObj(doc.id));
+        PrintData(temp_data);
+        cData.data.AddData(temp_data)
     });
 
 });
