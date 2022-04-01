@@ -26,8 +26,21 @@ express()
     .set("view engine", "ejs")
 
     .get("/", (req, res) => res.render("pages/links"))
-    .get("/building_select", (req, res) => res.render("pages/building_select"))
-    .get("/major_select", (req, res) => res.render("pages/major_select"))
+    // .get("/building_select", (req, res) => res.render("pages/building_select"))
+    .get("/major_select", (req, res) => 
+    {
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
+        {
+            const data = snapshot.data(options);
+            if (data != undefined)
+            {
+                res.render("pages/major_select", {categories:  data["Categories"] });
+            }
+            else
+                res.render("pages/404");
+        });
+    })
+    // res.render("pages/major_select"))
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         // console.log(req.query.page); // To specify page, add ?page=PAGE to the href

@@ -2,8 +2,6 @@
 $(() => 
 {
     $(".oit-card").before()
-        // .css("content", "")
-        // .css("float", "left")
         .css("padding-top", "100%");
 
 
