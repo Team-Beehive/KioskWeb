@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 
+
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
     authDomain: "oit-kiosk.firebaseapp.com",
@@ -51,6 +52,7 @@ express()
         if (major != undefined)
             getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
                 const data = snapshot.data(options);
+
                 if (data != undefined)
                 {
                     var temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
