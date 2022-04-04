@@ -27,21 +27,40 @@ express()
 
     .get("/", (req, res) => res.render("pages/links"))
     .get("/building_select", (req, res) => res.render("pages/building_select"))
-    .get("/major_select", (req, res) => res.render("pages/major_select"))
+    .get("/major_select", (req, res) => 
+    {
+
+        getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => 
+        {
+            collection_data = new models.CollectionData();
+
+            //Gets the data and saves it into the PageData class
+            querySnapshot.forEach((doc) => 
+            {
+                var temp_major = new models.MajorPageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+                collection_data.cData.AddData(temp_major)
+            });
+
+            res.render("pages/major_select", {data: collection_data});
+        });
+    })
+    
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         // console.log(req.query.page); // To specify page, add ?page=PAGE to the href
-        res.render("pages/building");
+        res.render("pages/building");   
     })
     .get("/major", (req, res) => {
         const major = req.query.page;
         if (major != undefined)
             getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
                 const data = snapshot.data(options);
+                //major_data = new models.CollectionData();
                 if (data != undefined)
                 {
-                    var temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-                    res.render("pages/major", { major: temp_data });
+                    
+                    var majorPage = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                    res.render("pages/major", { major: majorPage });
                 }
                 else
                 {

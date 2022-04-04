@@ -1,4 +1,5 @@
-import { initializeApp, collection, getDocs, getFirestore, enableIndexedDbPersistence } from "../build/firebase.bundle.js";
+/*
+import { initializeApp, collection, getDocs, getFirestore } from "../build/firebase.bundle.js";
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -73,3 +74,4 @@ getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) =>
     });
 
 });
+*/
