@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 
+const {execSync} = require("child_process");
+
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -63,6 +65,36 @@ express()
             });
         else
             res.render("pages/404");
+    })
+    .get("/hide_nav", (req, res) => 
+    {
+        try
+        {
+            execSync("adb connect localhost:55555");
+            execSync("adb shell wm overscan 0,-100,0,-100");
+            execSync("abd disconnect");
+
+            res.render("pages/links", { message: "successfully hid navigation bars!" });
+        }
+        catch
+        {
+            res.render("pages/links", {message: "problem occurred when trying to set overscan."});
+        }
+        
+    })
+    .get("/show_nav", (req, res) =>
+    {
+        try {
+            execSync("adb connect localhost:55555");
+            execSync("adb shell wm overscan 0,0,0,0");
+            execSync("abd disconnect");
+
+            res.render("pages/links", { message: "successfully showed navigation bars!" });
+        }
+        catch
+        {
+            res.render("pages/links", { message: "problem occurred when trying to set overscan." });
+        }
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
