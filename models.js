@@ -5,7 +5,7 @@ module.exports.MajorPageData = class MajorPageData {
         this.campuses = campuses;
         this.type = type;
     }
-}
+};
 
 module.exports.CollectionData = class CollectionData
 {
@@ -24,4 +24,4 @@ module.exports.CollectionData = class CollectionData
     {
         console.log(this.datetime);
     }
-}
+};

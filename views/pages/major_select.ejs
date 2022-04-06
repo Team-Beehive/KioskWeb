@@ -19,7 +19,7 @@
         <div class="row">
             <% categories.forEach(category => 
             { 
-                let categoryAsClass = category["categoryTitle"].replace(/[ &\/]/g, "");
+                let categoryAsClass = category["categoryTitle"].replace(/[ &/]/g, "");
                 %>
                 <div class="width-25 collapser p-1" type="button" data-bs-toggle="collapse" data-bs-target=".<%= categoryAsClass %>"
                     aria-expanded="false" aria-controls=".<%= categoryAsClass %>">
@@ -32,7 +32,7 @@
 
                 <% category["relatedDegrees"].forEach(degreeRef => 
                 { 
-                    let degree = degreeRef.path.split("\/")[1];
+                    let degree = degreeRef.path.split("/")[1];
                     %>
                     <div class="width-25 p-1 <%= categoryAsClass %> collapse">
                         <a href="/major?page=<%- degree %>">
