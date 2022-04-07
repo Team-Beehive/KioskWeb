@@ -24,12 +24,13 @@ let termux_api = false;
 let adb = false;
 
 try {
-    execSync("dpkg -l | grep android-tools", { stdio: ["ignore", "ignore", "ignore"] });
+    execSync("adb connect localhost:55555");
+
     adb = true;
 }
 catch
 {
-    console.error("Package android-tools is not installed. Locking will not work.");
+    console.error("Package android-tools is not installed correctly. Locking will not work.");
 }
 
 try {
@@ -87,9 +88,7 @@ express()
     })
     .get("/hide_nav", (req, res) => {
         if (adb) {
-            execSync("adb connect localhost:55555");
             execSync("adb shell wm overscan 0,-100,0,-100");
-            execSync("adb disconnect");
 
             if (termux_api)
                 exec("termux-toast 'Successfully locked application!'");
@@ -103,9 +102,7 @@ express()
     })
     .get("/show_nav", (req, res) => {
         if (adb) {
-            execSync("adb connect localhost:55555");
             execSync("adb shell wm overscan 0,0,0,0");
-            execSync("adb disconnect");
 
             if (termux_api)
                 exec("termux-toast 'Successfully unlocked application!'");
