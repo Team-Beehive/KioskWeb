@@ -52,6 +52,7 @@ express()
     .set("view engine", "ejs")
 
     .get("/", (req, res) => res.render("pages/links"))
+    .get("/links", (req, res) => res.render("pages/links"))
     // .get("/building_select", (req, res) => res.render("pages/building_select"))
     .get("/major_select", (req, res) => {
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
