@@ -72,7 +72,7 @@ express()
         {
             execSync("adb connect localhost:55555");
             execSync("adb shell wm overscan 0,-100,0,-100");
-            execSync("abd disconnect");
+            execSync("adb disconnect");
 
             res.render("pages/links", { message: "successfully hid navigation bars!" });
         }
@@ -87,7 +87,7 @@ express()
         try {
             execSync("adb connect localhost:55555");
             execSync("adb shell wm overscan 0,0,0,0");
-            execSync("abd disconnect");
+            execSync("adb disconnect");
 
             res.render("pages/links", { message: "successfully showed navigation bars!" });
         }
