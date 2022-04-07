@@ -24,7 +24,7 @@ let termux_api = false;
 let adb = false;
 
 try {
-    execSync("adb connect localhost:55555");
+    execSync("adb connect localhost:5555");
 
     adb = true;
 }
