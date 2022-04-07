@@ -78,7 +78,7 @@ express()
         }
         catch
         {
-            res.render("pages/links", {message: "problem occurred when trying to set overscan."});
+            res.render("pages/links", {message: "problem occurred when trying to hide navigation bar."});
         }
         
     })
@@ -93,7 +93,7 @@ express()
         }
         catch
         {
-            res.render("pages/links", { message: "problem occurred when trying to set overscan." });
+            res.render("pages/links", { message: "problem occurred when trying to show navigation bar." });
         }
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
