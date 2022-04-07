@@ -42,6 +42,31 @@ catch
     console.error("Application Termux:API is not installed. Some non-key features will not work.");
 }
 
+process.stdin.resume();//so the program will not close instantly
+
+function exitHandler(options, exitCode) {
+    if (options.cleanup) 
+    {
+        if (adb)
+        {
+            exec("adb disconnect");
+        }
+    }
+    if (exitCode || exitCode === 0) console.log(exitCode);
+    if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on("exit", exitHandler.bind(null, { cleanup: true }));
+
+//catches ctrl+c event
+process.on("SIGINT", exitHandler.bind(null, { exit: true }));
+
+// catches "kill pid" (for example: nodemon restart)
+process.on("SIGUSR1", exitHandler.bind(null, { exit: true }));
+process.on("SIGUSR2", exitHandler.bind(null, { exit: true }));
+
+
 console.log();
 
 express()
@@ -91,7 +116,7 @@ express()
             execSync("adb shell wm overscan 0,-100,0,-100");
 
             if (termux_api)
-                exec("termux-toast 'Successfully locked application!'");
+                exec("termux-toast -g bottom 'Successfully locked application!'");
             else
                 console.log("Successfully locked application!");
 
@@ -105,7 +130,7 @@ express()
             execSync("adb shell wm overscan 0,0,0,0");
 
             if (termux_api)
-                exec("termux-toast 'Successfully unlocked application!'");
+                exec("termux-toast -g bottom 'Successfully unlocked application!'");
             else
                 console.log("Successfully unlocked application!");
 
