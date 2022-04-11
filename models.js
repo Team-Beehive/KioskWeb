@@ -1,13 +1,21 @@
+<<<<<<< .mine
 var fs = require('fs');
 
 module.exports.MajorPageData = class MajorPageData {
     constructor(id, about, campuses, type) {
+=======
+module.exports.MajorPageData = class MajorPageData 
+{
+    constructor(id, about, campuses, type) 
+    {
+>>>>>>> .theirs
         this.id = id;
         this.about = about;
         this.campuses = campuses;
         this.type = type;
     }
 }
+<<<<<<< .mine
 
 
 module.exports.CollectionData = class CollectionData
@@ -71,3 +79,68 @@ module.exports.CollectionData = class CollectionData
     }
 
 }
+=======
+
+module.exports.CollectionData = class CollectionData
+{
+    cData = [];
+
+    constructor(id)
+    {
+        this.id = id;
+    }
+
+    AddData(majorData)
+    {
+        this.cData.push(majorData)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
