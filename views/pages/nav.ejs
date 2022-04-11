@@ -1,0 +1,53 @@
+<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">
+        <img src="https://www.oit.edu/themes/custom/oregontech/images/logo.png" alt="oit logo">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- <div class="navbar-brand">
+
+            </div> -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="home_page" class="nav-link">
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="building_select">
+                    Campus Map
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script src="build/bootstrap.bundle.js"></script>
+<script>
+    // Adding in some css stuff because I'm unsure if there's a way to add css in what would
+    // be the bottom of the page
+    $("body").css("padding-bottom", "100px");
+    $(".navbar-brand img").css("width", "50%");
+
+    // VSCode may be angry but it is what's needed.
+    // It'll be correct once it's on the browser.
+    var current = <%- current %>;
+
+    var links = $(".nav-item");
+    for (let i = 0; i < links.length; i++) 
+    {
+        const link = links[i];
+        if ($($(link).children("a")[0]).attr("href") === current) 
+        {
+            $(link).addClass("active")
+            $($(link).children("a")[0]).addClass("active");
+            $($(link).children("a")[0]).attr("href", "#");
+            $($(link).children("a")[0]).append(
+                "<span class=\"visually-hidden\">(current)</span>"
+            );
+        }
+    }
+</script>

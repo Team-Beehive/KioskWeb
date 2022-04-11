@@ -1,0 +1,10 @@
+// Please do not remove
+{
+        "liveSassCompile.settings.formats": [
+            {
+                "format": "expanded",
+                "extensionName": ".css",
+                "savePath": "/public/css"
+            }
+        ]
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head"); %>
+    <link rel="stylesheet" href="css/major.css">
+
+    <title><%= major.id %></title>
+</head>
+
+<body>
+    <table class="container-fluid p-0">
+
+        <tr class="row m-auto">
+            <td class="col-12 carousel">
+                <div class="slides">
+                    <img src="images/cset1.jpg" style="width:100%">
+                </div>
+                
+                <div class="slides">
+                    <img src="images/cset2.jpg" style="width:100%">
+                </div>
+                
+                <div class="slides">
+                    <img src="images/cset3.jpg" style="width:100%">
+                </div>
+                
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </td>
+        </tr>
+        <tr class="row m-auto">
+            <td class="col-12">
+                <h2 class="center"><%= major.id %></h2>
+                <h3 class="center">- 
+                <% major.type.forEach((type) =>
+                { %>
+                    <%= type %> 
+                    <%
+                    if (type != major.type[major.type.length - 1])
+                    { %>
+                        <%= "&" %>
+                    <% }
+                }); %> 
+                -</h3>
+            </td>
+        </tr>
+        <tr class="row m-auto">
+            <td class="col-4 blue-box">
+                <h4>Quick Facts</h4>
+                <h5>First Offered</h5>
+                <p>1984</p>
+                <h5>Offered At</h5>
+                <% major.campuses.forEach((campus) => 
+                { %> 
+                    <p>
+                        <%= campus %>
+                    </p> <%
+                }); %>
+                <h5>Typical Employers</h5>
+                <p>SpaceX</p>
+                <p>Expedita</p>
+                <p>Amazon</p>
+                <p>Microsoft</p>
+                <p>Intel Corporation</p>
+                <p>Garmin</p>
+                <h5>Expected Credit Hours</h5>
+                <p>187 Credit Hours</p>
+            </td>
+            <td class="col-8">
+                <% major.about.forEach((paragraph) => 
+                { %> 
+                    <p> 
+                        <%= paragraph %>
+                    </p> 
+                <% }); %>
+            </td>
+        </tr>
+    </table>
+
+<script src="build/bootstrap.bundle.js"></script>
+
+<script src="js/major.js"></script>
+</body>
+</html>
