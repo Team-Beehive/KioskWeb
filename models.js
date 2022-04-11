@@ -5,4 +5,23 @@ module.exports.MajorPageData = class MajorPageData {
         this.campuses = campuses;
         this.type = type;
     }
-}
+};
+
+module.exports.CollectionData = class CollectionData
+{
+    cData = [];
+    constructor(datetime)
+    {
+        this.datetime = datetime;
+    }
+
+    AddData(majorData)
+    {
+        this.cData.push(majorData);
+    }
+
+    PrintDate()
+    {
+        console.log(this.datetime);
+    }
+};

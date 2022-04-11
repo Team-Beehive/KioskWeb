@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 
+
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
     authDomain: "oit-kiosk.firebaseapp.com",
@@ -26,21 +27,33 @@ express()
     .set("view engine", "ejs")
 
     .get("/", (req, res) => res.render("pages/links"))
-    .get("/building_select", (req, res) => res.render("pages/building_select"))
-    .get("/major_select", (req, res) => res.render("pages/major_select"))
+    // .get("/building_select", (req, res) => res.render("pages/building_select"))
+    .get("/major_select", (req, res) => 
+    {
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
+        {
+            let data = snapshot.data(options);
+            if (data != undefined)
+            {
+                res.render("pages/major_select", {categories:  data["Categories"] });
+            }
+            else
+                res.render("pages/404");
+        });
+    })
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         // console.log(req.query.page); // To specify page, add ?page=PAGE to the href
         res.render("pages/building");
     })
     .get("/major", (req, res) => {
-        const major = req.query.page;
+        let major = req.query.page;
         if (major != undefined)
             getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
-                const data = snapshot.data(options);
+                let data = snapshot.data(options);
                 if (data != undefined)
                 {
-                    var temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                    let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
                     res.render("pages/major", { major: temp_data });
                 }
                 else
@@ -53,5 +66,5 @@ express()
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
-    .disable("x-powered-by")
+    .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));
