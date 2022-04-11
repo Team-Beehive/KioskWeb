@@ -9,14 +9,18 @@ module.exports.MajorPageData = class MajorPageData {
     }
 }
 
+
 module.exports.CollectionData = class CollectionData
 {
+    
     cData = [];
     datetime;
     cCategories = [];
+    
 
     constructor()
     {
+        this.test = new module.exports.MajorPageData("test page data", "hello this is some sample about", "Klamath", "Online");
         this.datetime = Date();
     }
 
@@ -32,8 +36,8 @@ module.exports.CollectionData = class CollectionData
 
     SaveDataJson(data)
     {
-        data = JSON.stringify(data);
-        fs.writeFile('./config.json', data, function (err) {
+        var jdata = JSON.stringify(data);
+        fs.writeFile('./config.json', jdata, function (err) {
             if (err) {
               console.log('There has been an error saving your configuration data.');
               console.log(err.message);
@@ -65,4 +69,5 @@ module.exports.CollectionData = class CollectionData
             console.log(err);
         }
     }
+
 }

@@ -1,13 +1,11 @@
 const { Console } = require("console");
 const express = require("express");
+const { getFirestore, doc, getDoc, getDocs, collection} = require("firebase/firestore");
 const { initializeApp } = require("firebase/app");
-const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ 
-collection} = require("firebase/firestore");
 const PORT = process.env.PORT || 8080;
 const path = require("path");   
 const { getSystemErrorMap } = require("util");
 const models = require("./models");
-
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -21,31 +19,6 @@ const app = initializeApp({
 
 const db = getFirestore(app);
 
-//Express cashing variables
-const application = express();
-const log = console;
-
-//if online
-const querySnapshot = await getDocs(query(doc(collection(db, "Degrees"))));
-        
-var data = new models.CollectionData();
-
-if(querySnapshot != undefined)
-{
-    
-    querySnapshot.forEach((doc) => 
-    {
-        // doc.data() is never undefined for query doc snapshots
-        var temp_data = new models.MajorPageData(doc.id, doc["about"], doc["campuses"], doc["type"]);
-        console.log(doc.id, doc["about"], doc["campuses"], doc["type"]);
-        data.AddData(temp_data);
-    });
-
-    data.cCategories = doc["Categories"];
-
-    data.SaveDataJson(data);
-}
-
 express()
 
     .use(express.static(path.join(__dirname, "public")))
@@ -57,18 +30,15 @@ express()
 
     .get("/", (req, res) => 
     {
-        
-
-        res.render("pages/links")
+        res.render("pages/links");
     })
 
     // .get("/building_select", (req, res) => res.render("pages/building_select"))
     .get("/major_select", (req, res) => 
     {
-        var data = new models.CollectionData();
-        data = data.GetDataJson();
-        res.render("pages/major_select", {categories:  data.cCategories });
-        //res.render("pages/404");
+        var collectionData = new models.CollectionData();
+        collectionData = collectionData.GetDataJson();
+        res.render("pages/major_select", {categories:  collectionData.cCatagories });
     })
 
     // res.render("pages/major_select"))
@@ -77,6 +47,7 @@ express()
         // console.log(req.query.page); // To specify page, add ?page=PAGE to the href
         res.render("pages/building");
     })
+
     .get("/major", (req, res) => {
         const major = req.query.page;
         if (major != undefined)
@@ -96,7 +67,28 @@ express()
         else
             res.render("pages/404");
     })
+
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by")
-    .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));
+    .listen(PORT, () => 
+    {
+        collectionData = new models.CollectionData();
+
+        /*
+        const querySnapshot = await getDocs(collection(db, "Majors"));
+        querySnapshot.forEach((doc) => {
+            collectionData.AddData(doc);
+        });
+        */
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
+        {
+            let data = snapshot.data(options);
+            collectionData.cCatagories = data["Categories"];
+
+            collectionData.SaveDataJson(collectionData);
+        });
+
+
+        console.log(`Started server on http://localhost:${ PORT }`);
+    });
