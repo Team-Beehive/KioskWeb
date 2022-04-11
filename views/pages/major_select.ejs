@@ -28,7 +28,7 @@
 
                 <% category["relatedDegrees"].forEach(degreeRef => 
                 { 
-                    let degree = degreeRef.path.split("/")[1];
+                    let degree = degreeRef/*.path.split("/")[1]*/;
                     %>
                     <div class="width-25 p-1 <%= categoryAsClass %> collapse in-group">
                         <a href="/major?page=<%- degree %>">

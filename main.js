@@ -30,16 +30,9 @@ express()
     // .get("/building_select", (req, res) => res.render("pages/building_select"))
     .get("/major_select", (req, res) => 
     {
-        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
-        {
-            let data = snapshot.data(options);
-            if (data != undefined)
-            {
-                res.render("pages/major_select", {categories:  data["Categories"] });
-            }
-            else
-                res.render("pages/404");
-        });
+        var collectionData = new models.CollectionData();
+        collectionData = collectionData.GetDataJson();
+        res.render("pages/major_select", {categories:  collectionData.cCatagories });
     })
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
@@ -67,4 +60,25 @@ express()
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
-    .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));
+    .listen(PORT, () =>
+    {
+        collectionData = new models.CollectionData();
+
+        /*
+        const querySnapshot = await getDocs(collection(db, "Majors"));
+        querySnapshot.forEach((doc) => {
+            collectionData.AddData(doc);
+        });
+        */
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
+        {
+            let data = snapshot.data(options);
+            collectionData.cCatagories = data["Categories"];
+
+            collectionData.SaveDataJson(collectionData);
+        });
+
+
+        console.log(`Started server on http://localhost:${ PORT }`);
+    });
+        
