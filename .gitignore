@@ -1,2 +1,8 @@
 .vs/
-.vscode/
+.vscode/*
+!settings.json
+node_modules/
+build/
+css/
+public/css
+**/desktop.ini
