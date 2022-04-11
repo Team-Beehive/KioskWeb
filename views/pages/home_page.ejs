@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+
+<head>
+    <%- include("head"); %>
+
+    <title>OIT Info Home</title>
+</head>
+
+<body>
+    <table class="container-fluid">
+        <div id="page_banner">
+            <tr class="row">
+                <td class="col-8">
+                    <img class="img-fluid" src="https://www.oit.edu/themes/custom/oregontech/images/logo.png">
+                </td>
+                <td class="col-4">
+                    <img class="img-fluid" src="https://oregontechowls.com/images/main_logo.png">
+                </td>
+            </tr>
+        </div>
+        <tr class="row" id="major_exploration">
+            <td class="col-12">
+                <h1 text-align="center">
+                    Get to know your options
+                </h1>
+            </td>
+        </tr>
+        <tr class="row" id="popular_majors">
+            <td class="col-12">
+                <h2 text-align="center">Most Popular Majors</h2>
+            </td>
+        </tr>
+        <tr class="row">
+            <!-- These still need the anchors for nav-->
+            <!--I know it's sad that Software isn't here but these are the 2019 stats-->
+            <td class="col-3 p-1" id="card-img-1">
+                <a href="/major?page=Diagnostic Medical Sonography">
+                    <div class="oit-card" id="card-img-1">
+                        <div class="oit-card-text">
+                            <p id="major-1">Diagnostic Medical Sonography & Ultrasound Technician</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td class="col-3 p-1">
+                <a href="/major?page=Mechanical Engineering">
+                    <div class="oit-card" id="card-img-2">
+                        <div class="oit-card-text">
+                            <p id="major-2">Mechanical Engineering</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td class="col-3 p-1">
+                <a href="/major?page=Dental Hygiene">
+                    <div class="oit-card" id="card-img-3">
+                        <div class="oit-card-text">
+                            <p id="major-3">Dental Hygiene</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td class="col-3 p-1">
+                <a href="/major?page=Radiologic Science">
+                    <div class="oit-card" id="card-img-4">
+                        <div class="oit-card-text">
+                            <p id="major-4">Radiographer</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+        </tr>
+        <tr class="row" id="major_link">
+            <td class="col-12">
+                <!--TODO: fix ref to pull data from JSON/Database-->
+                <a href="/major_select">All Majors</a>
+            </td>
+        </tr>
+        <tr class="row" id="professors_heading">
+            <td class="col-12">
+                <h1>Get to know the staff</h1>
+            </td>
+        </tr>
+        <tr class="row" id="professor_directory">
+            <td class="col-12">
+                <p>click <a href="/professors_page">here</a> to view directory</p>
+            </td>
+        </tr>
+        <tr class="row" id="map_heading">
+            <td class="col-12">
+                <h1>Never get lost</h1>
+            </td>
+        </tr>
+        <tr class="row" id="map_body">
+            <td class="col-12">
+                <h2>Learn about the campus <a href="/old_building_select">here</a></h2>
+            </td>
+        </tr>
+    </table>
+    
+
+    <!-- If there is a navbar there is no need to add the bootstrap bundle. -->
+    <script src="build/bootstrap.bundle.js"></script>
+</body>
+
+</html>
