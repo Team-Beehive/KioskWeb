@@ -28,7 +28,7 @@ try {
 
     adb = true;
 }
-catch
+catch 
 {
     console.error("Package android-tools is not installed correctly. Locking will not work.");
 }
@@ -84,7 +84,7 @@ express()
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
             let data = snapshot.data(options);
             if (data != undefined) {
-                res.render("pages/major_select", { categories: data["Categories"] });
+                res.render("pages/major_select", { categories: data["Categories"], bad_chars: /[ &/]/g });
             }
             else
                 res.render("pages/404");
