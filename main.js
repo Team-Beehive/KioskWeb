@@ -62,7 +62,7 @@ express()
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
     {
-        collectionData = new models.CollectionData();
+        let collectionData = new models.CollectionData();
 
         /*
         const querySnapshot = await getDocs(collection(db, "Majors"));
@@ -81,4 +81,4 @@ express()
 
         console.log(`Started server on http://localhost:${ PORT }`);
     });
-        
+

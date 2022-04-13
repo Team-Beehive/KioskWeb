@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require("fs");
 
 module.exports.MajorPageData = class MajorPageData {
     constructor(id, about, campuses, type) {
@@ -36,15 +36,15 @@ module.exports.CollectionData = class CollectionData
     SaveDataJson(data)
     {
         var jdata = JSON.stringify(data);
-        fs.writeFile('./config.json', jdata, function (err) {
+        fs.writeFile("./config.json", jdata, function (err) {
             if (err) {
-              console.log('There has been an error saving your configuration data.');
-              console.log(err.message);
-              return false;
+                console.log("There has been an error saving your configuration data.");
+                console.log(err.message);
+                return false;
             }
             else
             { 
-                console.log('Configuration saved successfully.')
+                console.log("Configuration saved successfully.");
                 return true;
             }
         }); 
@@ -52,7 +52,7 @@ module.exports.CollectionData = class CollectionData
 
     GetDataJson()
     {
-        var data = fs.readFileSync('./config.json'), myObj;
+        var data = fs.readFileSync("./config.json"), myObj;
 
         try 
         {
@@ -64,9 +64,9 @@ module.exports.CollectionData = class CollectionData
         }
         catch (err) 
         {
-            console.log('There has been an error parsing your JSON.')
+            console.log("There has been an error parsing your JSON.");
             console.log(err);
         }
     }
 
-}
+};
