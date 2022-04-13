@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 
+const { execSync, exec } = require("child_process");
+
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -18,6 +20,7 @@ const app = initializeApp({
 
 const db = getFirestore(app);
 
+
 express()
     .use(express.static(path.join(__dirname, "public")))
     .use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")))
@@ -27,15 +30,13 @@ express()
     .set("view engine", "ejs")
 
     .get("/", (req, res) => res.render("pages/links"))
+    .get("/links", (req, res) => res.render("pages/links"))
     // .get("/building_select", (req, res) => res.render("pages/building_select"))
-    .get("/major_select", (req, res) => 
-    {
-        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
-        {
+    .get("/major_select", (req, res) => {
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
             let data = snapshot.data(options);
-            if (data != undefined)
-            {
-                res.render("pages/major_select", {categories:  data["Categories"] });
+            if (data != undefined) {
+                res.render("pages/major_select", { categories: data["Categories"], bad_chars: /[ &/]/g });
             }
             else
                 res.render("pages/404");
@@ -51,13 +52,11 @@ express()
         if (major != undefined)
             getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
                 let data = snapshot.data(options);
-                if (data != undefined)
-                {
+                if (data != undefined) {
                     let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
                     res.render("pages/major", { major: temp_data });
                 }
-                else
-                {
+                else {
                     res.render("pages/404");
                 }
             });
@@ -67,4 +66,4 @@ express()
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
-    .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));
+    .listen(PORT, () => console.log(`Started server on http://localhost:${PORT}`));
