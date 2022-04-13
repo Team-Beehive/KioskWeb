@@ -5,8 +5,6 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 
-const { execSync, exec } = require("child_process");
-
 
 const app = initializeApp({
     apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
@@ -66,4 +64,4 @@ express()
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
-    .listen(PORT, () => console.log(`Started server on http://localhost:${PORT}`));
+    .listen(PORT, () => console.log(`Started server on http://localhost:${ PORT }`));
