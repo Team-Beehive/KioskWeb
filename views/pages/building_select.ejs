@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("head") %>
+        <title>Building Select</title>
+</head>
+
+<body>
+    <%- include("back"); %>
+    <div class="container-fluid">
+        <div class="row">
+            <% buidlings.forEach((building)=> { %>
+                <div class="col-3 p-1">
+                    <a href="/building?page=<%- building.name %>">
+                        <div class="oit-card" style="background-image: url(' <%- building.images[0] %>')">
+                            <div class="oit-card-text">
+                                <p>
+                                    <%= building.name %>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+    <%- include("tail") %>
+</body>
+
+</html>
