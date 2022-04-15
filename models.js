@@ -9,6 +9,7 @@ module.exports.MajorPageData = class MajorPageData {
         this.campuses = campuses;
         this.type = type;
     }
+
 };
 
 //holds a list of majors and orgonizes them by category
@@ -40,13 +41,18 @@ module.exports.CollectionData = class CollectionData
         this.cCategories.push(majorData);
     }
 
+    DeleteCategoryData(){
+        this.cCategories = [];
+    }
+
     PrintDate(){
         console.log(this.datetime);
     }
 
     SaveDataJson(data){
         var jdata = JSON.stringify(data);
-        fs.writeFile("./config.json", jdata, function (err) {
+        
+        fs.writeFile("./config.json", jdata, {flag: 'w+'}, function (err) {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);

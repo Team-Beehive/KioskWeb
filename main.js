@@ -49,7 +49,6 @@ express()
                     res.render("pages/major", { major: category });
                 }
             })
-            
         }
         else
             res.render("pages/404");
@@ -67,7 +66,7 @@ express()
             
             data["Categories"].forEach(category => {
                 //console.log(category["categoryTitle"]);
-                temp_categories = new models.Categories(category["categoryTitle"].replace(/[ &/]/g, ""))
+                temp_categories = new models.Categories(category["categoryTitle"].replace(/[ &/]/g, ""));
 
                 category["relatedDegrees"].forEach(degreeRef => { 
                         degree = degreeRef.path.split("/")[1];
@@ -79,8 +78,14 @@ express()
                                 let data = snapshot.data(options);
                                 if (data != undefined) {
                                     let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+
+                                    //adds the pade data to pageData member array variable
                                     temp_categories.AddPageData(temp_data);
+                                    
+                                    //adds the data to catagories, will end up adding more then necessary here
                                     collectionData.AddCategoryData(temp_categories);
+                                            
+                                    //saves everythiong to a json, runs more times then it should but it gets the job done
                                     collectionData.SaveDataJson(collectionData);
                                 }
                             });
