@@ -15,28 +15,28 @@
         <div class="row">
             <% categories.forEach(category => 
             { 
-                let categoryAsClass = category["categoryTitle"].replace(/[ &/]/g, "");
+                let categoryAsClass = category;
                 %>
                 <div class="width-25 collapser p-1" type="button" data-bs-toggle="collapse" data-bs-target=".<%= categoryAsClass %>"
                     aria-expanded="false" aria-controls=".<%= categoryAsClass %>">
                     <div class="oit-card" style="background-image: url('<%= 'images/frog1.jpg' %>')">
                         <div class="oit-card-text">
-                            <p> <%= category["categoryTitle"] %> </p>
+                            <p> <%= category.title %> </p>
                         </div>
                     </div>
                 </div>
 
-                <% category["relatedDegrees"].forEach(degreeRef => 
+                <% category.pageData.forEach(degree => 
                 {
-                    let refSegments = degreeRef._key.path.segments;
-                    let degree = refSegments[refSegments.length - 1];
+                    //let refSegments = degreeRef._key.path.segments;
+                    //let degree = refSegments[refSegments.length - 1];
 
                     %>
                     <div class="width-25 p-1 <%= categoryAsClass %> collapse in-group">
                         <a href="/major?page=<%- degree %>">
                             <div class="oit-card" style="background-image: url('<%= 'images/frog2.jpg' %>')">
                                 <div class="oit-card-text">
-                                    <p><%= degree %></p>
+                                    <p><%= degree.id %></p>
                                 </div>
                             </div>
                         </a>

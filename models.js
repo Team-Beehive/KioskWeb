@@ -1,5 +1,7 @@
+//Require for file manipulation on system
 var fs = require("fs");
 
+//holds the indiual page data for each major
 module.exports.MajorPageData = class MajorPageData {
     constructor(id, about, campuses, type) {
         this.id = id;
@@ -9,32 +11,40 @@ module.exports.MajorPageData = class MajorPageData {
     }
 };
 
+//holds a list of majors and orgonizes them by category
+module.exports.Categories = class Categories
+{
+    title;
+    pageData = [];
+
+    constructor(catagory_title){
+        this.title = catagory_title;
+    }
+
+    AddPageData(PageData){
+        this.pageData.push(PageData)
+    }
+}
+
+//Holds a list of catagories
 module.exports.CollectionData = class CollectionData
 {
-    
-    cData = [];
-    datetime;
     cCategories = [];
     
 
-    constructor()
-    {
-        //this.test = new module.exports.MajorPageData("test page data", "hello this is some sample about", "Klamath", "Online");
-        this.datetime = Date();
+    constructor(){
+        //this.cCategories = this.GetDataJson();
     }
 
-    AddData(majorData)
-    {
-        this.cData.push(majorData);
+    AddCategoryData(majorData){
+        this.cCategories.push(majorData);
     }
 
-    PrintDate()
-    {
+    PrintDate(){
         console.log(this.datetime);
     }
 
-    SaveDataJson(data)
-    {
+    SaveDataJson(data){
         var jdata = JSON.stringify(data);
         fs.writeFile("./config.json", jdata, function (err) {
             if (err) {
@@ -42,8 +52,7 @@ module.exports.CollectionData = class CollectionData
                 console.log(err.message);
                 return false;
             }
-            else
-            { 
+            else { 
                 console.log("Configuration saved successfully.");
                 return true;
             }
@@ -54,16 +63,14 @@ module.exports.CollectionData = class CollectionData
     {
         var data = fs.readFileSync("./config.json"), myObj;
 
-        try 
-        {
+        try {
             myObj = JSON.parse(data);
             if(myObj != undefined)
             {
                 return myObj;
             }
         }
-        catch (err) 
-        {
+        catch (err) {
             console.log("There has been an error parsing your JSON.");
             console.log(err);
         }

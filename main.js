@@ -40,20 +40,17 @@ express()
         res.render("pages/building");
     })
     .get("/major", (req, res) => {
-        let major = req.query.page;
+        let temp_major = req.query.page;
         if (major != undefined)
-            getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
-                let data = snapshot.data(options);
-                if (data != undefined)
-                {
-                    let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-                    res.render("pages/major", { major: temp_data });
+        {
+            collection = new models.CollectionData();
+            collection.Categories.forEach(category => {
+                if(category.title == temp_major){
+                    res.render("pages/major", { major: category });
                 }
-                else
-                {
-                    res.render("pages/404");
-                }
-            });
+            })
+            
+        }
         else
             res.render("pages/404");
     })
@@ -64,18 +61,32 @@ express()
     {
         let collectionData = new models.CollectionData();
 
-        /*
-        const querySnapshot = await getDocs(collection(db, "Majors"));
-        querySnapshot.forEach((doc) => {
-            collectionData.AddData(doc);
-        });
-        */
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
         {
             let data = snapshot.data(options);
-            collectionData.cCatagories = data["Categories"];
+            
+            data["Categories"].forEach(category => {
+                //console.log(category["categoryTitle"]);
+                temp_categories = new models.Categories(category["categoryTitle"].replace(/[ &/]/g, ""))
 
-            collectionData.SaveDataJson(collectionData);
+                category["relatedDegrees"].forEach(degreeRef => { 
+                        degree = degreeRef.path.split("/")[1];
+                        //console.log(degree);
+                        //console.log(degreeRef);
+
+                        if (degree != undefined){
+                            getDoc(doc(db, "pages", "Majors", "Degrees", degree)).then((snapshot, options) => {
+                                let data = snapshot.data(options);
+                                if (data != undefined) {
+                                    let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                                    temp_categories.AddPageData(temp_data);
+                                    collectionData.AddCategoryData(temp_categories);
+                                    collectionData.SaveDataJson(collectionData);
+                                }
+                            });
+                        }
+                });
+            });
         });
 
 
