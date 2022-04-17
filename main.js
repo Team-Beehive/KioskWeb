@@ -30,7 +30,6 @@ express()
     .get("/", (req, res) => res.render("pages/links"))
     .get("/links", (req, res) => res.render("pages/links"))
     .get("/building_select", (req, res) => {
-        
         res.render("pages/building_select", {buildings: models.buildings});
     })
     .get("/major_select", (req, res) => {
