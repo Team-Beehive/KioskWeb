@@ -31,22 +31,6 @@
             </td>
         </tr>
         <tr class="row m-auto">
-            <td class="col-12">
-                <h2 class="center"><%= major.id %></h2>
-                <h3 class="center">- 
-                <% major.type.forEach((type) =>
-                { %>
-                    <%= type %> 
-                    <%
-                    if (type != major.type[major.type.length - 1])
-                    { %>
-                        <%= "&" %>
-                    <% }
-                }); %> 
-                -</h3>
-            </td>
-        </tr>
-        <tr class="row m-auto">
             <td class="col-4 blue-box">
                 <h4>Quick Facts</h4>
                 <h5>First Offered</h5>
@@ -69,13 +53,37 @@
                 <p>187 Credit Hours</p>
             </td>
             <td class="col-8">
-                <% major.about.forEach((paragraph) => 
-                { %> 
-                    <p> 
-                        <%= paragraph %>
-                    </p> 
-                <% }); %>
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="center"><%= major.id %></h2>
+                        <h3 class="center">- 
+                        <% major.type.forEach((type) =>
+                        { %>
+                            <%= type %> 
+                            <%
+                            if (type != major.type[major.type.length - 1])
+                            { %>
+                                <%= "&" %>
+                            <% }
+                        }); %> 
+                        -</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <% major.about.forEach((paragraph) => 
+                        { %> 
+                            <p> 
+                                <%= paragraph %>
+                            </p> 
+                        <% }); %>
+                    </div>
+                </div>
             </td>
+        </tr>
+        <tr class="row m-auto">
+            
+            
         </tr>
     </table>
 
