@@ -26,7 +26,7 @@ module.exports.CollectionData = class CollectionData
     }
 };
 
-module.exports.buidlings =
+module.exports.buildings =
 {
 
     "Purvine": 
@@ -42,7 +42,7 @@ module.exports.buidlings =
     },
     "Dow":
     {
-        name: "Dow",
+        name: "Martha Anne Dow Center for Health Professions",
         images:
             [
                 "images/dow1.jpg"

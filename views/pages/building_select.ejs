@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include("head") %>
+    <%- include("head"); %>
         <title>Building Select</title>
 </head>
 
@@ -10,13 +10,13 @@
     <%- include("back"); %>
     <div class="container-fluid">
         <div class="row">
-            <% buidlings.forEach((building)=> { %>
+            <% Object.keys(buildings).forEach((name) => { %>
                 <div class="col-3 p-1">
-                    <a href="/building?page=<%- building.name %>">
-                        <div class="oit-card" style="background-image: url(' <%- building.images[0] %>')">
+                    <a href="/building?page=<%- name %>">
+                        <div class="oit-card" style="background-image: url(' <%- buildings[name].images[0] %>')">
                             <div class="oit-card-text">
                                 <p>
-                                    <%= building.name %>
+                                    <%= buildings[name].name // It's confusing but it works %> 
                                 </p>
                             </div>
                         </div>
@@ -25,6 +25,7 @@
                 <% }); %>
         </div>
     </div>
+    <%- include("nav", {current: '"building_select"' }) %>
     <%- include("tail") %>
 </body>
 

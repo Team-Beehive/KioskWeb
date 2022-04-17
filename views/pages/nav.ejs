@@ -7,9 +7,6 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- <div class="navbar-brand">
-
-            </div> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -19,13 +16,18 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="building_select">
-                    Campus Map
+                    Building Select
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="major_select">
+                    Major Select
                 </a>
             </li>
         </ul>
     </div>
 </nav>
-<script src="build/bootstrap.bundle.js"></script>
+<%- include("tail"); %>
 <script>
     // Adding in some css stuff because I'm unsure if there's a way to add css in what would
     // be the bottom of the page

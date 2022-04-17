@@ -31,7 +31,7 @@ express()
     .get("/links", (req, res) => res.render("pages/links"))
     .get("/building_select", (req, res) => {
         
-        res.render("pages/building_select", {buidlings: models.buidlings});
+        res.render("pages/building_select", {buildings: models.buildings});
     })
     .get("/major_select", (req, res) => {
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
@@ -46,7 +46,7 @@ express()
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         // console.log(req.query.page); // To specify page, add ?page=PAGE to the href
-        res.render("pages/building", {building: models.buidlings[req.query.page]});
+        res.render("pages/building", {building: models.buildings[req.query.page]});
     })
     .get("/major", (req, res) => {
         let major = req.query.page;
