@@ -66,7 +66,7 @@ express()
             
             data["Categories"].forEach(category => {
                 //console.log(category["categoryTitle"]);
-                temp_categories = new models.Categories(category["categoryTitle"].replace(/[ &/]/g, ""));
+                temp_categories = new models.Category(category["categoryTitle"].replace(/[ &/]/g, ""));
 
                 category["relatedDegrees"].forEach(degreeRef => { 
                     //console.log(degreeRef.id);
@@ -74,7 +74,7 @@ express()
                     getDoc(doc(db, "pages", "Majors", "Degrees", degreeRef.id)).then((snapshot, options) => {
                         let data = snapshot.data(options);
                         if (data != undefined) {
-                            temp_page = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                            temp_page = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
                             temp_categories.AddPageData(temp_page);
                         }
                         console.log(temp_page);

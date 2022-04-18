@@ -2,7 +2,7 @@
 var fs = require("fs");
 
 //holds the indiual page data for each major
-module.exports.MajorPageData = class MajorPageData {
+module.exports.PageData = class PageData {
     constructor(id = "", about = "", campuses = "", type = "") {
         this.id = id;
         this.about = about;
@@ -11,9 +11,10 @@ module.exports.MajorPageData = class MajorPageData {
     }
 };
 
-//holds a list of majors and orgonizes them by category
-module.exports.Categories = class Categories
+//holds a list of PageData
+module.exports.Category = class Category
 {
+    
     title;
     pageData = [];
 
@@ -33,23 +34,23 @@ module.exports.Categories = class Categories
 //Holds a list of catagories
 module.exports.CollectionData = class CollectionData
 {
-    cCategories = [];
     datetime;
+    categories = [];
 
     constructor(){
         this.datetime = Date();
-        //this.cCategories = this.GetDataJson();
+        //this.categories = this.GetDataJson();
     }
 
-    GetCcategories(){
-        if(this.cCategories != undefined){
-            return this.cCategories;
+    GetCategories(){
+        if(this.categories != undefined){
+            return this.categories;
         }
     }
 
     AddCategoryData(majorData){
         if(majorData != undefined){
-            this.cCategories.push(majorData);
+            this.categories.push(majorData);
         }
     }
 
@@ -60,7 +61,7 @@ module.exports.CollectionData = class CollectionData
     SaveDataJson(myObj){
         var jdata = JSON.stringify(myObj);
         
-        fs.writeFile("./config.json", jdata, {flag: 'w+'}, function (err) {
+        fs.writeFile("./data.json", jdata, {flag: 'w+'}, function (err) {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);
@@ -71,9 +72,9 @@ module.exports.CollectionData = class CollectionData
         }); 
     }
 
-    GetDataJson()
+    GetdataJson()
     {
-        var data = fs.readFileSync("./config.json"), myObj;
+        var data = fs.readFileSync("./pageData.json"), myObj;
 
         try {
             myObj = JSON.parse(data);
