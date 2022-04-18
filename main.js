@@ -1,3 +1,4 @@
+const { Deferred } = require("@firebase/util");
 const express = require("express");
 const { initializeApp } = require("firebase/app");
 const { getFirestore, /*collection,*/ doc, getDoc/*, getDocs*/ } = require("firebase/firestore");
@@ -58,10 +59,9 @@ express()
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
     {
-        let collectionData = new models.CollectionData();
-
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
         {
+            let collectionData = new models.CollectionData();
             let data = snapshot.data(options);
             
             data["Categories"].forEach(category => {
@@ -69,32 +69,34 @@ express()
                 temp_categories = new models.Categories(category["categoryTitle"].replace(/[ &/]/g, ""));
 
                 category["relatedDegrees"].forEach(degreeRef => { 
-                        degree = degreeRef.path.split("/")[1];
-                        //console.log(degree);
-                        //console.log(degreeRef);
-
-                        if (degree != undefined){
-                            getDoc(doc(db, "pages", "Majors", "Degrees", degree)).then((snapshot, options) => {
-                                let data = snapshot.data(options);
-                                if (data != undefined) {
-                                    let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-
-                                    //adds the pade data to pageData member array variable
-                                    temp_categories.AddPageData(temp_data);
-                                    
-                                    //adds the data to catagories, will end up adding more then necessary here
-                                    collectionData.AddCategoryData(temp_categories);
-                                            
-                                    //saves everythiong to a json, runs more times then it should but it gets the job done
-                                    collectionData.SaveDataJson(collectionData);
-                                }
-                            });
+                    //console.log(degreeRef.id);
+                    
+                    getDoc(doc(db, "pages", "Majors", "Degrees", degreeRef.id)).then((snapshot, options) => {
+                        let data = snapshot.data(options);
+                        if (data != undefined) {
+                            temp_page = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                            temp_categories.AddPageData(temp_page);
                         }
+                        console.log(temp_page);
+                    });
+                        
                 });
+                collectionData.AddCategoryData(temp_categories);
             });
+            console.log(collectionData.cCategories)
+            collectionData.SaveDataJson(collectionData);
         });
 
-
+        /*
+        collectionData = new models.CollectionData();
+        collectionData = collectionData.GetDataJson();
+        let temp_cCategories = collectionData.GetCcategories()
+        temp_cCategories.forEach(category =>{
+            category.GetPageData().forEach(page => {
+                console.log(page);
+            })
+        })
+        */
         console.log(`Started server on http://localhost:${ PORT }`);
     });
 

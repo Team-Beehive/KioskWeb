@@ -3,13 +3,12 @@ var fs = require("fs");
 
 //holds the indiual page data for each major
 module.exports.MajorPageData = class MajorPageData {
-    constructor(id, about, campuses, type) {
+    constructor(id = "", about = "", campuses = "", type = "") {
         this.id = id;
         this.about = about;
         this.campuses = campuses;
         this.type = type;
     }
-
 };
 
 //holds a list of majors and orgonizes them by category
@@ -22,8 +21,12 @@ module.exports.Categories = class Categories
         this.title = catagory_title;
     }
 
+    GetPageData(){
+        return this.pageData;
+    }
+
     AddPageData(PageData){
-        this.pageData.push(PageData)
+        this.pageData.push(PageData);
     }
 }
 
@@ -31,36 +34,39 @@ module.exports.Categories = class Categories
 module.exports.CollectionData = class CollectionData
 {
     cCategories = [];
-    
+    datetime;
 
     constructor(){
+        this.datetime = Date();
         //this.cCategories = this.GetDataJson();
     }
 
-    AddCategoryData(majorData){
-        this.cCategories.push(majorData);
+    GetCcategories(){
+        if(this.cCategories != undefined){
+            return this.cCategories;
+        }
     }
 
-    DeleteCategoryData(){
-        this.cCategories = [];
+    AddCategoryData(majorData){
+        if(majorData != undefined){
+            this.cCategories.push(majorData);
+        }
     }
 
     PrintDate(){
         console.log(this.datetime);
     }
 
-    SaveDataJson(data){
-        var jdata = JSON.stringify(data);
+    SaveDataJson(myObj){
+        var jdata = JSON.stringify(myObj);
         
         fs.writeFile("./config.json", jdata, {flag: 'w+'}, function (err) {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);
-                return false;
             }
             else { 
                 console.log("Configuration saved successfully.");
-                return true;
             }
         }); 
     }
