@@ -18,20 +18,20 @@
             { 
                 // This will need to be dynamically updated as there's no way to always have the
                 // majors that contain more than just these characters
-                let categoryAsClass = category["categoryTitle"].replace(bad_chars, "");
+                let categoryAsClass = category.title;
                 %>
                 <div class="width-25 collapser p-1" type="button" data-bs-toggle="collapse" data-bs-target=".<%= categoryAsClass %>"
                     aria-expanded="false" aria-controls=".<%= categoryAsClass %>">
                     <div class="oit-card" style="background-image: url('<%= 'images/frog1.jpg' %>')">
                         <div class="oit-card-text">
-                            <p> <%= category["categoryTitle"] %> </p>
+                            <p> <%= category.title %> </p>
                         </div>
                     </div>
                 </div>
 
-                <% category["relatedDegrees"].forEach(degreeRef => 
+                <% category.pageData.forEach(page => 
                 { 
-                    let degree = degreeRef.path.split("/")[1];
+                    let degree = page.id;
                     %>
                     <div class="width-25 p-1 <%= categoryAsClass %> collapse in-group">
                         <a href="/major?page=<%- degree %>">
