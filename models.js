@@ -12,10 +12,11 @@ module.exports.PageData = class PageData {
     }
 };
 
+//Class that holds all the page data in pages array , has a get set for pages. Takes nothing.
 module.exports.Pages = class Pages{
     pages = [];
 
-    GetPageData(){
+    GetPages(){
         return this.pages;
     }
     
@@ -28,7 +29,6 @@ module.exports.Pages = class Pages{
 module.exports.Category = class Category
 {
     title;
-    
     pageData = [];
     
     constructor(category_tittle){
@@ -42,7 +42,6 @@ module.exports.Category = class Category
     AddPageData(PageData){
         this.pageData.push(PageData);
     }
-    
 }
 
 
@@ -51,10 +50,10 @@ module.exports.CollectionData = class CollectionData
 {
     datetime;
     categories = [];
+    categoryData = [];
 
     constructor(){
         this.datetime = Date();
-        //this.categories = this.GetDataJson();
     }
 
     GetCategories(){
@@ -69,6 +68,12 @@ module.exports.CollectionData = class CollectionData
         }
     }
 
+    AddCategoryData(majorData){
+        if(majorData != undefined){
+            this.categoryData.push(majorData);
+        }
+    }
+
     AddPageData(PageData){
         this.pageData.push(PageData);
     }
@@ -80,8 +85,6 @@ module.exports.CollectionData = class CollectionData
     GetDataJson()
     {
         var data = fs.readFileSync("./data.json"), myObj;
-        //var result = data.row;
-        
 
         try {
             myObj = JSON.parse(data);
@@ -90,7 +93,7 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error parsing your JSON.");
+            console.log("There has been an error parsing data from data.JSON");
             console.log(err);
         }
     }
@@ -98,7 +101,7 @@ module.exports.CollectionData = class CollectionData
     SaveDataJson(myObj){
         var jdata = JSON.stringify(myObj);
         
-        fs.writeFileSync("./data.json", jdata, {flag: 'w+'},function (err) {
+        fs.writeFileSync("./data.json", jdata, function (err) {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);
@@ -112,13 +115,13 @@ module.exports.CollectionData = class CollectionData
     SavePagesJson(myObj){
         var jdata = JSON.stringify(myObj);
     
-        fs.writeFileSync("./pages.json", jdata, function (err) {
+        fs.writeFileSync("./pages.json", jdata, {flag: 'w+'}, function (err) {
             if (err) {
-                console.log("There has been an error saving your configuration data.");
+                console.log("There has been an error saving your pages.");
                 console.log(err.message);
             }
             else { 
-                console.log("Configuration saved successfully.");
+                console.log("Pages saved successfully.");
             }
         }); 
     }
@@ -129,18 +132,13 @@ module.exports.CollectionData = class CollectionData
 
         try {
             myObj = JSON.parse(data);
-            if(myObj != undefined)
-            {
+            if(myObj != undefined){
                 return myObj;
             }
         }
         catch (err) {
-            console.log("There has been an error parsing your JSON.");
+            console.log("There has been an error parsing data from pages.JSON");
             console.log(err);
         }
-        
-
-       
     }
-
 };

@@ -60,23 +60,6 @@ express()
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
     {
-        /*
-        getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
-            //Gets the data and saves it into the PageData class
-            querySnapshot.forEach((doc) => {
-                // var temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
-                let page_data = 
-                            {
-                                id: doc.id,
-                                about: doc.get("about"),
-                                campuses: doc.get("campuses"),
-                                type: doc.get("type"),
-                                category: ""
-                            }
-            });
-        });
-        */
-
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
         {
             let collectionData = new models.CollectionData();
@@ -85,57 +68,54 @@ express()
             count = 0;
             
             data["Categories"].forEach(category => {
-                //console.log(category["categoryTitle"]);
                 collectionData.AddCategories(category["categoryTitle"]);
 
                 category["relatedDegrees"].forEach(degreeRef => { 
-                    //console.log(degreeRef.id);
 
                     getDoc(doc(db, "pages", "Majors", "Degrees", degreeRef.id)).then((snapshot, options) => {
                         let data = snapshot.data(options);
 
                         if (data != undefined) {
-
                             //will read twice without if
                             if(count % 2 == 0){
                                 temp_page = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"], category["categoryTitle"]);
                                 pages.AddPageData(temp_page);
-                                //console.log("-----",page_data.key_category, "--",page_data.id);
+                                //ooverites each time so the last overitw will write all data, saves all the data for the pages in the pages class in an array
                                 collectionData.SavePagesJson(pages);
                             } 
                             count++;
                         }
                     });
-                    
-                
                 });
             
             });
-            
+            //saves all the category data here
             collectionData.SaveDataJson(collectionData);
         });
 
         //how to get all data
         collectionData = new models.CollectionData();
-        class_categories = collectionData.GetDataJson();
+        //gets the array of categories
+        class_collection = collectionData.GetDataJson();
+        //gets all the data for each page
         class_pages = collectionData.GetPagesJson();
 
-        categories = class_categories.categories;
-        console.log(categories, class_pages[0]);
-        /*
-
-        class_categories.categories.forEach(category =>{
+        class_collection.categories.forEach(category =>{
             temp_category = new models.Category(category);
-
+            
             class_pages.pages.forEach(page =>{
-                if(page.key_category = category){
+                if(page.key_category == category){
                     temp_category.AddPageData(page);
                 }
             })
-            collectionData.AddCategories(temp_category);
+            
+            collectionData.AddCategoryData(temp_category);
         })
-        console.log(collectionData);
-        */
+
+        collectionData.categoryData.forEach(category =>{
+            console.log(category);
+        })       
+
         console.log(`Started server on http://localhost:${ PORT }`);
     });
 
