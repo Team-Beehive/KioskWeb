@@ -3,33 +3,48 @@ var fs = require("fs");
 
 //holds the indiual page data for each major
 module.exports.PageData = class PageData {
-    constructor(id = "", about = "", campuses = "", type = "") {
+    constructor(id, about, campuses, type, key) {
         this.id = id;
         this.about = about;
         this.campuses = campuses;
         this.type = type;
+        this.key_category = key;
     }
 };
+
+module.exports.Pages = class Pages{
+    pages = [];
+
+    GetPageData(){
+        return this.pages;
+    }
+    
+    AddPageData(PageData){
+        this.pages.push(PageData);
+    }
+}
 
 //holds a list of PageData
 module.exports.Category = class Category
 {
-    
     title;
+    
     pageData = [];
-
-    constructor(catagory_title){
-        this.title = catagory_title;
+    
+    constructor(category_tittle){
+        this.title = category_tittle;
     }
-
+    
     GetPageData(){
         return this.pageData;
     }
-
+    
     AddPageData(PageData){
         this.pageData.push(PageData);
     }
+    
 }
+
 
 //Holds a list of catagories
 module.exports.CollectionData = class CollectionData
@@ -48,20 +63,42 @@ module.exports.CollectionData = class CollectionData
         }
     }
 
-    AddCategoryData(majorData){
+    AddCategories(majorData){
         if(majorData != undefined){
             this.categories.push(majorData);
         }
     }
 
+    AddPageData(PageData){
+        this.pageData.push(PageData);
+    }
+
     PrintDate(){
         console.log(this.datetime);
+    }
+    
+    GetDataJson()
+    {
+        var data = fs.readFileSync("./data.json"), myObj;
+        //var result = data.row;
+        
+
+        try {
+            myObj = JSON.parse(data);
+            if(myObj != undefined){
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error parsing your JSON.");
+            console.log(err);
+        }
     }
 
     SaveDataJson(myObj){
         var jdata = JSON.stringify(myObj);
         
-        fs.writeFile("./data.json", jdata, {flag: 'w+'}, function (err) {
+        fs.writeFileSync("./data.json", jdata, {flag: 'w+'},function (err) {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);
@@ -72,9 +109,23 @@ module.exports.CollectionData = class CollectionData
         }); 
     }
 
-    GetdataJson()
+    SavePagesJson(myObj){
+        var jdata = JSON.stringify(myObj);
+    
+        fs.writeFileSync("./pages.json", jdata, function (err) {
+            if (err) {
+                console.log("There has been an error saving your configuration data.");
+                console.log(err.message);
+            }
+            else { 
+                console.log("Configuration saved successfully.");
+            }
+        }); 
+    }
+
+    GetPagesJson()
     {
-        var data = fs.readFileSync("./pageData.json"), myObj;
+        var data = fs.readFileSync("./pages.json"), myObj;
 
         try {
             myObj = JSON.parse(data);
@@ -87,6 +138,9 @@ module.exports.CollectionData = class CollectionData
             console.log("There has been an error parsing your JSON.");
             console.log(err);
         }
+        
+
+       
     }
 
 };

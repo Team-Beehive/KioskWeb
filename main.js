@@ -1,7 +1,8 @@
 const { Deferred } = require("@firebase/util");
 const express = require("express");
 const { initializeApp } = require("firebase/app");
-const { getFirestore, /*collection,*/ doc, getDoc/*, getDocs*/ } = require("firebase/firestore");
+const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ 
+collection} = require("firebase/firestore");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
@@ -59,43 +60,81 @@ express()
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
     {
+        /*
+        getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
+            //Gets the data and saves it into the PageData class
+            querySnapshot.forEach((doc) => {
+                // var temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+                let page_data = 
+                            {
+                                id: doc.id,
+                                about: doc.get("about"),
+                                campuses: doc.get("campuses"),
+                                type: doc.get("type"),
+                                category: ""
+                            }
+            });
+        });
+        */
+
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
         {
             let collectionData = new models.CollectionData();
+            let pages = new models.Pages();
             let data = snapshot.data(options);
+            count = 0;
             
             data["Categories"].forEach(category => {
                 //console.log(category["categoryTitle"]);
-                temp_categories = new models.Category(category["categoryTitle"].replace(/[ &/]/g, ""));
+                collectionData.AddCategories(category["categoryTitle"]);
 
                 category["relatedDegrees"].forEach(degreeRef => { 
                     //console.log(degreeRef.id);
-                    
+
                     getDoc(doc(db, "pages", "Majors", "Degrees", degreeRef.id)).then((snapshot, options) => {
                         let data = snapshot.data(options);
+
                         if (data != undefined) {
-                            temp_page = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-                            temp_categories.AddPageData(temp_page);
+
+                            //will read twice without if
+                            if(count % 2 == 0){
+                                temp_page = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"], category["categoryTitle"]);
+                                pages.AddPageData(temp_page);
+                                //console.log("-----",page_data.key_category, "--",page_data.id);
+                                collectionData.SavePagesJson(pages);
+                            } 
+                            count++;
                         }
-                        console.log(temp_page);
                     });
-                        
+                    
+                
                 });
-                collectionData.AddCategoryData(temp_categories);
+            
             });
-            console.log(collectionData.cCategories)
+            
             collectionData.SaveDataJson(collectionData);
         });
 
-        /*
+        //how to get all data
         collectionData = new models.CollectionData();
-        collectionData = collectionData.GetDataJson();
-        let temp_cCategories = collectionData.GetCcategories()
-        temp_cCategories.forEach(category =>{
-            category.GetPageData().forEach(page => {
-                console.log(page);
+        class_categories = collectionData.GetDataJson();
+        class_pages = collectionData.GetPagesJson();
+
+        categories = class_categories.categories;
+        console.log(categories, class_pages[0]);
+        /*
+
+        class_categories.categories.forEach(category =>{
+            temp_category = new models.Category(category);
+
+            class_pages.pages.forEach(page =>{
+                if(page.key_category = category){
+                    temp_category.AddPageData(page);
+                }
             })
+            collectionData.AddCategories(temp_category);
         })
+        console.log(collectionData);
         */
         console.log(`Started server on http://localhost:${ PORT }`);
     });
