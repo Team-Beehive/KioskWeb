@@ -1,5 +1,5 @@
 //Require for file manipulation on system
-var fs = require("fs");
+const fs = require("fs");
 
 //holds the indiual page data for each major
 module.exports.PageData = class PageData {
@@ -14,7 +14,7 @@ module.exports.PageData = class PageData {
 
 //Class that holds all the page data in pages array , has a get set for pages. Takes nothing.
 module.exports.Pages = class Pages{
-    pages = [];
+    pages = {};
 
     GetPages(){
         return this.pages;
@@ -23,7 +23,46 @@ module.exports.Pages = class Pages{
     AddPageData(PageData){
         this.pages.push(PageData);
     }
-}
+
+    AddPages(pages)
+    {
+        this.pages["Pages"] = pages;
+    }
+
+    SetPages(pages) {
+        this.pageData = pages;
+    }
+
+    SavePagesJson() {
+        var jdata = JSON.stringify(this.pages);
+
+        fs.writeFileSync("./pages.json", jdata, { flag: "w+" }, function (err) {
+            if (err) {
+                console.log("There has been an error saving your pages.");
+                console.log(err.message);
+            }
+            else {
+                console.log("Pages saved successfully.");
+            }
+        });
+    }
+
+    GetPagesJson() {
+        var data = fs.readFileSync("./pages.json"), myObj;
+
+        try {
+            myObj = JSON.parse(data);
+            if (myObj != undefined) {
+                this.pages = myObj;
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error parsing data from pages.JSON");
+            console.log(err);
+        }
+    }
+};
 
 //holds a list of PageData
 module.exports.Category = class Category
@@ -42,29 +81,33 @@ module.exports.Category = class Category
     AddPageData(PageData){
         this.pageData.push(PageData);
     }
-}
+};
 
 
 //Holds a list of catagories
 module.exports.CollectionData = class CollectionData
 {
     datetime;
-    categories = [];
-    categoryData = [];
+    data = {};
 
     constructor(){
         this.datetime = Date();
     }
 
     GetCategories(){
-        if(this.categories != undefined){
-            return this.categories;
+        if(this.data != undefined){
+            return this.data;
         }
+    }
+
+    SetCategories(categories)
+    {
+        this.data["Categories"] = categories;
     }
 
     AddCategories(majorData){
         if(majorData != undefined){
-            this.categories.push(majorData);
+            this.data.push(majorData);
         }
     }
 
@@ -73,22 +116,20 @@ module.exports.CollectionData = class CollectionData
             this.categoryData.push(majorData);
         }
     }
-
-    AddPageData(PageData){
-        this.pageData.push(PageData);
-    }
+    
 
     PrintDate(){
         console.log(this.datetime);
     }
     
-    GetDataJson()
+    GetCategoriesJson()
     {
         var data = fs.readFileSync("categories.json"), myObj;
 
         try {
             myObj = JSON.parse(data);
             if(myObj != undefined){
+                this.data = myObj;
                 return myObj;
             }
         }
@@ -98,10 +139,12 @@ module.exports.CollectionData = class CollectionData
         }
     }
 
-    SaveDataJson(myObj){
-        var jdata = JSON.stringify(myObj);
+    SaveCategoriesJson()
+    {
+        this.data["Date"] = Date();
+        var jdata = JSON.stringify(this.data);
         
-        fs.writeFileSync("categories.json", jdata, function (err) {
+        fs.writeFileSync("categories.json", jdata, (err) => {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);
@@ -112,35 +155,7 @@ module.exports.CollectionData = class CollectionData
         }); 
     }
 
-    SavePagesJson(myObj){
-        var jdata = JSON.stringify(myObj);
     
-        fs.writeFileSync("./pages.json", jdata, {flag: 'w+'}, function (err) {
-            if (err) {
-                console.log("There has been an error saving your pages.");
-                console.log(err.message);
-            }
-            else { 
-                console.log("Pages saved successfully.");
-            }
-        }); 
-    }
-
-    GetPagesJson()
-    {
-        var data = fs.readFileSync("./pages.json"), myObj;
-
-        try {
-            myObj = JSON.parse(data);
-            if(myObj != undefined){
-                return myObj;
-            }
-        }
-        catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
-            console.log(err);
-        }
-    }
 };
 
 module.exports.buildings =

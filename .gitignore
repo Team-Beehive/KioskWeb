@@ -6,3 +6,4 @@ build/
 css/
 public/css
 **/desktop.ini
+categories.json
