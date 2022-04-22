@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head"); %>
+    <link rel="stylesheet" href="css/card-fix.css">
+    <title>Document</title>
+</head>
+<body>
+    <table class="container-fluid">
+        <tr class="row">
+            <td class="col-6">
+                <div class="oit-card" style="background-image: url('<%- "images/todd.jpg" %>');"></div>
+                <div class="blue-box">
+                    <h4>Department</h4>
+                    <p><%= professor["department"] %></p>
+                    <h4>Email</h4>
+                    <p><%= professor["email"] %></p>
+                    <h4>Office</h4>
+                    <p><%= professor["office"] %></p>
+                    <h4>Phone Number</h4>
+                    <p><%= professor["phone_number"] %></p>
+                </div>
+            </td>
+            <td class="col-6">
+                <p class="vertical"><%= professor.name %></p>
+            </td>
+        </tr>
+    </table>
+<%- include("nav", {current: "\"professors\""}) %>
+<%- include("tail"); %>
+<script src="js/card-fix.js"></script>
+</body>
+</html>

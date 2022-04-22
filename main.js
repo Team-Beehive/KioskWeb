@@ -29,6 +29,31 @@ express()
 
     .get("/", (req, res) => res.render("pages/links"))
     .get("/links", (req, res) => res.render("pages/links"))
+    .get("/professor", (req, res) => {
+        var professor = req.query.page;
+        if (professor != undefined)
+            getDoc(doc(db, "pages", "Professors", "Professors", professor)).then((snapshot, options) => {
+                let data = snapshot.data(options);
+                if (data != undefined)
+                {
+                    res.render("pages/professor", {professor: 
+                        {
+                            name: professor, // This is the professor that was defined at the req.query.page
+                            department: data["department"],
+                            email: data["email"],
+                            office: data["office"],
+                            phone_number: data["phone_number"]
+                        }
+                    });
+                }
+                else
+                {
+                    res.render("pages/404");
+                }
+            });
+        else
+            res.render("pages/404");
+    })
     .get("/building_select", (req, res) => {
         res.render("pages/building_select", {buildings: models.buildings});
     })
