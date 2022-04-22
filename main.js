@@ -3,6 +3,7 @@ const express = require("express");
 const { initializeApp } = require("firebase/app");
 const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ 
 collection} = require("firebase/firestore");
+const { builtinModules } = require("module");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
@@ -35,6 +36,29 @@ express()
         res.render("pages/building_select", {buildings: models.buildings});
     })
     .get("/major_select", (req, res) => {
+
+        //Start: get amajor pages
+        collectionData = new models.CollectionData();
+        //gets the array of categories
+        class_collection = collectionData.GetDataJson();
+        //gets all the data for each page
+        class_pages = collectionData.GetPagesJson();
+
+        class_collection.categories.forEach(category =>{
+            temp_category = new models.Category(category);
+            
+            class_pages.pages.forEach(page =>{
+                if(page.key_category == category){
+                    temp_category.AddPageData(page);
+                }
+            })
+            
+            collectionData.AddCategoryData(temp_category);
+        })//End: get major pages
+
+        res.render("pages/major_select", { categories: collectionData.categoryData });
+
+        /*old code
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
             let data = snapshot.data(options);
             if (data != undefined) {
@@ -43,6 +67,7 @@ express()
             else
                 res.render("pages/404");
         });
+        */
     })
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
@@ -63,7 +88,6 @@ express()
                     res.render("pages/404");
                 }
             });
-            })
         }
         else
             res.render("pages/404");
@@ -105,29 +129,6 @@ express()
             //saves all the category data here
             collectionData.SaveDataJson(collectionData);
         });
-
-        //how to get all data
-        collectionData = new models.CollectionData();
-        //gets the array of categories
-        class_collection = collectionData.GetDataJson();
-        //gets all the data for each page
-        class_pages = collectionData.GetPagesJson();
-
-        class_collection.categories.forEach(category =>{
-            temp_category = new models.Category(category);
-            
-            class_pages.pages.forEach(page =>{
-                if(page.key_category == category){
-                    temp_category.AddPageData(page);
-                }
-            })
-            
-            collectionData.AddCategoryData(temp_category);
-        })
-
-        collectionData.categoryData.forEach(category =>{
-            console.log(category);
-        })       
 
         console.log(`Started server on http://localhost:${ PORT }`);
     });

@@ -18,7 +18,7 @@
             { 
                 // This will need to be dynamically updated as there's no way to always have the
                 // majors that contain more than just these characters
-                let categoryAsClass = category["categoryTitle"].replace(bad_chars, "");
+                let categoryAsClass = category/*.replace(bad_chars, "")*/;
                 %>
                 <div class="width-25 collapser p-1" type="button" data-bs-toggle="collapse" data-bs-target=".<%= categoryAsClass %>"
                     aria-expanded="false" aria-controls=".<%= categoryAsClass %>">

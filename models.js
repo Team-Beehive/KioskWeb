@@ -49,7 +49,9 @@ module.exports.Category = class Category
 module.exports.CollectionData = class CollectionData
 {
     datetime;
+    //list of categories string
     categories = [];
+    //list of category classes
     categoryData = [];
 
     constructor(){
@@ -80,6 +82,66 @@ module.exports.CollectionData = class CollectionData
 
     PrintDate(){
         console.log(this.datetime);
+    }
+
+    GetDataJson()
+    {
+        var data = fs.readFileSync("./data.json"), myObj;
+
+        try {
+            myObj = JSON.parse(data);
+            if(myObj != undefined){
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error parsing data from data.JSON");
+            console.log(err);
+        }
+    }
+
+    SaveDataJson(myObj){
+        var jdata = JSON.stringify(myObj);
+        
+        fs.writeFileSync("./data.json", jdata, function (err) {
+            if (err) {
+                console.log("There has been an error saving your configuration data.");
+                console.log(err.message);
+            }
+            else { 
+                console.log("Configuration saved successfully.");
+            }
+        }); 
+    }
+
+    SavePagesJson(myObj){
+        var jdata = JSON.stringify(myObj);
+    
+        fs.writeFileSync("./pages.json", jdata, {flag: 'w+'}, function (err) {
+            if (err) {
+                console.log("There has been an error saving your pages.");
+                console.log(err.message);
+            }
+            else { 
+                console.log("Pages saved successfully.");
+            }
+        }); 
+    }
+
+    GetPagesJson()
+    {
+        var data = fs.readFileSync("./pages.json"), myObj;
+
+        try {
+            myObj = JSON.parse(data);
+            if(myObj != undefined){
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error parsing data from pages.JSON");
+            console.log(err);
+        }
     }
 };
 
@@ -147,64 +209,5 @@ module.exports.buildings =
             [
                 "images/boivin1.jpg"
             ]
-    
-    GetDataJson()
-    {
-        var data = fs.readFileSync("./data.json"), myObj;
-
-        try {
-            myObj = JSON.parse(data);
-            if(myObj != undefined){
-                return myObj;
-            }
-        }
-        catch (err) {
-            console.log("There has been an error parsing data from data.JSON");
-            console.log(err);
-        }
-    }
-
-    SaveDataJson(myObj){
-        var jdata = JSON.stringify(myObj);
-        
-        fs.writeFileSync("./data.json", jdata, function (err) {
-            if (err) {
-                console.log("There has been an error saving your configuration data.");
-                console.log(err.message);
-            }
-            else { 
-                console.log("Configuration saved successfully.");
-            }
-        }); 
-    }
-
-    SavePagesJson(myObj){
-        var jdata = JSON.stringify(myObj);
-    
-        fs.writeFileSync("./pages.json", jdata, {flag: 'w+'}, function (err) {
-            if (err) {
-                console.log("There has been an error saving your pages.");
-                console.log(err.message);
-            }
-            else { 
-                console.log("Pages saved successfully.");
-            }
-        }); 
-    }
-
-    GetPagesJson()
-    {
-        var data = fs.readFileSync("./pages.json"), myObj;
-
-        try {
-            myObj = JSON.parse(data);
-            if(myObj != undefined){
-                return myObj;
-            }
-        }
-        catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
-            console.log(err);
-        }
-    }
+    },
 };
