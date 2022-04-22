@@ -54,10 +54,10 @@ express()
                 if(page.key_category == category){
                     temp_category.AddPageData(page);
                 }
-            })
+            });
             
             collectionData.AddCategoryData(temp_category);
-        })//End: get major pages
+        }); //End: get major pages
 
         res.render("pages/major_select", { categories: collectionData.categoryData });
 
