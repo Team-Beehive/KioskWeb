@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <%- include("head"); %>
-    <link rel="stylesheet" href="css/card-fix.css">
+    <!-- <link rel="stylesheet" href="css/card-fix.css"> -->
     <title>Document</title>
 </head>
 <body>
+    <%- include("back"); %>
     <table class="container-fluid">
         <tr class="row">
             <td class="col-6">
@@ -22,12 +23,15 @@
                 </div>
             </td>
             <td class="col-6">
-                <p class="vertical"><%= professor.name %></p>
+                <div class="vertical">
+                <p>
+                    <%= professor.name %>
+                </p>
+                </div>
             </td>
         </tr>
     </table>
-<%- include("nav", {current: "\"professors\""}) %>
-<%- include("tail"); %>
-<script src="js/card-fix.js"></script>
+<%- include("nav", {current: '"professors"'}) %>
+<!-- <script src="js/card-fix.js"></script> -->
 </body>
 </html>

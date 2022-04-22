@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <% category["relatedDegrees"].forEach(degreeRef => 
+                <% category["relatedDegrees"].forEach((degreeRef) => 
                 { 
                     let degree = degreeRef.path.split("/")[1];
                     %>
@@ -48,7 +48,6 @@
     </div>
 
     <%- include("nav", {current: '"major_select"'}) %>
-    <%- include("tail"); %>
     <script src="js/card_fix.js"></script>
 </body>
 

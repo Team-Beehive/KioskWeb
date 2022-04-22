@@ -182,6 +182,10 @@ $oit_gold: #ffd14e;
 }
 
 .vertical {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     writing-mode: sideways-lr;
     text-orientation: mixed;
 }
