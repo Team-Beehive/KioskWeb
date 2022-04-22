@@ -29,7 +29,7 @@ getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
     }
     else 
     {
-        console.log("Failed to read data from online database.");
+        console.error("Failed to read data from online database.");
     }
 });
 
@@ -48,10 +48,11 @@ getDocs(collection(db, "pages", "Majors", "Degrees")).then((snapshot) => {
             };
         });
         pageData.SetPages(pages);
+        pageData.SavePagesJson();
     }
     else 
     {
-        console.log("Failed to read data from online database.");
+        console.error("Failed to read data from online database.");
     }
 });
 
@@ -75,7 +76,7 @@ express()
         }
         catch(err)
         {
-            console.log(err);
+            console.error(err);
             res.render("pages/404");
         }
     })
@@ -86,7 +87,6 @@ express()
     })
     .get("/major", (req, res) => {
         let major = req.query.page;
-        console.log(pageData.pages);
         res.render("pages/major", { major: pageData.pages["Pages"][major] });
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))

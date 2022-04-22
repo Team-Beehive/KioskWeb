@@ -1,39 +1,20 @@
 //Require for file manipulation on system
 const fs = require("fs");
 
-//holds the indiual page data for each major
-module.exports.PageData = class PageData {
-    constructor(id, about, campuses, type, key) {
-        this.id = id;
-        this.about = about;
-        this.campuses = campuses;
-        this.type = type;
-        this.keyCategory = key;
-    }
-};
-
 //Class that holds all the page data in pages array , has a get set for pages. Takes nothing.
 module.exports.Pages = class Pages{
     pages = {};
 
-    GetPages(){
-        return this.pages;
-    }
-    
     AddPageData(PageData){
         this.pages.push(PageData);
     }
 
-    AddPages(pages)
-    {
+    SetPages(pages) {
         this.pages["Pages"] = pages;
     }
 
-    SetPages(pages) {
-        this.pageData = pages;
-    }
-
     SavePagesJson() {
+        this.pages["Date"] = Date();
         var jdata = JSON.stringify(this.pages);
 
         fs.writeFileSync("./pages.json", jdata, { flag: "w+" }, function (err) {
@@ -64,35 +45,13 @@ module.exports.Pages = class Pages{
     }
 };
 
-//holds a list of PageData
-module.exports.Category = class Category
-{
-    title;
-    pageData = [];
-    
-    constructor(categoryTitle){
-        this.title = categoryTitle;
-    }
-    
-    GetPageData(){
-        return this.pageData;
-    }
-    
-    AddPageData(PageData){
-        this.pageData.push(PageData);
-    }
-};
-
 
 //Holds a list of catagories
 module.exports.CollectionData = class CollectionData
 {
-    datetime;
     data = {};
 
-    constructor(){
-        this.datetime = Date();
-    }
+    constructor(){}
 
     GetCategories(){
         if(this.data != undefined){
@@ -103,18 +62,6 @@ module.exports.CollectionData = class CollectionData
     SetCategories(categories)
     {
         this.data["Categories"] = categories;
-    }
-
-    AddCategories(majorData){
-        if(majorData != undefined){
-            this.data.push(majorData);
-        }
-    }
-
-    AddCategoryData(majorData){
-        if(majorData != undefined){
-            this.categoryData.push(majorData);
-        }
     }
     
 
