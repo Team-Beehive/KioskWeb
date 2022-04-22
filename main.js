@@ -1,9 +1,12 @@
-const { Deferred } = require("@firebase/util");
+/* eslint-disable no-undef */
 const express = require("express");
 const { initializeApp } = require("firebase/app");
-const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ 
-collection} = require("firebase/firestore");
-const { builtinModules } = require("module");
+
+// old main includes
+//const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ collection} = require("firebase/firestore");
+//const { builtinModules } = require("module");
+
+const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ } = require("firebase/firestore");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
@@ -75,9 +78,9 @@ express()
         res.render("pages/building", {building: models.buildings[req.query.page]});
     })
     .get("/major", (req, res) => {
-        let temp_major = req.query.page;
+        let major = req.query.page;
         if (major != undefined)
-		{
+        {
             getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
                 let data = snapshot.data(options);
                 if (data != undefined) {
@@ -117,7 +120,7 @@ express()
                             if(count % 2 == 0){
                                 temp_page = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"], category["categoryTitle"]);
                                 pages.AddPageData(temp_page);
-                                //ooverites each time so the last overitw will write all data, saves all the data for the pages in the pages class in an array
+                                //ooverwrites each time so the last overitw will write all data, saves all the data for the pages in the pages class in an array
                                 collectionData.SavePagesJson(pages);
                             } 
                             count++;
@@ -129,7 +132,7 @@ express()
             //saves all the category data here
             collectionData.SaveDataJson(collectionData);
         });
-
+        
         console.log(`Started server on http://localhost:${ PORT }`);
     });
 
