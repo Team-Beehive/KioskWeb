@@ -29,10 +29,21 @@
 </nav>
 <%- include("tail"); %>
 <script>
+    
     // Adding in some css stuff because I'm unsure if there's a way to add css in what would
     // be the bottom of the page
-    $("body").css("padding-bottom", "100px");
-    $(".navbar-brand img").css("width", "50%");
+    $(document).ready(() =>{
+        $("body").css("padding-bottom", $("nav").outerHeight(true));
+        $(".navbar-brand img").css("width", "50%");
+    });
+
+    // Whenever the page, and in turn the navbar, resizes, update the padding on the bottom of the body.
+    $(window).resize(() => {
+        console.log($("nav").outerHeight(true));
+        $("body").css("padding-bottom", $("nav").outerHeight(true));
+    });
+    
+    
 
     // VSCode may be angry but it is what's needed.
     // It'll be correct once it's on the browser.
