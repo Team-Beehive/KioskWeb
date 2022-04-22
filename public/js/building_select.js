@@ -49,13 +49,13 @@ getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) =>
 
     //Gets the data and saves it into the PageData class
     querySnapshot.forEach((doc) => {
-        var temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
-        localStorage.setObj(doc.id, temp_data);
+        // var temp_data = new PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+        // localStorage.setObj(doc.id, temp_data);
     });
 
-    //test to see if it gets everything
-    querySnapshot.forEach((doc) => {
-        PrintData(localStorage.getObj(doc.id));
-    });
+    // //test to see if it gets everything
+    // querySnapshot.forEach((doc) => {
+    //     PrintData(localStorage.getObj(doc.id));
+    // });
 
 });
