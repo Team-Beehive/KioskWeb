@@ -15,10 +15,10 @@
     <div class="container-fluid">
         <div class="row">
             <% categories.forEach(category => 
-            { 
-                // This will need to be dynamically updated as there's no way to always have the
-                // majors that contain more than just these characters
-                let categoryAsClass = category/*.replace(bad_chars, "")*/;
+            {
+                console.log(category);
+                let good_chars = /[^A-Za-z0-9\_-]/g; // [^ ] means match everything not in the square brackets
+                let categoryAsClass = category.title.replace(good_chars, "");
                 %>
                 <div class="width-25 collapser p-1" type="button" data-bs-toggle="collapse" data-bs-target=".<%= categoryAsClass %>"
                     aria-expanded="false" aria-controls=".<%= categoryAsClass %>">
@@ -50,7 +50,6 @@
     </div>
 
     <%- include("nav", {current: '"major_select"'}) %>
-    <%- include("tail"); %>
     <script src="js/card_fix.js"></script>
 </body>
 
