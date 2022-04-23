@@ -106,21 +106,14 @@ express()
     })
     .get("/major", (req, res) => {
         let major = req.query.page;
-        if (major != undefined)
-        {
-            getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
-                let data = snapshot.data(options);
-                if (data != undefined) {
-                    let tempData = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-                    res.render("pages/major", { major: tempData });
-                }
-                else {
-                    res.render("pages/404");
-                }
-            });
-        }
-        else
-            res.render("pages/404");
+        collectionData = new models.CollectionData();
+        classPages = collectionData.GetPagesJson();
+        classPages.pages.forEach(page =>{
+            if(page.id == major){
+                res.render("pages/major", { major: page });
+            }
+        })
+        res.render("pages/404");
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
