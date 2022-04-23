@@ -10,6 +10,9 @@ apt -y install openssh # Openssh will allow filezilla to connect to kiosk
 apt -y install termux-auth
 apt -y install termux-api
 
+# Make scripts runnable
+chmod +x start
+chmod +x get-login
 # Move start script and other useful scripts to home directory
 mv start ~
 mv get-login ~

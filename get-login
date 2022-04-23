@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+echo -n "IP Address: "
+ifconfig wlan0 | grep 'inet ' | cut -f 10 -d ' '
+echo "Port: 22"
+echo -n "Username: "
+whoami

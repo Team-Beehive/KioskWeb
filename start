@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+# Make sure everything is up-to-date
+apt update
+apt -o Dpkg::Options::='--force-confold' -y upgrade
+
+git pull origin
+
+cd KioskWeb
+npm i
+
+npm run build
+
+npm start
