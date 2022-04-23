@@ -4,9 +4,16 @@
 apt update
 apt -o Dpkg::Options::='--force-confold' -y upgrade
 
+cd KioskWeb
+
 git pull origin
 
-cd KioskWeb
+chmod +x start
+chmod +x get-login
+
+mv start ~
+mv get-login ~
+
 npm i
 
 npm run build
