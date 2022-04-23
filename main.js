@@ -71,14 +71,25 @@ express()
         classCollection = collectionData.GetCategoriesJson();
         //gets all the data for each page
         classPages = collectionData.GetPagesJson();
-
+        
         classCollection.categories.forEach(category =>{
             tempCategory = new models.Category(category);
             
+            //for each page in pages
             classPages.pages.forEach(page =>{
-                page.keyCategories.forEach(category => {
-                    if(page.keyCategory == category){
-                        tempCategory.AddPageData(page);
+                count = 2;
+                //for each category in page
+                page.keyCategories.forEach(pageCategory => {
+                    //if the category is in the pages categories
+                    if(pageCategory == category){
+                        if(count % 2 == 0)
+                        {
+                            tempCategory.AddPageData(page);
+                            count++;
+                        }
+                        else{
+                            count++;
+                        }
                     }
                 }) 
             });
