@@ -146,7 +146,7 @@ express()
                         
                         pageData.pages.forEach(page =>{
                             //console.log(page);
-                            if(page.id == relatedDegree.id){
+                            if(page.id == relatedDegree.id && page.keyCategory == ""){
                                 page.keyCategory = category["categoryTitle"];
                                 classPages.AddPageData(page);
                                 //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
