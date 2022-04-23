@@ -6,7 +6,7 @@ const { initializeApp } = require("firebase/app");
 //const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ collection} = require("firebase/firestore");
 //const { builtinModules } = require("module");
 
-const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ } = require("firebase/firestore");
+const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/firestore");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
@@ -68,34 +68,23 @@ express()
         //Start: get amajor pages
         collectionData = new models.CollectionData();
         //gets the array of categories
-        class_collection = collectionData.GetDataJson();
+        classCollection = collectionData.GetCategoriesJson();
         //gets all the data for each page
-        class_pages = collectionData.GetPagesJson();
+        classPages = collectionData.GetPagesJson();
 
-        class_collection.categories.forEach(category =>{
-            temp_category = new models.Category(category);
+        classCollection.categories.forEach(category =>{
+            tempCategory = new models.Category(category);
             
-            class_pages.pages.forEach(page =>{
-                if(page.key_category == category){
-                    temp_category.AddPageData(page);
+            classPages.pages.forEach(page =>{
+                if(page.keyCategory == category){
+                    tempCategory.AddPageData(page);
                 }
             });
             
-            collectionData.AddCategoryData(temp_category);
+            collectionData.AddCategoryData(tempCategory);
         }); //End: get major pages
 
         res.render("pages/major_select", { categories: collectionData.categoryData });
-
-        /*old code
-        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
-            let data = snapshot.data(options);
-            if (data != undefined) {
-                res.render("pages/major_select", { categories: data["Categories"], bad_chars: /[ &/]/g });
-            }
-            else
-                res.render("pages/404");
-        });
-        */
     })
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
@@ -109,8 +98,8 @@ express()
             getDoc(doc(db, "pages", "Majors", "Degrees", major)).then((snapshot, options) => {
                 let data = snapshot.data(options);
                 if (data != undefined) {
-                    let temp_data = new models.MajorPageData(snapshot.id, data["about"], data["campuses"], data["type"]);
-                    res.render("pages/major", { major: temp_data });
+                    let tempData = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"]);
+                    res.render("pages/major", { major: tempData });
                 }
                 else {
                     res.render("pages/404");
@@ -125,38 +114,58 @@ express()
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
     {
-        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>
-        {
-            let collectionData = new models.CollectionData();
-            let pages = new models.Pages();
-            let data = snapshot.data(options);
-            count = 0;
+        let collectionData = new models.CollectionData();
+
+        //gets all pages
+        getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
+            let classPages = new models.Pages();
             
-            data["Categories"].forEach(category => {
-                collectionData.AddCategories(category["categoryTitle"]);
-
-                category["relatedDegrees"].forEach(degreeRef => { 
-
-                    getDoc(doc(db, "pages", "Majors", "Degrees", degreeRef.id)).then((snapshot, options) => {
-                        let data = snapshot.data(options);
-
-                        if (data != undefined) {
-                            //will read twice without if
-                            if(count % 2 == 0){
-                                temp_page = new models.PageData(snapshot.id, data["about"], data["campuses"], data["type"], category["categoryTitle"]);
-                                pages.AddPageData(temp_page);
-                                //ooverwrites each time so the last overitw will write all data, saves all the data for the pages in the pages class in an array
-                                collectionData.SavePagesJson(pages);
-                            } 
-                            count++;
-                        }
-                    });
-                });
-            
-            });
-            //saves all the category data here
-            collectionData.SaveDataJson(collectionData);
+            querySnapshot.forEach(doc => {
+                //sets all pages with no category key
+                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+                classPages.AddPageData(tempPage);
+            })
+            //saves pages without key category to json
+            collectionData.SavePagesJson(classPages);
         });
+
+        //gets all categories
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>{
+            if(snapshot != undefined){
+
+                let data = snapshot.data(options);
+                let classPages = new models.Pages();
+                pageData = collectionData.GetPagesJson();
+
+                data["Categories"].forEach(category => {
+                    collectionData.AddCategories(category["categoryTitle"]);
+                    //classCategory = new models.Category(category["categoryTitle"]);
+
+                    //list of degrees under a category
+                    category["relatedDegrees"].forEach(relatedDegree => { 
+                        
+                        pageData.pages.forEach(page =>{
+                            //console.log(page);
+                            if(page.id == relatedDegree.id){
+                                page.keyCategory = category["categoryTitle"];
+                                classPages.AddPageData(page);
+                                //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
+                            }
+                            else{
+                                //console.log(page.id, ">", relatedDegree.id);
+                            }
+                            
+                        })
+                        //console.log("------------------")
+                    });
+
+                    collectionData.SavePagesJson(classPages);
+                });
+                //saves all data to json here
+                collectionData.SaveCategoriesJson(collectionData);
+            }
+        });
+       
         
         console.log(`Started server on http://localhost:${ PORT }`);
     });

@@ -3,12 +3,12 @@ var fs = require("fs");
 
 //holds the indiual page data for each major
 module.exports.PageData = class PageData {
-    constructor(id, about, campuses, type, key) {
+    constructor(id, about, campuses, type, key = "") {
         this.id = id;
         this.about = about;
         this.campuses = campuses;
         this.type = type;
-        this.key_category = key;
+        this.keyCategory = key;
     }
 };
 
@@ -51,7 +51,7 @@ module.exports.CollectionData = class CollectionData
     datetime;
     //list of categories string
     categories = [];
-    //list of category classes
+    //list of category classes got after everyting is already in a json
     categoryData = [];
 
     constructor(){
@@ -84,9 +84,9 @@ module.exports.CollectionData = class CollectionData
         console.log(this.datetime);
     }
 
-    GetDataJson()
+    GetCategoriesJson()
     {
-        var data = fs.readFileSync("./data.json"), myObj;
+        var data = fs.readFileSync("./categories.json"), myObj;
 
         try {
             myObj = JSON.parse(data);
@@ -100,10 +100,10 @@ module.exports.CollectionData = class CollectionData
         }
     }
 
-    SaveDataJson(myObj){
+    SaveCategoriesJson(myObj){
         var jdata = JSON.stringify(myObj);
         
-        fs.writeFileSync("./data.json", jdata, function (err) {
+        fs.writeFileSync("./categories.json", jdata, function (err) {
             if (err) {
                 console.log("There has been an error saving your configuration data.");
                 console.log(err.message);
