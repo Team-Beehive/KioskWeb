@@ -158,6 +158,6 @@ express()
             collectionData.SaveDataJson(collectionData);
         });
         
-        console.log(`Started server on http://localhost:${ PORT }`);
+        console.log(`Started server on http://localhost:${ PORT }\n\nReady!`);
     });
 
