@@ -76,9 +76,11 @@ express()
             tempCategory = new models.Category(category);
             
             classPages.pages.forEach(page =>{
-                if(page.keyCategory == category){
-                    tempCategory.AddPageData(page);
-                }
+                page.keyCategories.forEach(category => {
+                    if(page.keyCategory == category){
+                        tempCategory.AddPageData(page);
+                    }
+                }) 
             });
             
             collectionData.AddCategoryData(tempCategory);
@@ -146,13 +148,13 @@ express()
                         
                         pageData.pages.forEach(page =>{
                             //console.log(page);
-                            if(page.id == relatedDegree.id && page.keyCategory == ""){
-                                page.keyCategory = category["categoryTitle"];
+                            if(page.id == relatedDegree.id && page.keyCategories.length == 0){
+                                page.keyCategories.push(category["categoryTitle"]);
                                 classPages.AddPageData(page);
                                 //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
                             }
-                            else{
-                                //console.log(page.id, ">", relatedDegree.id);
+                            if(page.id == relatedDegree.id && page.keyCategories.length != 0){
+                                page.keyCategories.push(category["categoryTitle"]);
                             }
                             
                         })
