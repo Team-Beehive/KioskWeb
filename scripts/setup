@@ -10,7 +10,7 @@ apt -y install openssh # Openssh will allow filezilla to connect to kiosk
 apt -y install termux-auth # Makes passwd available 
 apt -y install termux-api # Wrapper for Termux:API application
 
-# Make scripts runnable
+# Make other scripts runnable
 chmod +x start
 chmod +x get-login
 # Move start script and other useful scripts to home directory
@@ -23,12 +23,16 @@ echo "PATH=.:$PATH;export PATH" >> ~/.bashrc
 
 # Start openssh
 sshd
-# Display kiosk ip and username, and prompt password that will be used for filezilla
+# Display kiosk ip and username, and prompt password that will be used for Filezilla
 ~/get-login
 
 passwd
 
+
 echo "Setup complete!"
 
-# TODO:
-#       
+# Start a new bash session that replaces the old one so they 
+# can immediately start using the new .bashrc
+# Doing so also appears to move to the user's home directory.
+# This MUST be at the last command executed.
+exec bash 

@@ -8,11 +8,11 @@ cd KioskWeb
 
 git pull origin
 
-chmod +x start
-chmod +x get-login
+chmod +x scripts/start
+chmod +x scripts/get-login
 
-mv start ~
-mv get-login ~
+mv scripts/start ~
+mv scripts/get-login ~
 
 npm i
 
