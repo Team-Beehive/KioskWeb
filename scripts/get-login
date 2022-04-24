@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+# echo wlan0's inet address, which is assumed to be the kiosk's wi-fi address
+echo -n "IP Address: "
+ifconfig wlan0 | grep "inet " | cut -f 10 -d " "
+
+# get the ssh_port and put it in a variable
+read ssh_port < <(grep -i "port " $PREFIX/etc/ssh/sshd_config)
+
+if [ ! -z "$ssh_port" ] # if the ssh_port variable is not empty
+then
+    # echo the port it found
+    echo -n "Port: "
+    echo $ssh_port | cut -f 2 -d " "
+else
+    # Otherwise, print the default Termux ssh port
+    echo "Port: 8022" # While it's not the default port for most ssh, it is for Termux
+fi
+
+# echo username from whoami. Unfortunately this username cannot be changed in Termux.
+echo -n "Username: "
+whoami

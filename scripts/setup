@@ -2,13 +2,13 @@
 
 # Install base packages
 apt update
-apt -o Dpkg::Options::='--force-confold' -y upgrade
+apt -o Dpkg::Options::='--force-confold' -y upgrade # force-confold makes it so no config files are changed
 
 # Install nessasary packages to run kiosk
 apt -y install nodejs
 apt -y install openssh # Openssh will allow filezilla to connect to kiosk
-apt -y install termux-auth
-apt -y install termux-api
+apt -y install termux-auth # Makes passwd available 
+apt -y install termux-api # Wrapper for Termux:API application
 
 # Make scripts runnable
 chmod +x start
@@ -18,17 +18,17 @@ mv start ~
 mv get-login ~
 # Make shortcut to images folder on home directory
 ln -s ./public/images ~/images
-# add current directory to PATH variable so they can just type start instead of ./start
-echo "PATH=.:$PATH;export PATH" >> ../.bashrc
+# add current directory (.) to PATH variable so they can just type start instead of ./start
+echo "PATH=.:$PATH;export PATH" >> ~/.bashrc
+
+# Start openssh
+sshd
 # Display kiosk ip and username, and prompt password that will be used for filezilla
-echo -n "IP Address: "
-ifconfig wlan0 | grep 'inet ' | cut -f 10 -d' '
-echo -n "Username: "
-whoami
+~/get-login
+
 passwd
 
 echo "Setup complete!"
 
-# TODO: 
-#       Start openssh
+# TODO:
 #       
