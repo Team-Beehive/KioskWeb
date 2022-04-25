@@ -145,9 +145,62 @@ module.exports.CollectionData = class CollectionData
     }
 };
 
+module.exports.Professor = class Professor{
+    constructor(name, department, email, office, phoneNumber){
+        this.name = name;
+        this.department = department;
+        this.email = email;
+        this.office = office;
+        this.phoneNumber = phoneNumber;
+    }
+}
+
+module.exports.Professors = class Professors{
+
+    //list of class professors
+    professors = [];
+
+    AddProfessor(professor){
+        this.professors.push(professor);
+    }
+
+    GetProfessors(){
+        return this.professors;
+    }
+
+    SaveProfessorsJson(myObj){
+        var jdata = JSON.stringify(myObj);
+    
+        fs.writeFileSync("./professors.json", jdata, function (err) {
+            if (err) {
+                console.log("There has been an error saving your pages.");
+                console.log(err.message);
+            }
+            else { 
+                console.log("Pages saved successfully.");
+            }
+        }); 
+    }
+
+    GetProfessorsJson()
+    {
+        var data = fs.readFileSync("./professors.json"), myObj;
+
+        try {
+            myObj = JSON.parse(data);
+            if(myObj != undefined){
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error parsing data from pages.JSON");
+            console.log(err);
+        }
+    }
+};
+
 module.exports.buildings =
 {
-
     "Purvine": 
     {
         name: "Purvine",

@@ -172,7 +172,19 @@ express()
             }
         });
        
-        
+        getDocs(collection(db, "pages", "Professors", "Professors")).then((querySnapshot) => {
+            professors = new models.Professors();
+
+            querySnapshot.forEach(professor => {
+                professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
+            })
+
+            
+            console.log(professors.professors);
+            professors.SaveProfessorsJson(professors);
+        });
+
+
         console.log(`Started server on http://localhost:${ PORT }`);
     });
 
