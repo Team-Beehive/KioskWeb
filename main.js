@@ -99,8 +99,9 @@ express()
     })
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
-        // console.log(req.query.page); // To specify page, add ?page=PAGE to the href
-        res.render("pages/building", {building: models.buildings[req.query.page]});
+        let building = req.query.page;
+        res.render("pages/building", {building: models.buildings[building], 
+            secret: building == "Purvine"}); // If building is not Purvine, secret is false
     })
     .get("/major", (req, res) => {
         let major = req.query.page;
