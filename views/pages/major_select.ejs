@@ -16,7 +16,6 @@
         <div class="row">
             <% categories.forEach(category => 
             {
-                console.log(category);
                 let good_chars = /[^A-Za-z0-9\_-]/g; // [^ ] means match everything not in the square brackets
                 let categoryAsClass = category.title.replace(good_chars, "");
                 %>
@@ -31,12 +30,9 @@
 
                 <% category.pageData.forEach(degree => 
                 {
-                    //let refSegments = degreeRef._key.path.segments;
-                    //let degree = refSegments[refSegments.length - 1];
-
                     %>
                     <div class="width-25 p-1 <%= categoryAsClass %> collapse in-group">
-                        <a href="/major?page=<%- degree %>">
+                        <a href="/major?page=<%- degree.id %>">
                             <div class="oit-card" style="background-image: url('<%= 'images/frog2.jpg' %>')">
                                 <div class="oit-card-text">
                                     <p><%= degree.id %></p>
