@@ -8,15 +8,33 @@
 <body>
 <%- include("back") %>
 <h1 class="center">Staff Directory</h1>
-<% for(var key in professors) {
-    let professor = professors[key]; %>
+<% let byLast = {};
+for (var key in professors)
+{
+    let lastName = key.split(" ");
+    lastName = lastName[lastName.length - 1];
+    byLast[lastName] = professors[key];
+}
+console.log(byLast);
+let ordered = Object.keys(byLast).sort().reduce(
+  (obj, key) => { 
+    obj[key] = byLast[key]; 
+    return obj;
+  }, 
+  {}
+);
+
+console.log(ordered);
+
+for(var key in ordered) {
+    let professor = ordered[key]; %>
 
     <a href="/professor?page=<%- professor.name %>">
         <div class="prof-card">
             <p class="name">
                 <%= professor.name %>
             </p>
-            <p class="bottom">Professor in the <%= professor.department %> department.</p>
+            <p class="bottom"><b>Department:</b> <%= professor.department %></p>
         </div>
     </a>
 
