@@ -33,9 +33,9 @@ express()
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
 
-    // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+    // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
     .get("/", (req, res) => res.render("pages/links"))
-    // REMEMBER TO CHANGE FOR PRODUCTION ^^^^^^^
+    // ^^^^^^ REMEMBER TO CHANGE FOR PRODUCTION ^^^^^^
 
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/links", (req, res) => res.render("pages/links"))
@@ -77,6 +77,9 @@ express()
         }); //End: get major pages
 
         res.render("pages/major_select", { categories: collectionData.categoryData });
+    })
+    .get("/professor_select", (req, res) => {
+        res.render("pages/professor_select", {professors: professors.professors});
     })
     .get("/building", (req, res) => {
         let building = req.query.page;

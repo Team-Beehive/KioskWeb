@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head"); %>
+    <title>Professor Directory</title>
+</head>
+<body>
+<%- include("back") %>
+<h1>Directory</h1>
+
+<% for(var key in professors) {
+    let professor = professors[key]; %>
+
+    <div>
+        <a href="/professor?page=<%- professor.name %>">
+            <p>
+                <%= professor.name %>
+            </p>
+            <p>Professor in the <%= professor.department %> department.</p>
+        </a>
+        <hr>
+    </div>
+
+<% } %>
+<%- include("tail"); %>    
+</body>
+</html>
