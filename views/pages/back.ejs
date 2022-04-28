@@ -7,18 +7,19 @@
 	outline: inherit;
 
 	padding: 5px 5px 5px 1px;
-    border-radius: 0 0 5px 0;
+    border-radius: 0 5px 5px 0;
 
     position: fixed;
     left: 0;
-    top: 0;
+    top: 50%;
+    transform: translate(0, -50%);
 
     font-size: 1.5em;
     background-color: #003767; /* oit blue. not sure if I can pull from the scss file. */
     color: white;
     text-align: center;
 
-    z-index: 1000;
+    z-index: 1000; /* make sure that it's at the top of everything */
 "
 onclick="history.back()">
     &#11207;

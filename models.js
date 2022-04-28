@@ -158,10 +158,10 @@ module.exports.Professor = class Professor{
 module.exports.Professors = class Professors{
 
     //list of class professors
-    professors = [];
+    professors = {};
 
     AddProfessor(professor){
-        this.professors.push(professor);
+        this.professors[professor.name] = professor;
     }
 
     GetProfessors(){

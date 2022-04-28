@@ -37,31 +37,26 @@ express()
     .get("/links", (req, res) => res.render("pages/links"))
     .get("/professor", (req, res) => {
         var professor = req.query.page;
-        if (professor != undefined)
-            getDoc(doc(db, "pages", "Professors", "Professors", professor)).then((snapshot, options) => {
-                let data = snapshot.data(options);
-                if (data != undefined)
-                {
-                    res.render("pages/professor", {professor: 
-                        {
-                            name: professor, // This is the professor that was defined at the req.query.page
-                            department: data["department"],
-                            email: data["email"],
-                            office: data["office"],
-                            phone_number: data["phone_number"]
-                        }
-                    });
-                }
-                else
-                {
-                    res.render("pages/404");
-                }
-            });
+        if (professor != undefined) {
+            let data = professors.professors[professor];
+            if (data != undefined)
+            {
+                res.render("pages/professor", {
+                    professor: data
+                });
+            }
+            else
+            {
+                res.render("pages/404");
+            }
+        }
         else
+        {
             res.render("pages/404");
+        }
     })
     .get("/building_select", (req, res) => {
-        res.render("pages/building_select", {buildings: models.buildings});
+        res.render("pages/building_select", { buildings: models.buildings });
     })
     .get("/major_select", (req, res) => {
 
@@ -71,29 +66,28 @@ express()
         classCollection = collectionData.GetCategoriesJson();
         //gets all the data for each page
         classPages = collectionData.GetPagesJson();
-        
-        classCollection.categories.forEach(category =>{
+
+        classCollection.categories.forEach(category => {
             tempCategory = new models.Category(category);
-            
+
             //for each page in pages
-            classPages.pages.forEach(page =>{
+            classPages.pages.forEach(page => {
                 count = 2;
                 //for each category in page
                 page.keyCategories.forEach(pageCategory => {
                     //if the category is in the pages categories
-                    if(pageCategory == category){
-                        if(count % 2 == 0)
-                        {
+                    if (pageCategory == category) {
+                        if (count % 2 == 0) {
                             tempCategory.AddPageData(page);
                             count++;
                         }
-                        else{
+                        else {
                             count++;
                         }
                     }
-                }); 
+                });
             });
-            
+
             collectionData.AddCategoryData(tempCategory);
         }); //End: get major pages
 
@@ -102,31 +96,34 @@ express()
     .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         let building = req.query.page;
-        res.render("pages/building", {building: models.buildings[building], 
-            secret: building == "Purvine"}); // If building is not Purvine, secret is false
+        res.render("pages/building", {
+            building: models.buildings[building],
+            secret: building == "Purvine"
+        }); // If building is not Purvine, secret is false
     })
     .get("/major", (req, res) => {
         let major = req.query.page;
         collectionData = new models.CollectionData();
         classPages = collectionData.GetPagesJson();
-        classPages.pages.forEach(page =>{
-            if(page.id == major){
+        classPages.pages.forEach(page => {
+            if (page.id == major) {
                 res.render("pages/major", { major: page });
+                rendered = true;
             }
         });
-        res.render("pages/404");
+        if (!rendered)
+            res.render("pages/404");
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
-    .listen(PORT, () =>
-    {
+    .listen(PORT, () => {
         let collectionData = new models.CollectionData();
 
         //gets all pages
         getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
             let classPages = new models.Pages();
-            
+
             querySnapshot.forEach(doc => {
                 //sets all pages with no category key
                 tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
@@ -135,12 +132,12 @@ express()
             //saves pages without key category to json
             collectionData.SavePagesJson(classPages);
         });
-        
-        
+
+
 
         //gets all categories
-        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>{
-            if(snapshot != undefined){
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
+            if (snapshot != undefined) {
 
                 let data = snapshot.data(options);
                 let classPages = new models.Pages();
@@ -151,19 +148,19 @@ express()
                     //classCategory = new models.Category(category["categoryTitle"]);
 
                     //list of degrees under a category
-                    category["relatedDegrees"].forEach(relatedDegree => { 
-                        
-                        pageData.pages.forEach(page =>{
+                    category["relatedDegrees"].forEach(relatedDegree => {
+
+                        pageData.pages.forEach(page => {
                             //console.log(page);
-                            if(page.id == relatedDegree.id && page.keyCategories.length == 0){
+                            if (page.id == relatedDegree.id && page.keyCategories.length == 0) {
                                 page.keyCategories.push(category["categoryTitle"]);
                                 classPages.AddPageData(page);
                                 //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
                             }
-                            if(page.id == relatedDegree.id && page.keyCategories.length != 0){
+                            if (page.id == relatedDegree.id && page.keyCategories.length != 0) {
                                 page.keyCategories.push(category["categoryTitle"]);
                             }
-                            
+
                         });
                         //console.log("------------------")
                     });
@@ -174,14 +171,14 @@ express()
                 collectionData.SaveCategoriesJson(collectionData);
             }
         });
-       
+
         getDocs(collection(db, "pages", "Professors", "Professors")).then((querySnapshot) => {
             professors = new models.Professors();
 
             querySnapshot.forEach(professor => {
                 professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
             });
-            
+
             professors.SaveProfessorsJson(professors);
         });
 
