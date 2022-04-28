@@ -2,24 +2,23 @@
 <html lang="en">
 <head>
     <%- include("head"); %>
+    <link rel="stylesheet" href="css/professor_select.css">
     <title>Professor Directory</title>
 </head>
 <body>
 <%- include("back") %>
-<h1>Directory</h1>
-
+<h1 class="center">Staff Directory</h1>
 <% for(var key in professors) {
     let professor = professors[key]; %>
 
-    <div>
-        <a href="/professor?page=<%- professor.name %>">
-            <p>
+    <a href="/professor?page=<%- professor.name %>">
+        <div class="prof-card">
+            <p class="name">
                 <%= professor.name %>
             </p>
-            <p>Professor in the <%= professor.department %> department.</p>
-        </a>
-        <hr>
-    </div>
+            <p class="bottom">Professor in the <%= professor.department %> department.</p>
+        </div>
+    </a>
 
 <% } %>
 <%- include("tail"); %>    

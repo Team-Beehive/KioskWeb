@@ -1,0 +1,25 @@
+@import "colors.scss";
+
+a
+{
+    text-decoration: none;
+}
+.prof-card
+{
+    background-color: $oit_blue;
+    border-radius: 8px;
+    padding: 8px;
+    color: white;
+    margin: 8px;
+
+
+    .name  
+    {
+        font-size: 1.4rem;
+        margin-bottom: 4px;
+    }
+    p.bottom
+    {
+        margin-bottom: 0px;
+    }
+}

@@ -1,7 +1,4 @@
-// Variable declarations
-$oit_blue: #003767;
-$techweb_lightblue: #5e9ccc;
-$oit_gold: #ffd14e;
+@import "colors.scss";
 
 // When calling 'headings', makes all headings receive the content
 @mixin headings {
@@ -13,7 +10,7 @@ $oit_gold: #ffd14e;
 
 .major {
     margin: 5px;
-    background-color: #003767;
+    background-color: $oit_blue;
   }
   
 // Font family decisions copied from OIT website
