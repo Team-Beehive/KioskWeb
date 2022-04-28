@@ -8,23 +8,18 @@
 <body>
 <%- include("back") %>
 <h1 class="center">Staff Directory</h1>
-<% let byLast = {};
+<%
 for (var key in professors)
 {
-    let lastName = key.split(" ");
-    lastName = lastName[lastName.length - 1];
-    byLast[lastName] = professors[key];
+    let lastName = professors[key].name.split(" ");
+    professors[key].lastName = lastName[lastName.length - 1];
 }
-let ordered = Object.keys(byLast).sort().reduce(
-  (obj, key) => { 
-    obj[key] = byLast[key]; 
-    return obj;
-  }, 
-  {}
-);
+let ordered = Object.values(professors).sort((a, b) => {
+    // I don't know how this works but it does. Should return the same as c strcmp though.
+    return ( ( a.lastName == b.lastName ) ? 0 : ( ( a.lastName > b.lastName ) ? 1 : -1 ) );
+});
 
-for(var key in ordered) {
-    let professor = ordered[key]; %>
+ordered.forEach((professor) => { %>
 
     <a href="/professor?page=<%- professor.name %>">
         <div class="prof-card">
@@ -35,7 +30,7 @@ for(var key in ordered) {
         </div>
     </a>
 
-<% } %>
+<% }); %>
 <%- include("tail"); %>    
 </body>
 </html>
