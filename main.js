@@ -90,6 +90,7 @@ express()
     })
     .get("/major", (req, res) => {
         let major = req.query.page;
+        let rendered = false;
         collectionData = new models.CollectionData();
         classPages = collectionData.GetPagesJson();
         classPages.pages.forEach(page => {
