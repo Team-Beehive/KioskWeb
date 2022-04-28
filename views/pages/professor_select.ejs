@@ -15,7 +15,6 @@ for (var key in professors)
     lastName = lastName[lastName.length - 1];
     byLast[lastName] = professors[key];
 }
-console.log(byLast);
 let ordered = Object.keys(byLast).sort().reduce(
   (obj, key) => { 
     obj[key] = byLast[key]; 
@@ -23,8 +22,6 @@ let ordered = Object.keys(byLast).sort().reduce(
   }, 
   {}
 );
-
-console.log(ordered);
 
 for(var key in ordered) {
     let professor = ordered[key]; %>
