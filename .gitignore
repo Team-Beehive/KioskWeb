@@ -1,14 +1,14 @@
 .vs/
 .vscode/*
-!settings.json
 node_modules/
 build/
 css/
 public/css
 **/desktop.ini
-config.json
-data.json
-categories.json
-data.json
-pages.json
-professors.json
+
+# Ignore all json files except for eslint, settings, and npm files
+*.json
+!.eslintrc.json
+!settings.json
+!package.json
+!package-lock.json

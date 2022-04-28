@@ -33,28 +33,13 @@ express()
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
 
+    // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
     .get("/", (req, res) => res.render("pages/links"))
+    // REMEMBER TO CHANGE FOR PRODUCTION ^^^^^^^
+
+    .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/links", (req, res) => res.render("pages/links"))
-    .get("/professor", (req, res) => {
-        var professor = req.query.page;
-        if (professor != undefined) {
-            let data = professors.professors[professor];
-            if (data != undefined)
-            {
-                res.render("pages/professor", {
-                    professor: data
-                });
-            }
-            else
-            {
-                res.render("pages/404");
-            }
-        }
-        else
-        {
-            res.render("pages/404");
-        }
-    })
+
     .get("/building_select", (req, res) => {
         res.render("pages/building_select", { buildings: models.buildings });
     })
@@ -93,7 +78,6 @@ express()
 
         res.render("pages/major_select", { categories: collectionData.categoryData });
     })
-    .get("/home_page", (req, res) => res.render("pages/home_page"))
     .get("/building", (req, res) => {
         let building = req.query.page;
         res.render("pages/building", {
@@ -113,6 +97,23 @@ express()
         });
         if (!rendered)
             res.render("pages/404");
+    })
+    .get("/professor", (req, res) => {
+        var professor = req.query.page;
+        if (professor != undefined) {
+            let data = professors.professors[professor];
+            if (data != undefined) {
+                res.render("pages/professor", {
+                    professor: data
+                });
+            }
+            else {
+                res.render("pages/404");
+            }
+        }
+        else {
+            res.render("pages/404");
+        }
     })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
