@@ -181,9 +181,7 @@ express()
             querySnapshot.forEach(professor => {
                 professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
             });
-
             
-            console.log(professors.professors);
             professors.SaveProfessorsJson(professors);
         });
 

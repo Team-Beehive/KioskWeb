@@ -23,7 +23,7 @@ module.exports.Pages = class Pages{
     AddPageData(PageData){
         this.pages.push(PageData);
     }
-}
+};
 
 //holds a list of PageData
 module.exports.Category = class Category
@@ -42,7 +42,7 @@ module.exports.Category = class Category
     AddPageData(PageData){
         this.pageData.push(PageData);
     }
-}
+};
 
 
 //Holds a list of catagories
@@ -95,8 +95,8 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from data.JSON");
-            console.log(err);
+            console.error("There has been an error parsing data from data.JSON");
+            console.error(err);
         }
     }
 
@@ -105,8 +105,8 @@ module.exports.CollectionData = class CollectionData
         
         fs.writeFileSync("./categories.json", jdata, function (err) {
             if (err) {
-                console.log("There has been an error saving your configuration data.");
-                console.log(err.message);
+                console.error("There has been an error saving your configuration data.");
+                console.error(err.message);
             }
             else { 
                 console.log("Configuration saved successfully.");
@@ -117,10 +117,10 @@ module.exports.CollectionData = class CollectionData
     SavePagesJson(myObj){
         var jdata = JSON.stringify(myObj);
     
-        fs.writeFileSync("./pages.json", jdata, {flag: 'w+'}, function (err) {
+        fs.writeFileSync("./pages.json", jdata, {flag: "w+"}, function (err) {
             if (err) {
-                console.log("There has been an error saving your pages.");
-                console.log(err.message);
+                console.error("There has been an error saving your pages.");
+                console.error(err.message);
             }
             else { 
                 console.log("Pages saved successfully.");
@@ -139,8 +139,8 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
-            console.log(err);
+            console.error("There has been an error parsing data from pages.JSON");
+            console.error(err);
         }
     }
 };
@@ -153,7 +153,7 @@ module.exports.Professor = class Professor{
         this.office = office;
         this.phoneNumber = phoneNumber;
     }
-}
+};
 
 module.exports.Professors = class Professors{
 
@@ -173,8 +173,8 @@ module.exports.Professors = class Professors{
     
         fs.writeFileSync("./professors.json", jdata, function (err) {
             if (err) {
-                console.log("There has been an error saving your pages.");
-                console.log(err.message);
+                console.error("There has been an error saving your pages.");
+                console.error(err.message);
             }
             else { 
                 console.log("Pages saved successfully.");
@@ -193,8 +193,8 @@ module.exports.Professors = class Professors{
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
-            console.log(err);
+            console.error("There has been an error parsing data from pages.JSON");
+            console.error(err);
         }
     }
 };

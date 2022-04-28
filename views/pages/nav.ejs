@@ -39,7 +39,6 @@
 
     // Whenever the page, and in turn the navbar, resizes, update the padding on the bottom of the body.
     $(window).resize(() => {
-        console.log($("nav").outerHeight(true));
         $("body").css("padding-bottom", $("nav").outerHeight(true));
     });
     
