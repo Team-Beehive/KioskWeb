@@ -66,12 +66,8 @@
     $(window).resize(() => {
         $("body").css("padding-bottom", $("nav").outerHeight(true));
     });
-    
-    
-
-    // VSCode may be angry but it is what's needed.
-    // It'll be correct once it's on the browser.
-    var current = <%- current %>;
+        
+    var current = "<%- current %>";
 
     var links = $(".nav-item");
     for (let i = 0; i < links.length; i++) 
