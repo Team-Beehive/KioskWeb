@@ -147,7 +147,8 @@ module.exports.CollectionData = class CollectionData
 
 module.exports.Professor = class Professor{
     constructor(name, department, email, office, phoneNumber){
-        this.name = name;
+        this.firstname = name.split(" ")[0];
+        this.lastname = name.split(" ")[1];
         this.department = department;
         this.email = email;
         this.office = office;
