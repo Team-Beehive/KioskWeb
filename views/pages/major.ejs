@@ -14,17 +14,13 @@
 
         <tr class="row m-auto">
             <td class="col-12 carousel">
-                <div class="slides">
-                    <img src="images/cset1.jpg" style="width:100%">
-                </div>
-                
-                <div class="slides">
-                    <img src="images/cset2.jpg" style="width:100%">
-                </div>
-                
-                <div class="slides">
-                    <img src="images/cset3.jpg" style="width:100%">
-                </div>
+                <% images.forEach((image) => {
+                    %>
+                        <div class="slides">
+                            <img src="images/Majors/<%- major.id %>/<%- image %>" style="width:100%">
+                        </div>
+                    <%
+                }); %>
                 
                 <!-- Next and previous buttons -->
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

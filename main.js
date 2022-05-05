@@ -10,6 +10,7 @@ const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/fir
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
+const { readdirSync } = require("fs");
 
 
 const app = initializeApp({
@@ -102,6 +103,7 @@ express()
                     page.employers = ["SpaceX", "Expedita", "Amazon", "Microsoft", "Intel Corporation", "Garmin"];
                     page.hours = 187;
                 }
+                var images = readdirSync("public/images/Majors/" + major);
                 res.render("pages/major", { major: page });
                 rendered = true;
             }
