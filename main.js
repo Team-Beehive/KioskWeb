@@ -95,6 +95,13 @@ express()
         classPages = collectionData.GetPagesJson();
         classPages.pages.forEach(page => {
             if (page.id == major) {
+                // Testing some front-end code. Should be replaced with actually reading in said data.
+                if (major == "Software Engineering Technology")
+                {
+                    page.year = 1984;
+                    page.employers = ["SpaceX", "Expedita", "Amazon", "Microsoft", "Intel Corporation", "Garmin"];
+                    page.hours = 187;
+                }
                 res.render("pages/major", { major: page });
                 rendered = true;
             }

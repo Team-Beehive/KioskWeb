@@ -34,24 +34,29 @@
         <tr class="row m-auto">
             <td class="col-4 blue-box">
                 <h4>Quick Facts</h4>
-                <h5>First Offered</h5>
-                <p>1984</p>
+                <% if (locals.major.year) { %>
+                    <h5>First Offered</h5>
+                    <p><%= major.year %></p>
+                <% } %>
+                <% if (locals.major.campuses) { %> 
                 <h5>Offered At</h5>
-                <% major.campuses.forEach((campus) => 
-                { %> 
-                    <p>
-                        <%= campus %>
-                    </p> <%
-                }); %>
-                <h5>Typical Employers</h5>
-                <p>SpaceX</p>
-                <p>Expedita</p>
-                <p>Amazon</p>
-                <p>Microsoft</p>
-                <p>Intel Corporation</p>
-                <p>Garmin</p>
-                <h5>Expected Credit Hours</h5>
-                <p>187 Credit Hours</p>
+                    <% major.campuses.forEach((campus) => 
+                    { %> 
+                        <p>
+                            <%= campus %>
+                        </p> <%
+                    }); 
+                }%>
+                <% if (locals.major.employers) { %>
+                    <h5>Typical Employers</h5>
+                    <% major.employers.forEach((employer) => { %>
+                        <p><%= employer %></p>
+                    <%  }) %>
+                <% } %>
+                <% if (locals.major.hours) { %>
+                    <h5>Expected Credit Hours</h5>
+                    <p><%= major.hours %> Credit Hours</p>
+                <% } %>
             </td>
             <td class="col-8">
                 <div class="row">
