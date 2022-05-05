@@ -1,4 +1,5 @@
 // Mostly taken from https://www.w3schools.com/howto/howto_js_slideshow.asp
+@import "colors.scss"; 
 
 .carousel
 {
@@ -39,6 +40,11 @@
     border-radius: 0 3px 3px 0;
     user-select: none;
     text-decoration: none;
+
+    &:hover
+    {
+        color: $oit_blue;
+    }
 }
 
 .next 

@@ -65,30 +65,15 @@
         object-position: center; // Center the image within the element
         width: 100%;
 
-        @media screen and (max-width: 768px) 
-        {
-            &
-            {
-                height: 15vh;
-            }
-        }
-
-        height: 35vh;
+        height: 15vh;
     }
 
     &.main
     {
         img
         {
-            @media screen and (max-width: 768px) 
-            {
-                &
-                {
-                    height: 20vh;
-                }
-            }
 
-            height: 40vh;
+            height: 20vh;
         }
     }
 }
@@ -195,20 +180,9 @@
     {
         color: white;
     }
-
-    // [^=]
 }
 
 .width-25 {
     width: 25%;
 }
 
-#secret
-{
-    width: 50px;
-    height: 50px;
-    position: fixed;
-    top: 0;
-    right: 0;
-    border: 1px solid magenta;
-}
