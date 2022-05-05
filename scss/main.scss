@@ -179,12 +179,12 @@
 }
 
 .vertical {
-    position: relative;
+    position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    writing-mode: sideways-lr;
-    text-orientation: mixed;
+    transform: rotate(-0.25turn);
+    text-align: center;
+    font-size: 3rem;
+    white-space: nowrap;
 }
 
 
