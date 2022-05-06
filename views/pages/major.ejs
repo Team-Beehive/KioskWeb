@@ -12,9 +12,11 @@
     
     <table class="container-fluid p-0">
 
+        <% if (locals.images) { %>
         <tr class="row m-auto">
             <td class="col-12 carousel">
-                <% images.forEach((image) => {
+                <%
+                    images.forEach((image) => {
                     %>
                         <div class="slides">
                             <img src="images/Majors/<%- major.id %>/<%- image %>" style="width:100%">
@@ -27,6 +29,7 @@
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </td>
         </tr>
+        <% } %>
         <tr class="row m-auto">
             <td class="col-4 blue-box">
                 <h4>Quick Facts</h4>

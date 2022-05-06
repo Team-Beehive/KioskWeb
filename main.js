@@ -103,8 +103,15 @@ express()
                     page.employers = ["SpaceX", "Expedita", "Amazon", "Microsoft", "Intel Corporation", "Garmin"];
                     page.hours = 187;
                 }
-                var images = readdirSync("public/images/Majors/" + major);
-                res.render("pages/major", { major: page });
+                try {
+                    var images = readdirSync("public/images/Majors/" + major);
+                    res.render("pages/major", { major: page, images: images });
+                }
+                catch
+                {
+                    res.render("pages/major", { major: page });
+                }
+                
                 rendered = true;
             }
         });
