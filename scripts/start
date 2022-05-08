@@ -1,8 +1,9 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Make sure everything is up-to-date
-apt update
-apt -o Dpkg::Options::='--force-confold' -y upgrade
+# probably don't do this
+# apt update
+# apt -o Dpkg::Options::='--force-confold' -y upgrade
 
 cd KioskWeb
 

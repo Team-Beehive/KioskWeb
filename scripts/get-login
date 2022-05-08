@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # echo wlan0's inet address, which is assumed to be the kiosk's wi-fi address
 echo -n "Host: "

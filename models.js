@@ -4,11 +4,12 @@ var fs = require("fs");
 //holds the indiual page data for each major
 module.exports.PageData = class PageData {
     keyCategories = [];
-    constructor(id, about, campuses, type) {
+    constructor(id, about, campuses, type, quick_facts) {
         this.id = id;
         this.about = about;
         this.campuses = campuses;
         this.type = type;
+        this.quick_facts = quick_facts;
     }
 };
 

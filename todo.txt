@@ -1,0 +1,21 @@
+let sudo=sudo 
+
+
+sudo npm i n --global
+sudo n i lts
+
+install firefox?
+
+sed touchscreen catchall
+Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
+40-libinput.conf
+
+
+Get power supply x 2
+Get raspberry pi kit x 2
+Keyboard
+Mouse
+hdmi breakout cable
+
+
+chown root

@@ -96,13 +96,6 @@ express()
         classPages = collectionData.GetPagesJson();
         classPages.pages.forEach(page => {
             if (page.id == major) {
-                // Testing some front-end code. Should be replaced with actually reading in said data.
-                if (major == "Software Engineering Technology")
-                {
-                    page.year = 1984;
-                    page.employers = ["SpaceX", "Expedita", "Amazon", "Microsoft", "Intel Corporation", "Garmin"];
-                    page.hours = 187;
-                }
                 try {
                     var images = readdirSync("public/images/Majors/" + major);
                     res.render("pages/major", { major: page, images: images });
@@ -111,7 +104,6 @@ express()
                 {
                     res.render("pages/major", { major: page });
                 }
-                
                 rendered = true;
             }
         });
@@ -147,7 +139,7 @@ express()
 
             querySnapshot.forEach(doc => {
                 //sets all pages with no category key
-                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"), doc.get("quick_facts"));
                 classPages.AddPageData(tempPage);
             });
             //saves pages without key category to json
