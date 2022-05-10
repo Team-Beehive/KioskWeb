@@ -17,20 +17,16 @@ require('dns').resolve('www.google.com', function(err) {
         const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/firestore");
 
         let collectionData = new models.CollectionData();
-        jdata = collectionData.GetCredentialsJson();
-
-        console.log(jdata)
-        /*
+        jsonCredentials = collectionData.GetCredentialsJson();
         const app = initializeApp({
-            apiKey: jdata.apiKey,
-            authDomain: jdata.authDomain,
-            projectId: jdata.projectId,
-            storageBucket: jdata.storageBucket,
-            messagingSenderId: jdata.messagingSenderId,
-            appId: jdata.appId,
-            measurementId: jdata.measurementId
+            apiKey: jsonCredentials.apiKey,
+            authDomain: jsonCredentials.authDomain,
+            projectId: jsonCredentials.projectId,
+            storageBucket: jsonCredentials.storageBucket,
+            messagingSenderId: jsonCredentials.messagingSenderId,
+            appId: jsonCredentials.appId,
+            measurementId: jsonCredentials.measurementId
         });
-        */
         const db = getFirestore(app);
 
         //save all pages

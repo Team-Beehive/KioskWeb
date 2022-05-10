@@ -145,6 +145,20 @@ module.exports.CollectionData = class CollectionData
         }
     }
 
+    SaveCredentialsJson(myObj){
+        var jdata = JSON.stringify(myObj);
+    
+        fs.writeFileSync("./credentials.json", jdata, {flag: 'w+'}, function (err) {
+            if (err) {
+                console.log("There has been an error saving your pages.");
+                console.log(err.message);
+            }
+            else { 
+                console.log("Pages saved successfully.");
+            }
+        }); 
+    }
+
     GetCredentialsJson()
     {
         var data = fs.readFileSync("./credentials.json"), myObj;
