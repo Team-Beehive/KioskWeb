@@ -16,19 +16,22 @@ require('dns').resolve('www.google.com', function(err) {
         const { initializeApp } = require("firebase/app");
         const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/firestore");
 
-        const app = initializeApp({
-            apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
-            authDomain: "oit-kiosk.firebaseapp.com",
-            projectId: "oit-kiosk",
-            storageBucket: "oit-kiosk.appspot.com",
-            messagingSenderId: "622074473491",
-            appId: "1:622074473491:web:f3fb2717a8577b8ff963e6",
-            measurementId: "G-BYNMKM80XC"
-        });
-
-        const db = getFirestore(app);
-
         let collectionData = new models.CollectionData();
+        jdata = collectionData.GetCredentialsJson();
+
+        console.log(jdata)
+        /*
+        const app = initializeApp({
+            apiKey: jdata.apiKey,
+            authDomain: jdata.authDomain,
+            projectId: jdata.projectId,
+            storageBucket: jdata.storageBucket,
+            messagingSenderId: jdata.messagingSenderId,
+            appId: jdata.appId,
+            measurementId: jdata.measurementId
+        });
+        */
+        const db = getFirestore(app);
 
         //save all pages
         getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
@@ -36,14 +39,14 @@ require('dns').resolve('www.google.com', function(err) {
             
             querySnapshot.forEach(doc => {
                 //sets all pages with no category key
-                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"));
+                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("quick_facts"), doc.get("type"));
                 classPages.AddPageData(tempPage);
             })
             //saves pages without key category to json
             collectionData.SavePagesJson(classPages);
         });
 
-        //save all categories
+        //save all categories and gets key categories
         getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>{
             if(snapshot != undefined){
 
@@ -55,27 +58,28 @@ require('dns').resolve('www.google.com', function(err) {
                     collectionData.AddCategories(category["categoryTitle"]);
                     //classCategory = new models.Category(category["categoryTitle"]);
 
-                    //list of degrees under a category
-                    category["relatedDegrees"].forEach(relatedDegree => { 
-                        
-                        pageData.pages.forEach(page =>{
-                            //console.log(page);
-                            if(page.id == relatedDegree.id && page.keyCategories.length == 0){
-                                page.keyCategories.push(category["categoryTitle"]);
-                                classPages.AddPageData(page);
-                                //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
-                            }
-                            if(page.id == relatedDegree.id && page.keyCategories.length != 0){
-                                page.keyCategories.push(category["categoryTitle"]);
-                            }
+                    if(category["relatedDegrees"] != null){
+                        category["relatedDegrees"].forEach(relatedDegree => { 
                             
-                        })
-                        //console.log("------------------")
-                    });
+                            pageData.pages.forEach(page =>{
+                                //console.log(page);
+                                if(page.id == relatedDegree.id && page.keyCategories.length == 0){
+                                    page.keyCategories.push(category["categoryTitle"]);
+                                    classPages.AddPageData(page);
+                                    //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
+                                }
+                                if(page.id == relatedDegree.id && page.keyCategories.length != 0){
+                                    page.keyCategories.push(category["categoryTitle"]);
+                                }
+                                
+                            })
+                            //console.log("------------------")
+                        });
+                    }
 
                     collectionData.SavePagesJson(classPages);
                 });
-                //saves all data to json here
+
                 collectionData.SaveCategoriesJson(collectionData);
             }
         });
@@ -89,7 +93,7 @@ require('dns').resolve('www.google.com', function(err) {
             })
 
             
-            console.log(professors.professors);
+            //console.log(professors.professors);
             professors.SaveProfessorsJson(professors);
         });
     }

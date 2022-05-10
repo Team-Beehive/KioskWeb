@@ -4,10 +4,11 @@ var fs = require("fs");
 //holds the indiual page data for each major
 module.exports.PageData = class PageData {
     keyCategories = [];
-    constructor(id, about, campuses, type) {
+    constructor(id, about, campuses, quickFacts, type) {
         this.id = id;
         this.about = about;
         this.campuses = campuses;
+        this.quickFacts = quickFacts;
         this.type = type;
     }
 };
@@ -131,6 +132,22 @@ module.exports.CollectionData = class CollectionData
     GetPagesJson()
     {
         var data = fs.readFileSync("./pages.json"), myObj;
+
+        try {
+            myObj = JSON.parse(data);
+            if(myObj != undefined){
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error parsing data from pages.JSON");
+            console.log(err);
+        }
+    }
+
+    GetCredentialsJson()
+    {
+        var data = fs.readFileSync("./credentials.json"), myObj;
 
         try {
             myObj = JSON.parse(data);
