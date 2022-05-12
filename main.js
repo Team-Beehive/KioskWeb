@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 const { readdirSync, mkdir } = require("fs");
-const res = require("express/lib/response");
 
 const good_chars = /[^A-Za-z0-9_-]/g;
 

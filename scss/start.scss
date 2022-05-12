@@ -7,10 +7,8 @@
     {
         img
         {
-            width: 100vw;
             height: 100vh;
         }
-        display: flex;
         flex: 1;
     }
 }
@@ -23,7 +21,7 @@
     transform: translate(-50%, 0);
     background-color: $oit_blue;
     color: white;
-    padding: 12px 24px;
+    padding: 12px 48px;
     margin-bottom: 24px;
     border-radius: 5000px;
 }

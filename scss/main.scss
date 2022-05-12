@@ -13,10 +13,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-body {
+html {
     -ms-overflow-style: none;
     /* IE and Edge */
-    scrollbar-width: none;
+    scrollbar-width: none !important;
     /* Firefox */
 }
 
@@ -124,6 +124,14 @@ body {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;
+    // // /* IE and Edge */
+    scrollbar-width: none !important;
+    /* Firefox */
 }
 
 .oit-card
