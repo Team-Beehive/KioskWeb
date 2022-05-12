@@ -10,7 +10,14 @@ const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/fir
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
-const { readdirSync } = require("fs");
+const { readdirSync, mkdir } = require("fs");
+
+const good_chars = /[^A-Za-z0-9_-]/g;
+
+function cleanString(string)
+{
+    return string.replace(good_chars, "");
+}
 
 
 const app = initializeApp({
@@ -53,8 +60,11 @@ express()
         //gets all the data for each page
         classPages = collectionData.GetPagesJson();
 
+        let images = {};
+
         classCollection.categories.forEach(category => {
             tempCategory = new models.Category(category);
+            images[cleanString(category)] = readdirSync("public/images/Categories/" + cleanString(category));
 
             //for each page in pages
             classPages.pages.forEach(page => {
@@ -65,6 +75,7 @@ express()
                     if (pageCategory == category) {
                         if (count % 2 == 0) {
                             tempCategory.AddPageData(page);
+                            images[cleanString(page.id)] = readdirSync("public/images/Majors/" + cleanString(page.id));
                             count++;
                         }
                         else {
@@ -77,7 +88,7 @@ express()
             collectionData.AddCategoryData(tempCategory);
         }); //End: get major pages
 
-        res.render("pages/major_select", { categories: collectionData.categoryData });
+        res.render("pages/major_select", { categories: collectionData.categoryData, images: images, cleanString: cleanString });
     })
     .get("/professor_select", (req, res) => {
         res.render("pages/professor_select", {professors: professors.professors});
@@ -95,15 +106,9 @@ express()
         collectionData = new models.CollectionData();
         classPages = collectionData.GetPagesJson();
         classPages.pages.forEach(page => {
-            if (page.id == major) {
-                try {
-                    var images = readdirSync("public/images/Majors/" + major);
-                    res.render("pages/major", { major: page, images: images });
-                }
-                catch
-                {
-                    res.render("pages/major", { major: page });
-                }
+            if (page.id == major && !rendered) {
+                var images = readdirSync("public/images/Majors/" + cleanString(page.id));
+                res.render("pages/major", { major: page, images: images, cleanString: cleanString });
                 rendered = true;
             }
         });
@@ -115,21 +120,11 @@ express()
         if (professor != undefined) {
             let data = professors.professors[professor];
             if (data != undefined) {
-                try
-                {
-                    let images = readdirSync("public/images/Professors/" + professor);
-                    res.render("pages/professor", {
-                        professor: data,
-                        images: images
-                    });
-                }
-                catch
-                {
-                    res.render("pages/professor", {
-                        professor: data
-                    });
-                }
-                
+                let images = readdirSync("public/images/Professors/" + cleanString(professor));
+                res.render("pages/professor", {
+                    professor: data,
+                    images: images
+                });
             }
             else {
                 res.render("pages/404");
@@ -150,6 +145,7 @@ express()
             let classPages = new models.Pages();
 
             querySnapshot.forEach(doc => {
+                mkdir("public/images/Majors/" + cleanString(doc.id), () => { });
                 //sets all pages with no category key
                 tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"), doc.get("quick_facts"));
                 classPages.AddPageData(tempPage);
@@ -170,6 +166,7 @@ express()
 
                 data["Categories"].forEach(category => {
                     collectionData.AddCategories(category["categoryTitle"]);
+                    mkdir("public/images/Categories/" + cleanString(category["categoryTitle"]), () => { });
                     //classCategory = new models.Category(category["categoryTitle"]);
 
                     //list of degrees under a category
@@ -201,6 +198,7 @@ express()
             professors = new models.Professors();
 
             querySnapshot.forEach(professor => {
+                mkdir("public/images/Professors/" + cleanString(professor.id), () => {});
                 professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
             });
 
