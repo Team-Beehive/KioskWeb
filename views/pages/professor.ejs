@@ -11,7 +11,9 @@
     <table class="container-fluid">
         <tr class="row">
             <td class="col-6">
-                <div class="oit-card" style="background-image: url('<%- "images/todd.jpg" %>');"></div>
+                <% if (locals.images) {%>
+                    <div class="oit-card" style="background-image: url('images/Professors/<%- professor.name %>/<%- images[0] %>');"></div>
+                <% } %>
                 <div class="blue-box">
                     <h4>Department</h4>
                     <p>

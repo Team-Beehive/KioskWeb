@@ -115,9 +115,21 @@ express()
         if (professor != undefined) {
             let data = professors.professors[professor];
             if (data != undefined) {
-                res.render("pages/professor", {
-                    professor: data
-                });
+                try
+                {
+                    let images = readdirSync("public/images/Professors/" + professor);
+                    res.render("pages/professor", {
+                        professor: data,
+                        images: images
+                    });
+                }
+                catch
+                {
+                    res.render("pages/professor", {
+                        professor: data
+                    });
+                }
+                
             }
             else {
                 res.render("pages/404");
