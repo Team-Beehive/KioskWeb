@@ -96,7 +96,7 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from data.JSON");
+            console.log("There has been an error reading data from categories.JSON");
             console.log(err);
         }
     }
@@ -106,11 +106,11 @@ module.exports.CollectionData = class CollectionData
         
         fs.writeFileSync("./categories.json", jdata, function (err) {
             if (err) {
-                console.log("There has been an error saving your configuration data.");
+                console.log("There has been an error saving your category data.");
                 console.log(err.message);
             }
             else { 
-                console.log("Configuration saved successfully.");
+                console.log("categories saved successfully.");
             }
         }); 
     }
@@ -140,23 +140,9 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
+            console.log("There has been an error reading data from pages.JSON");
             console.log(err);
         }
-    }
-
-    SaveCredentialsJson(myObj){
-        var jdata = JSON.stringify(myObj);
-    
-        fs.writeFileSync("./credentials.json", jdata, {flag: 'w+'}, function (err) {
-            if (err) {
-                console.log("There has been an error saving your pages.");
-                console.log(err.message);
-            }
-            else { 
-                console.log("Pages saved successfully.");
-            }
-        }); 
     }
 
     GetCredentialsJson()
@@ -170,7 +156,7 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
+            console.log("There has been an error reading data from credentials.JSON");
             console.log(err);
         }
     }
@@ -200,16 +186,20 @@ module.exports.Professors = class Professors{
         return this.professors;
     }
 
+    GetSourtedProfessors(){
+        return this.professors.sort();
+    }
+
     SaveProfessorsJson(myObj){
         var jdata = JSON.stringify(myObj);
     
         fs.writeFileSync("./professors.json", jdata, function (err) {
             if (err) {
-                console.log("There has been an error saving your pages.");
+                console.log("There has been an error saving your professors.");
                 console.log(err.message);
             }
             else { 
-                console.log("Pages saved successfully.");
+                console.log("Professors saved successfully.");
             }
         }); 
     }
@@ -225,7 +215,60 @@ module.exports.Professors = class Professors{
             }
         }
         catch (err) {
-            console.log("There has been an error parsing data from pages.JSON");
+            console.log("There has been an error reading data from professors.JSON");
+            console.log(err);
+        }
+    }
+};
+
+module.exports.Building = class Building{
+    constructor(name, majors, nameInfo, professors, roomTypes, year){
+        this.name = name;
+        this.majors = majors;
+        this.nameInfo = nameInfo;
+        this.professors = professors;
+        this.roomTypes = roomTypes;
+        this.year = year;
+    }
+};
+
+module.exports.Buildings = class Buildings{
+    buildings = [];
+
+    AddBuilding(building){
+        this.buildings.push(building);
+    }
+
+    GetBuildings(){
+        return this.buildings;
+    }
+
+    SaveBuildingsJson(myObj){
+        var jdata = JSON.stringify(myObj);
+    
+        fs.writeFileSync("./buildings.json", jdata, function (err) {
+            if (err) {
+                console.log("There has been an error saving your buildings.");
+                console.log(err.message);
+            }
+            else { 
+                console.log("Buildings saved successfully.");
+            }
+        }); 
+    }
+
+    GetProfessorsJson()
+    {
+        var data = fs.readFileSync("./buildings.json"), myObj;
+
+        try {
+            myObj = JSON.parse(data);
+            if(myObj != undefined){
+                return myObj;
+            }
+        }
+        catch (err) {
+            console.log("There has been an error reading data from buildings.JSON");
             console.log(err);
         }
     }

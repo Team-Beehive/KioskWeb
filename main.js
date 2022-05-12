@@ -92,9 +92,20 @@ require('dns').resolve('www.google.com', function(err) {
             //console.log(professors.professors);
             professors.SaveProfessorsJson(professors);
         });
+
+        getDocs(collection(db, "pages", "Map", "Buildings")).then((querySnapshot) => {
+            buildings = new models.Buildings();
+
+            querySnapshot.forEach(building => {
+                buildings.AddBuilding(new models.Building(building.id, building.get("majors"), building.get("nameInfo"), building.get("professors"), building.get("roomTypes"), building.get("year")));
+                console.log(building.id);
+            })
+
+            buildings.SaveBuildingsJson(buildings);
+            console.log(buildings);
+        });
     }
 });   
-
 
 express()
     .use(express.static(path.join(__dirname, "public")))
