@@ -12,7 +12,7 @@
         <tr class="row">
             <td class="col-6">
                 <% if (locals.images) {%>
-                    <div class="oit-card" style="background-image: url('images/Professors/<%- professor.name %>/<%- images[0] %>');"></div>
+                    <div class="oit-card" style="background-image: url('images/Professors/<%- cleanString(professor.name) %>/<%- images[0] %>');"></div>
                 <% } %>
                 <div class="blue-box">
                     <h4>Department</h4>

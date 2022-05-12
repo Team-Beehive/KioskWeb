@@ -123,7 +123,8 @@ express()
                 let images = readdirSync("public/images/Professors/" + cleanString(professor));
                 res.render("pages/professor", {
                     professor: data,
-                    images: images
+                    images: images,
+                    cleanString: cleanString
                 });
             }
             else {
