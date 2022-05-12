@@ -45,11 +45,10 @@
                 <% if (locals.major.quick_facts) {
                     for (var fact in major.quick_facts[0])
                     { %>
-                      <h5><%= fact %></h5>
-                      <%
-                      major.quick_facts[0][fact].forEach((item) => { %>
-                        <p><%= item %></p>
-                        <% }) 
+                        <h5><%= fact %></h5>
+                        <% major.quick_facts[0][fact].forEach((item) => { %>
+                            <p><%= item %></p>
+                        <% });
                     }
                 } %>
             </td>
@@ -61,8 +60,7 @@
                         <% major.type.forEach((type) =>
                         { %>
                             <%= type %> 
-                            <%
-                            if (type != major.type[major.type.length - 1])
+                            <% if (type != major.type[major.type.length - 1])
                             { %>
                                 <%= "&" %>
                             <% }

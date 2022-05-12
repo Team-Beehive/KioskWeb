@@ -3,6 +3,7 @@
 
 <head>
     <%- include("head"); %>
+    <link rel="stylesheet" href="css/card-fix.css">
     <title><%= professor.name %></title>
 </head>
 
@@ -11,26 +12,37 @@
     <table class="container-fluid">
         <tr class="row">
             <td class="col-6">
-                <% if (locals.images) {%>
-                    <div class="oit-card" style="background-image: url('images/Professors/<%- cleanString(professor.name) %>/<%- images[0] %>');"></div>
+                <% if (images.length != 0) { %>
+                    <div>
+                        <div class="oit-card"
+                            style="background-image: url('images/Professors/<%- cleanString(professor.name) %>/<%- images[0] %>');"></div>
+                    </div>
                 <% } %>
                 <div class="blue-box">
-                    <h4>Department</h4>
-                    <p>
-                        <%= professor["department"] %>
-                    </p>
-                    <h4>Email</h4>
-                    <p>
-                        <%= professor["email"] %>
-                    </p>
-                    <h4>Office</h4>
-                    <p>
-                        <%= professor["office"] %>
-                    </p>
-                    <h4>Phone Number</h4>
-                    <p>
-                        <%= professor["phoneNumber"] %>
-                    </p>
+                    <% if (locals.professor["department"]) { %>
+                        <h4>Department</h4>
+                        <p>
+                            <%= professor["department"] %>
+                        </p>
+                    <% } %>
+                    <% if (locals.professor["email"]) { %>
+                        <h4>Email</h4>
+                        <p>
+                            <%= professor["email"] %>
+                        </p>
+                    <% } %>
+                    <% if (locals.professor["office"]) { %>
+                        <h4>Office</h4>
+                        <p>
+                            <%= professor["office"] %>
+                        </p>
+                    <% } %>
+                    <% if (locals.professor["phoneNumber"]) { %>
+                        <h4>Phone Number</h4>
+                        <p>
+                            <%= professor["phoneNumber"] %>
+                        </p>
+                    <% } %>
                 </div>
             </td>
             <td class="col-6">
@@ -43,5 +55,6 @@
         </tr>
     </table>
     <%- include("nav", {current: "professor_select" }) %>
+    <script src="js/card_fix.js"></script>
 </body>
 </html>

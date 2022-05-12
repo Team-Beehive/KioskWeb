@@ -71,7 +71,7 @@
         const link = links[i];
         if ($($(link).children("a")[0]).attr("href") === current) 
         {
-            $(link).addClass("active")
+            $(link).addClass("active");
             $($(link).children("a")[0]).addClass("active");
             $($(link).children("a")[0]).attr("href", "#");
             $($(link).children("a")[0]).append(
