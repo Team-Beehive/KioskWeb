@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 const { readdirSync, mkdir } = require("fs");
+const res = require("express/lib/response");
 
 const good_chars = /[^A-Za-z0-9_-]/g;
 
@@ -40,6 +41,8 @@ express()
 
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
+
+    .get("/start", (req, res) => res.render("pages/start"))
 
     // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
     .get("/", (req, res) => res.render("pages/links"))

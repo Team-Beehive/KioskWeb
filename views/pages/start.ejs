@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("head") %>
+    <link rel="stylesheet" href="css/start.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="scroll">
+        <div><img src="images/frog1.jpg"></div>
+        <div><img src="images/frog2.jpg"></div>
+        <div><img src="images/frog3.jpg"></div>
+    </div>
+    <footer>
+        <a href="/"><h1 class="click">Tap here to start!</h1></a>
+    </footer>
+    <%- include("tail") %>
+    <script>
+        function animatethis(targetElement, speed) {
+            $(targetElement).animate({scrollLeft: 0}, {duration: 0, easing: "linear"});
+                var scrollWidth = $(targetElement).get(0).scrollWidth;
+                var clientWidth = $(targetElement).get(0).clientWidth;
+                $(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
+                {
+                    duration: speed,
+                    easing: "linear",
+                    complete:  () => {
+                        animatethis(targetElement, speed);
+                    }
+                });
+            };
+            $(".scroll").append("<div>" + $($(".scroll").children()[0]).html() + "</div>");
+            animatethis($('.scroll'), 50000);
+
+    </script>
+</body>
+</html>
