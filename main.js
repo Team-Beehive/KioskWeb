@@ -34,11 +34,10 @@ require('dns').resolve('www.google.com', function(err) {
             let classPages = new models.Pages();
             
             querySnapshot.forEach(doc => {
-                //sets all pages with no category key
                 tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("quick_facts"), doc.get("type"));
                 classPages.AddPageData(tempPage);
             })
-            //saves pages without key category to json
+
             collectionData.SavePagesJson(classPages);
         });
 
@@ -52,24 +51,19 @@ require('dns').resolve('www.google.com', function(err) {
 
                 data["Categories"].forEach(category => {
                     collectionData.AddCategories(category["categoryTitle"]);
-                    //classCategory = new models.Category(category["categoryTitle"]);
 
                     if(category["relatedDegrees"] != null){
                         category["relatedDegrees"].forEach(relatedDegree => { 
                             
                             pageData.pages.forEach(page =>{
-                                //console.log(page);
                                 if(page.id == relatedDegree.id && page.keyCategories.length == 0){
                                     page.keyCategories.push(category["categoryTitle"]);
                                     classPages.AddPageData(page);
-                                    //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
                                 }
                                 if(page.id == relatedDegree.id && page.keyCategories.length != 0){
                                     page.keyCategories.push(category["categoryTitle"]);
                                 }
-                                
                             })
-                            //console.log("------------------")
                         });
                     }
 
@@ -88,21 +82,18 @@ require('dns').resolve('www.google.com', function(err) {
                 professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
             })
 
-            
-            //console.log(professors.professors);
             professors.SaveProfessorsJson(professors);
         });
 
+        //save all buildings
         getDocs(collection(db, "pages", "Map", "Buildings")).then((querySnapshot) => {
             buildings = new models.Buildings();
 
             querySnapshot.forEach(building => {
                 buildings.AddBuilding(new models.Building(building.id, building.get("majors"), building.get("nameInfo"), building.get("professors"), building.get("roomTypes"), building.get("year")));
-                console.log(building.id);
             })
 
             buildings.SaveBuildingsJson(buildings);
-            console.log(buildings);
         });
     }
 });   

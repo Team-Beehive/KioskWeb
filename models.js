@@ -156,7 +156,7 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.log("There has been an error reading data from credentials.JSON");
+            console.log("There has been an error reading credentials from credentials.JSON make sure everyting is correct in the file.");
             console.log(err);
         }
     }
@@ -185,10 +185,11 @@ module.exports.Professors = class Professors{
     GetProfessors(){
         return this.professors;
     }
-
+    /*
     GetSourtedProfessors(){
         return this.professors.sort();
     }
+    */
 
     SaveProfessorsJson(myObj){
         var jdata = JSON.stringify(myObj);
@@ -257,7 +258,7 @@ module.exports.Buildings = class Buildings{
         }); 
     }
 
-    GetProfessorsJson()
+    GetBuildingsJson()
     {
         var data = fs.readFileSync("./buildings.json"), myObj;
 
