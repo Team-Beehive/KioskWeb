@@ -9,7 +9,7 @@ $(() => {
         var scrollWidth = $(targetElement).get(0).scrollWidth;
         var clientWidth = $(targetElement).get(0).clientWidth;
 
-        $(targetElement).scrollLeft((scrollWidth - $(first).width()) / 2 + $(first).width() - $(window).width());
+        $(targetElement).scrollLeft((scrollWidth - $(first).width()) / 2 + $(first).width() - clientWidth);
 
         $(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
             {
