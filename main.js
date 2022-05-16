@@ -1,12 +1,6 @@
 /* eslint-disable no-undef */
 const express = require("express");
-const { initializeApp } = require("firebase/app");
 
-// old main includes
-//const { getFirestore, /*collection,*/ doc, getDoc,/*, getDocs*/ collection} = require("firebase/firestore");
-//const { builtinModules } = require("module");
-
-const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/firestore");
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
@@ -19,19 +13,101 @@ function cleanString(string)
     return string.replace(good_chars, "");
 }
 
+//checks for internet connection by pinging google.com
+require("dns").resolve("www.google.com", function(err) {
+    if (err) {
+        //no connection no firestore
+        console.log("No connection, pulling from offline database.");
+    } else {
+        console.log("Connected, updating offline database");
+        //if connected to internet add needed requires, pull data and save to json
+        const { initializeApp } = require("firebase/app");
+        const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/firestore");
 
-const app = initializeApp({
-    apiKey: "AIzaSyCwReoKDSMZgqVD1BvOb5aUQi3QJALE7hc",
-    authDomain: "oit-kiosk.firebaseapp.com",
-    projectId: "oit-kiosk",
-    storageBucket: "oit-kiosk.appspot.com",
-    messagingSenderId: "622074473491",
-    appId: "1:622074473491:web:f3fb2717a8577b8ff963e6",
-    measurementId: "G-BYNMKM80XC"
-});
+        let collectionData = new models.CollectionData();
+        jsonCredentials = collectionData.GetCredentialsJson();
+        const app = initializeApp({
+            apiKey: jsonCredentials.apiKey,
+            authDomain: jsonCredentials.authDomain,
+            projectId: jsonCredentials.projectId,
+            storageBucket: jsonCredentials.storageBucket,
+            messagingSenderId: jsonCredentials.messagingSenderId,
+            appId: jsonCredentials.appId,
+            measurementId: jsonCredentials.measurementId
+        });
+        const db = getFirestore(app);
 
-const db = getFirestore(app);
+        //save all pages
+        getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
+            let classPages = new models.Pages();
+            
+            querySnapshot.forEach(doc => {
+                mkdir("public/images/Majors/" + cleanString(doc.id), () => { });
+                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("quick_facts"), doc.get("type"));
+                classPages.AddPageData(tempPage);
+            });
 
+            collectionData.SavePagesJson(classPages);
+        });
+
+        //save all categories and gets key categories
+        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) =>{
+            if(snapshot != undefined){
+
+                let data = snapshot.data(options);
+                let classPages = new models.Pages();
+                pageData = collectionData.GetPagesJson();
+
+                data["Categories"].forEach(category => {
+                    collectionData.AddCategories(category["categoryTitle"]);
+                    mkdir("public/images/Categories/" + cleanString(category["categoryTitle"]), () => { });
+
+                    if(category["relatedDegrees"] != null){
+                        category["relatedDegrees"].forEach(relatedDegree => { 
+                            
+                            pageData.pages.forEach(page =>{
+                                if(page.id == relatedDegree.id && page.keyCategories.length == 0){
+                                    page.keyCategories.push(category["categoryTitle"]);
+                                    classPages.AddPageData(page);
+                                }
+                                if(page.id == relatedDegree.id && page.keyCategories.length != 0){
+                                    page.keyCategories.push(category["categoryTitle"]);
+                                }
+                            });
+                        });
+                    }
+
+                    collectionData.SavePagesJson(classPages);
+                });
+
+                collectionData.SaveCategoriesJson(collectionData);
+            }
+        });
+       
+        //save all professors
+        getDocs(collection(db, "pages", "Professors", "Professors")).then((querySnapshot) => {
+            professors = new models.Professors();
+
+            querySnapshot.forEach(professor => {
+                mkdir("public/images/Professors/" + cleanString(professor.id), () => { });
+                professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
+            });
+
+            professors.SaveProfessorsJson(professors);
+        });
+
+        //save all buildings
+        getDocs(collection(db, "pages", "Map", "Buildings")).then((querySnapshot) => {
+            buildings = new models.Buildings();
+
+            querySnapshot.forEach(building => {
+                buildings.AddBuilding(new models.Building(building.id, building.get("majors"), building.get("nameInfo"), building.get("professors"), building.get("roomTypes"), building.get("year")));
+            });
+
+            buildings.SaveBuildingsJson(buildings);
+        });
+    }
+});   
 
 express()
     .use(express.static(path.join(__dirname, "public")))
@@ -140,75 +216,8 @@ express()
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
-    .listen(PORT, () => {
-        let collectionData = new models.CollectionData();
-
-        //gets all pages
-        getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
-            let classPages = new models.Pages();
-
-            querySnapshot.forEach(doc => {
-                mkdir("public/images/Majors/" + cleanString(doc.id), () => { });
-                //sets all pages with no category key
-                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"), doc.get("quick_facts"));
-                classPages.AddPageData(tempPage);
-            });
-            //saves pages without key category to json
-            collectionData.SavePagesJson(classPages);
-        });
-
-
-
-        //gets all categories
-        getDoc(doc(db, "pages", "Majors")).then((snapshot, options) => {
-            if (snapshot != undefined) {
-
-                let data = snapshot.data(options);
-                let classPages = new models.Pages();
-                pageData = collectionData.GetPagesJson();
-
-                data["Categories"].forEach(category => {
-                    collectionData.AddCategories(category["categoryTitle"]);
-                    mkdir("public/images/Categories/" + cleanString(category["categoryTitle"]), () => { });
-                    //classCategory = new models.Category(category["categoryTitle"]);
-
-                    //list of degrees under a category
-                    category["relatedDegrees"].forEach(relatedDegree => {
-
-                        pageData.pages.forEach(page => {
-                            //console.log(page);
-                            if (page.id == relatedDegree.id && page.keyCategories.length == 0) {
-                                page.keyCategories.push(category["categoryTitle"]);
-                                classPages.AddPageData(page);
-                                //console.log("  ===>", page.id, "-->", category["categoryTitle"]);
-                            }
-                            if (page.id == relatedDegree.id && page.keyCategories.length != 0) {
-                                page.keyCategories.push(category["categoryTitle"]);
-                            }
-
-                        });
-                        //console.log("------------------")
-                    });
-
-                    collectionData.SavePagesJson(classPages);
-                });
-                //saves all data to json here
-                collectionData.SaveCategoriesJson(collectionData);
-            }
-        });
-
-        getDocs(collection(db, "pages", "Professors", "Professors")).then((querySnapshot) => {
-            professors = new models.Professors();
-
-            querySnapshot.forEach(professor => {
-                mkdir("public/images/Professors/" + cleanString(professor.id), () => {});
-                professors.AddProfessor(new models.Professor(professor.id, professor.get("department"), professor.get("email"), professor.get("office"), professor.get("phone_number")));
-            });
-
-            professors.SaveProfessorsJson(professors);
-        });
-
-
-        console.log(`Started server on http://localhost:${PORT}\n\nReady!`);
+    .listen(PORT, () =>
+    {
+        console.log(`Started server on http://localhost:${ PORT }`);
     });
 
