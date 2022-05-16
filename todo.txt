@@ -14,7 +14,10 @@ Keyboard
 Mouse
 micro hdmi cable x 2
 
+Welcome to OIT text on start 
 
 chown root
 
 col-<%- 12 / images.length - 1 %>
+
+get pi connected to wifi
