@@ -10,26 +10,28 @@
 <body>
     
     <table class="container-fluid">
-        <% if (building.images.length >= 1) %>
+        <% if (images.length > 2) { %>
             <tr class="row m-auto">
                 <td class="col-12 cover main" id="building-crop-1">
-                    <img src="<%= building.images[0] %>">
+                    <img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[0] %>">
                 </td>
             </tr>
+        <% } %>
         <tr class="row m-auto">
-            <% switch (building.images.length)
+            <% switch (images.length)
             {
                 case 4: %>
-                <td class="col-4 cover"><img src="<%= building.images[1] %>"></td>
-                <td class="col-4 cover"><img src="<%= building.images[2] %>"></td>
-                <td class="col-4 cover"><img src="<%= building.images[3] %>"></td>
+                <td class="col-4 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
+                <td class="col-4 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[2] %>"></td>
+                <td class="col-4 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[3] %>"></td>
             <% break;
                 case 3: %>
-                <td class="col-6 cover"><img src="<%= building.images[1] %>"></td>
-                <td class="col-6 cover"><img src="<%= building.images[2] %>"></td>
+                <td class="col-6 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
+                <td class="col-6 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[2] %>"></td>
             <% break;
                 case 2: %>
-                <td class="col-12 cover"><img src="<%= building.images[1] %>"></td>
+                <td class="col-6 cover main"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[0] %>"></td>
+                <td class="col-6 cover main"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
             <% break;
             } %>
         </tr>

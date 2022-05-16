@@ -13,7 +13,7 @@
             <% Object.keys(buildings).forEach((name) => { %>
                 <div class="col-3 p-1">
                     <a href="/building?page=<%- name %>">
-                        <div class="oit-card" style="background-image: url(' <%- buildings[name].images[0] %>')">
+                        <div class="oit-card" style="background-image: url('images/Buildings/<%- cleanString(name)%>/<%- images[name][0] %>')">
                             <div class="oit-card-text">
                                 <p>
                                     <%= buildings[name].name // It's confusing but it works %> 

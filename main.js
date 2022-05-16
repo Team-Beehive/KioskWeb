@@ -13,8 +13,12 @@ function cleanString(string)
     return string.replace(good_chars, "");
 }
 
-//checks for internet connection by pinging google.com
-require("dns").resolve("www.google.com", function(err) {
+var professors;
+var buildings;
+var classPages;
+
+// Pinging is disallowed in Purvine. This seems to be more reliable.
+require("dns").lookupService("8.8.8.8", 53, function(err) {
     if (err) {
         //no connection no firestore
         console.log("No connection, pulling from offline database.");
@@ -39,11 +43,11 @@ require("dns").resolve("www.google.com", function(err) {
 
         //save all pages
         getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
-            let classPages = new models.Pages();
+            classPages = new models.Pages();
             
             querySnapshot.forEach(doc => {
                 mkdir("public/images/Majors/" + cleanString(doc.id), () => { });
-                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("quick_facts"), doc.get("type"));
+                tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"), doc.get("quick_facts"));
                 classPages.AddPageData(tempPage);
             });
 
@@ -101,6 +105,7 @@ require("dns").resolve("www.google.com", function(err) {
             buildings = new models.Buildings();
 
             querySnapshot.forEach(building => {
+                mkdir("public/images/Buildings/" + cleanString(building.id), () => {});
                 buildings.AddBuilding(new models.Building(building.id, building.get("majors"), building.get("nameInfo"), building.get("professors"), building.get("roomTypes"), building.get("year")));
             });
 
@@ -127,7 +132,12 @@ express()
     .get("/links", (req, res) => res.render("pages/links"))
 
     .get("/building_select", (req, res) => {
-        res.render("pages/building_select", { buildings: models.buildings });
+        var images = {};
+        Object.keys(buildings.buildings).forEach((name) =>
+        {
+            images[name] = readdirSync("public/images/Buildings/" + cleanString(name));
+        });
+        res.render("pages/building_select", { buildings: buildings.buildings, images: images, cleanString: cleanString });
     })
     .get("/major_select", (req, res) => {
 
@@ -173,9 +183,12 @@ express()
     })
     .get("/building", (req, res) => {
         let building = req.query.page;
+        let images = readdirSync("public/images/Buildings/" + cleanString(building));
         res.render("pages/building", {
-            building: models.buildings[building],
-            secret: building == "Purvine"
+            building: buildings.buildings[building],
+            secret: building == "Purvine",
+            images: images,
+            cleanString: cleanString
         }); // If building is not Purvine, secret is false
     })
     .get("/major", (req, res) => {

@@ -9,14 +9,9 @@
 
 <h1 class="center">Staff Directory</h1>
 <%
-for (var key in professors)
-{
-    let lastName = professors[key].name.split(" ");
-    professors[key].lastName = lastName[lastName.length - 1];
-}
 let ordered = Object.values(professors).sort((a, b) => {
     // I don't know how this works but it does. Should return the same as c strcmp though.
-    return ( ( a.lastName == b.lastName ) ? 0 : ( ( a.lastName > b.lastName ) ? 1 : -1 ) );
+    return ( ( a.last_name == b.last_name ) ? 0 : ( ( a.last_name > b.last_name ) ? 1 : -1 ) );
 });
 
 ordered.forEach((professor) => { %>

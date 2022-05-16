@@ -235,17 +235,18 @@ module.exports.Building = class Building{
 };
 
 module.exports.Buildings = class Buildings{
-    buildings = [];
+    buildings = {};
 
     AddBuilding(building){
-        this.buildings.push(building);
+        this.buildings[building.name] = building;
     }
 
     GetBuildings(){
         return this.buildings;
     }
 
-    SaveBuildingsJson(myObj){
+    SaveBuildingsJson(myObj)
+    {
         var jdata = JSON.stringify(myObj);
     
         fs.writeFileSync("./buildings.json", jdata, function (err) {
