@@ -10,7 +10,7 @@
 <body>
     
     <table class="container-fluid">
-        <% if (images.length > 2) { %>
+        <% if (images.length >= 1 && images.length != 2) { %>
             <tr class="row m-auto">
                 <td class="col-12 cover main" id="building-crop-1">
                     <img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[0] %>">

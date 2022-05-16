@@ -186,7 +186,7 @@ express()
         let images = readdirSync("public/images/Buildings/" + cleanString(building));
         res.render("pages/building", {
             building: buildings.buildings[building],
-            secret: building == "Purvine",
+            secret: building == "Purvine Hall",
             images: images,
             cleanString: cleanString
         }); // If building is not Purvine, secret is false

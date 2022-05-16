@@ -1,7 +1,7 @@
 sudo npm i n --global
 sudo n i lts
 
-install firefox?
+install firefox or other browser?
 
 sed touchscreen catchall
 Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
@@ -16,3 +16,5 @@ micro hdmi cable x 2
 
 
 chown root
+
+col-<%- 12 / images.length - 1 %>
