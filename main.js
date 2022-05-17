@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const express = require("express");
 
 const PORT = process.env.PORT || 8080;
@@ -46,7 +45,7 @@ function Update()
                 const { getFirestore, collection, doc, getDoc, getDocs } = require("firebase/firestore");
 
                 let collectionData = new models.CollectionData();
-                jsonCredentials = collectionData.GetCredentialsJson();
+                let jsonCredentials = collectionData.GetCredentialsJson();
                 const app = initializeApp({
                     apiKey: jsonCredentials.apiKey,
                     authDomain: jsonCredentials.authDomain,
@@ -64,7 +63,7 @@ function Update()
 
                     querySnapshot.forEach(doc => {
                         mkdir("public/images/Majors/" + cleanString(doc.id), () => { });
-                        tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"), doc.get("quick_facts"));
+                        let tempPage = new models.PageData(doc.id, doc.get("about"), doc.get("campuses"), doc.get("type"), doc.get("quick_facts"));
                         classPages.AddPageData(tempPage);
                     });
 
@@ -76,7 +75,6 @@ function Update()
                     if (snapshot != undefined) {
 
                         let data = snapshot.data(options);
-                        let classPages = new models.Pages();
                         pageData = models.CollectionData.GetPagesJson();
 
                         data["Categories"].forEach(category => {
@@ -166,20 +164,20 @@ express()
         //Start: get amajor pages
         collectionData = new models.CollectionData();
         //gets the array of categories
-        classCollection = models.CollectionData.GetCategoriesJson();
+        let classCollection = models.CollectionData.GetCategoriesJson();
         //gets all the data for each page
         classPages = models.CollectionData.GetPagesJson();
 
         let images = {};
 
         classCollection.categories.forEach(category => {
-            tempCategory = new models.Category(category);
+            let tempCategory = new models.Category(category);
             images[cleanString(category)] = readdirSync("public/images/Categories/" + cleanString(category));
 
             //for each page in pages
             // console.log(pageData);
             Object.keys(pageData.pages).forEach((page) => {
-                count = 2;
+                let count = 2;
                 //for each category in page
                 pageData.pages[page].keyCategories.forEach(pageCategory => {
                     //if the category is in the pages categories
