@@ -20,19 +20,18 @@
         <tr class="row m-auto">
             <% switch (images.length)
             {
-                case 4: %>
-                <td class="col-4 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
-                <td class="col-4 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[2] %>"></td>
-                <td class="col-4 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[3] %>"></td>
-            <% break;
-                case 3: %>
-                <td class="col-6 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
-                <td class="col-6 cover"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[2] %>"></td>
-            <% break;
+                
                 case 2: %>
-                <td class="col-6 cover main"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[0] %>"></td>
-                <td class="col-6 cover main"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
-            <% break;
+                    <td class="col-6 cover main"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[0] %>"></td>
+                    <td class="col-6 cover main"><img src="images/Buildings/<%- cleanString(building.name) %>/<%- images[1] %>"></td>
+                <% break;
+                default:
+                    for (var i = 1; i < images.length; i++)
+                    { %>
+                        <td class="col-<%= 12 / (images.length - 1) %> cover"><img
+                                src="images/Buildings/<%- cleanString(building.name) %>/<%- images[i] %>"></td>
+                    <% }
+                    break;
             } %>
         </tr>
         <tr class="row m-auto">

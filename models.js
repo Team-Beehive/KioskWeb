@@ -15,14 +15,14 @@ module.exports.PageData = class PageData {
 
 //Class that holds all the page data in pages array , has a get set for pages. Takes nothing.
 module.exports.Pages = class Pages{
-    pages = [];
+    pages = {};
 
     GetPages(){
         return this.pages;
     }
     
     AddPageData(PageData){
-        this.pages.push(PageData);
+        this.pages[PageData.id] = PageData;
     }
 };
 
@@ -85,7 +85,7 @@ module.exports.CollectionData = class CollectionData
         console.log(this.datetime);
     }
 
-    GetCategoriesJson()
+    static GetCategoriesJson()
     {
         var data = fs.readFileSync("./categories.json"), myObj;
 
@@ -129,7 +129,7 @@ module.exports.CollectionData = class CollectionData
         }); 
     }
 
-    GetPagesJson()
+    static GetPagesJson()
     {
         var data = fs.readFileSync("./pages.json"), myObj;
 
@@ -156,7 +156,7 @@ module.exports.CollectionData = class CollectionData
             }
         }
         catch (err) {
-            console.error("There has been an error reading credentials from credentials.JSON make sure everyting is correct in the file.");
+            console.error("There has been an error reading credentials from credentials.JSON make sure everything is correct in the file.");
             console.error(err);
         }
     }
@@ -206,7 +206,7 @@ module.exports.Professors = class Professors{
         }); 
     }
 
-    GetProfessorsJson()
+    static GetProfessorsJson()
     {
         var data = fs.readFileSync("./professors.json"), myObj;
 
@@ -260,7 +260,7 @@ module.exports.Buildings = class Buildings{
         }); 
     }
 
-    GetBuildingsJson()
+    static GetBuildingsJson()
     {
         var data = fs.readFileSync("./buildings.json"), myObj;
 

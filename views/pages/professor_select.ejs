@@ -8,11 +8,44 @@
 <body>
 
 <h1 class="center">Staff Directory</h1>
+<div class="container-fluid m-0 p-0">
+    <div class="row m-0">
+        <div class="col-3 p-0 m-0 center">
+            <a href="/professor_select">
+                <div class="prof-card">
+                    <p class="name m-0">Sort by name</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-3 p-0 m-0 center">
+            <a href="/professor_select?sort=department">
+                <div class="prof-card">
+                    <p class="name m-0">Sort by department</p>
+                </div>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+   
 <%
-let ordered = Object.values(professors).sort((a, b) => {
+let ordered;
+if (sort == undefined)
+{
+    ordered = Object.values(professors).sort((a, b) => {
     // I don't know how this works but it does. Should return the same as c strcmp though.
-    return ( ( a.last_name == b.last_name ) ? 0 : ( ( a.last_name > b.last_name ) ? 1 : -1 ) );
-});
+        return ( ( a.last_name == b.last_name ) ? 0 : ( ( a.last_name > b.last_name ) ? 1 : -1 ) );
+    });
+}
+else if (sort == "department")
+{
+    ordered = Object.values(professors).sort((a, b) => {
+    // I don't know how this works but it does. Should return the same as c strcmp though.
+    return ( ( a.department == b.department ) ? 0 : ( ( a.department > b.department ) ? 1 : -1 ) );
+    });
+}
+
 
 ordered.forEach((professor) => { %>
 

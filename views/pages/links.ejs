@@ -11,6 +11,7 @@
     <h1 class="title">Link Page</h1>
     <div>
         <% if (locals.message) { %> <p> <%= message %> </p> <% } %>
+        <p><a href="update">Update Kiosk Data</a></p>
         <p><a href="start">Start page</a></p>
         <p><a href="home_page">Home Page</a></p>
         <hr/>
@@ -29,4 +30,9 @@
     </div>
 <%- include("tail"); %>
 </body>
+<% if (locals.redirect) { %>
+<script>
+    location.href = "/<%- redirect %>";
+</script>
+<% } %>
 </html>
