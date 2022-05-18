@@ -15,8 +15,8 @@ apt -y install firefox-esr # Firefox is needed for a better scroll
 chmod +x start
 chmod +x get-login
 # Move start script and other useful scripts to home directory
-mv start ~/Desktop
-mv get-login ~/Desktop
+mv start ../../Desktop
+mv get-login ../../Desktop
 # Make shortcut to images folder on home directory
 ln -s ~/KioskWeb/public/images ~/images
 # add current directory (.) to PATH variable so they can just type start instead of ./start
@@ -27,7 +27,8 @@ sshd
 # Display kiosk ip and username, and prompt password that will be used for Filezilla
 ~/get-login
 
-passwd
+# No more password input as it's handled by the os now
+# passwd
 
 
 echo "Setup complete!"

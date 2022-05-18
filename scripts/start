@@ -12,8 +12,8 @@ git pull origin
 chmod +x scripts/start
 chmod +x scripts/get-login
 
-mv scripts/start ~/Desktop
-mv scripts/get-login ~/Desktop
+mv scripts/start ../Desktop
+mv scripts/get-login ../Desktop
 
 npm i
 
