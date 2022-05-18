@@ -9,15 +9,16 @@ apt -y install nodejs
 apt -y install openssh # Openssh will allow filezilla to connect to kiosk
 apt -y install termux-auth # Makes passwd available 
 apt -y install termux-api # Wrapper for Termux:API application
+apt -y install firefox-esr # Firefox is needed for a better scroll
 
 # Make other scripts runnable
 chmod +x start
 chmod +x get-login
 # Move start script and other useful scripts to home directory
-mv start ~
-mv get-login ~
+mv start ~/Desktop
+mv get-login ~/Desktop
 # Make shortcut to images folder on home directory
-ln -s ./public/images ~/images
+ln -s ~/KioskWeb/public/images ~/images
 # add current directory (.) to PATH variable so they can just type start instead of ./start
 echo "PATH=.:$PATH;export PATH" >> ~/.bashrc
 
@@ -35,4 +36,4 @@ echo "Setup complete!"
 # can immediately start using the new .bashrc
 # Doing so also appears to move to the user's home directory.
 # This MUST be at the last command executed.
-exec bash 
+# exec bash 
