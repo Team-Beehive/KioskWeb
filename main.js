@@ -4,6 +4,8 @@ const PORT = process.env.PORT || 8080;
 const path = require("path");
 const models = require("./models");
 const { readdirSync, mkdir } = require("fs");
+const { exec } = require("child_process");
+const { exit } = require("process");
 
 const good_chars = /[^A-Za-z0-9_-]/g;
 
@@ -11,6 +13,8 @@ function cleanString(string)
 {
     return string.replace(good_chars, "");
 }
+
+var firefox;
 
 var professors = new models.Professors();
 var buildings = new models.Buildings(); 
@@ -145,7 +149,7 @@ express()
     .get("/start", (req, res) => res.render("pages/start"))
 
     // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-    .get("/", (req, res) => res.render("pages/links"))
+    .get("/", (req, res) => res.render("pages/home_page"))
     // ^^^^^^ REMEMBER TO CHANGE FOR PRODUCTION ^^^^^^
 
     .get("/home_page", (req, res) => res.render("pages/home_page"))
@@ -270,11 +274,19 @@ express()
             res.render("pages/links", { message: callback ? "Updated Kiosk Data!" : "Unable to update kiosk data. Please connect to the internet." });
         });
     })
+    .get("/kill", () => {
+        if (firefox != undefined)
+        {
+            firefox.kill();
+        }
+        exit(0);
+    })
     .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
     {
         console.log(`Started server on http://localhost:${ PORT }`);
+        firefox = exec("firefox http://localhost:8080 -kiosk");
     });
 
