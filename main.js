@@ -121,7 +121,7 @@ function Update()
 
                     querySnapshot.forEach(building => {
                         mkdir("public/images/Buildings/" + cleanString(building.id), () => { });
-                        buildings.AddBuilding(new models.Building(building.id, building.get("majors"), building.get("nameInfo"), building.get("professors"), building.get("roomTypes"), building.get("year")));
+                        buildings.AddBuilding(new models.Building(building.id, building.get("majors"), building.get("name_info"), building.get("professors"), building.get("room_types"), building.get("year")));
                     });
 
                     buildings.SaveBuildingsJson(buildings);
@@ -287,6 +287,6 @@ express()
     .listen(PORT, () =>
     {
         console.log(`Started server on http://localhost:${ PORT }`);
-        firefox = exec("firefox http://localhost:8080 -kiosk");
+        firefox = exec("firefox http://localhost:8080/start -kiosk");
     });
 
