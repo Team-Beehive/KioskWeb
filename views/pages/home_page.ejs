@@ -18,9 +18,6 @@
                 <td class="col-8">
                     <img class="img-fluid" src="images/logo.png">
                 </td>
-                <td class="col-4">
-                    <img class="img-fluid" src="images/hootie_logo.png">
-                </td>
             </tr>
         </div>
         <tr class="row" id="major_exploration">
@@ -32,73 +29,75 @@
         </tr>
         <tr class="row" id="popular_majors">
             <td class="col-12">
-                <h2 text-align="center">Most Popular Majors</h2>
+                <h2 text-align="center">Our most Popular Majors</h2>
             </td>
         </tr>
         <tr class="row">
             <!-- These still need the anchors for nav-->
             <!--I know it's sad that Software isn't here but these are the 2019 stats-->
-            <td class="col-3 p-1" id="card-img-1">
+            <td class="col-6 p-1">
                 <a href="major?page=Diagnostic Medical Sonography">
-                    <div class="oit-card" id="card-img-1" style="background-image: url('images/Majors/DiagnosticMedicalSonography/optimizedIMG_1705.jpg')">
+                    <div class="oit-card" style="background-image: url('images/Majors/DiagnosticMedicalSonography/optimizedIMG_1705.jpg')">
                         <div class="oit-card-text">
-                            <p id="major-1">Diagnostic Medical Sonography & Ultrasound Technician</p>
+                            <p id="major-1">Diagnostic Medical Sonography</p>
                         </div>
                     </div>
                 </a>
             </td>
-            <td class="col-3 p-1">
+            <td class="col-6 p-1">
                 <a  href="major?page=Mechanical Engineering">
-                    <div class="oit-card" id="card-img-2" style="background-image: url('images/Majors/MechanicalEngineering/mech-engineering.jpg')">
+                    <div class="oit-card" style="background-image: url('images/Majors/MechanicalEngineering/mech-engineering.jpg')">
                         <div class="oit-card-text">
                             <p id="major-2">Mechanical Engineering</p>
                         </div>
                     </div>
                 </a>
             </td>
-            <td class="col-3 p-1">
+            <td class="col-6 p-1">
                 <a href="major?page=Dental Hygiene">
-                    <div class="oit-card" id="card-img-3" style="background-image: url('images/Majors/DentalHygiene/students-with-suzanne.jpg')">
+                    <div class="oit-card" style="background-image: url('images/Majors/DentalHygiene/students-with-suzanne.jpg')">
                         <div class="oit-card-text">
                             <p id="major-3">Dental Hygiene</p>
                         </div>
                     </div>
                 </a>
             </td>
-            <td class="col-3 p-1">
-                <a href="major?page=Radiologic Science">
-                    <div class="oit-card" id="card-img-4" style="background-image: url('images/Majors/RadiologicScience/rad-science.jpg')">
+            <td class="col-6 p-1">
+                <a href="major_select">
+                    <div class="oit-card" style="background-image: url('images/hootie_logo.png')">
                         <div class="oit-card-text">
-                            <p id="major-4">Radiologic Science</p>
+                            <p id="major-4">More...</p>
                         </div>
                     </div>
                 </a>
             </td>
         </tr>
-        <tr class="row" id="major_link">
-            <td class="col-12">
-                <!--TODO: fix ref to pull data from JSON/Database-->
-                <a href="/major_select">All Majors</a>
+        <tr class="row">
+            <td class="col-6">
+                <h2>Get to know our staff & faculty!</h2>
+            </td>
+            <td class="col-6">
+                <h2>Learn our campus!</h2>
             </td>
         </tr>
         <tr class="row" id="professors_heading">
-            <td class="col-12">
-                <h1>Get to know the staff</h1>
+            <td class="col-6 p-1">
+                <a href="professor_select?sort=department">
+                    <div class="oit-card" style="background-image: url('images/Hootie-cutout.png');">
+                        <div class="oit-card-text">
+                            <p>Staff Directory</p>
+                        </div>
+                    </div>
+                </a>
             </td>
-        </tr>
-        <tr class="row" id="professor_directory">
-            <td class="col-12">
-                <p>click <a href="/professor_select">here</a> to view directory</p>
-            </td>
-        </tr>
-        <tr class="row" id="map_heading">
-            <td class="col-12">
-                <h1>Never get lost</h1>
-            </td>
-        </tr>
-        <tr class="row" id="map_body">
-            <td class="col-12">
-                <h2>Learn about the campus <a href="/building_select">here</a></h2>
+            <td class="col-6 p-1">
+                <a href="building_select">
+                    <div class="oit-card" style="background-image: url('images/Buildings/LearningResourceCenter/lrc1.jpg');">
+                        <div class="oit-card-text">
+                            <p>Campus Buildings</p>
+                        </div>
+                    </div>
+                </a>
             </td>
         </tr>
     </table>

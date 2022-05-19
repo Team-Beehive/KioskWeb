@@ -35,7 +35,6 @@ $(() => {
     let str = "";
 
     let len = $(".scroll").children().length;
-    console.log(len);
     if (len > 0)
     {
         for (let i = 0; i < len; i++) {
@@ -60,7 +59,7 @@ $(() => {
     }
     else
     {
-        $(".scroll").append("<p>There are no images in the slides folder!<br>Please add some.</p>");
+        $(".scroll").append("<p>There are no images in the images/Slides folder!<br>Please add some.</p>");
     }
     
 });

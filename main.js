@@ -60,7 +60,7 @@ function Update()
                     measurementId: jsonCredentials.measurementId
                 });
                 const db = getFirestore(app);
-
+                mkdir("public/images/Slides", () => { });
                 //save all pages
                 getDocs(collection(db, "pages", "Majors", "Degrees")).then((querySnapshot) => {
                     classPages = new models.Pages();
@@ -133,10 +133,7 @@ function Update()
     });
 }
 
-Update().then(() =>
-{
-    console.log("Pulled database.");
-});
+Update();
 
 express()
     .use(express.static(path.join(__dirname, "public")))
@@ -146,7 +143,12 @@ express()
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
 
-    .get("/start", (req, res) => res.render("pages/start"))
+    .get("/start", (req, res) => 
+    {
+        var images = readdirSync("public/images/Slides");
+        res.render("pages/start", {images});
+
+    })
 
     // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
     .get("/", (req, res) => res.render("pages/home_page"))
@@ -161,7 +163,7 @@ express()
         {
             images[name] = readdirSync("public/images/Buildings/" + cleanString(name));
         });
-        res.render("pages/building_select", { buildings: buildings.buildings, images: images, cleanString: cleanString });
+        res.render("pages/building_select", { buildings: buildings.buildings, images, cleanString });
     })
     .get("/major_select", (req, res) => {
 
@@ -201,7 +203,7 @@ express()
             collectionData.AddCategoryData(tempCategory);
         }); //End: get major pages
 
-        res.render("pages/major_select", { categories: collectionData.categoryData, images: images, cleanString: cleanString });
+        res.render("pages/major_select", { categories: collectionData.categoryData, images, cleanString });
     })
     .get("/professor_select", (req, res) => {
         res.render("pages/professor_select", {professors: professors.professors, sort: req.query.sort});
@@ -216,8 +218,8 @@ express()
                 res.render("pages/building", {
                     building: buildings.buildings[building],
                     secret: building == "Purvine Hall",
-                    images: images,
-                    cleanString: cleanString
+                    images,
+                    cleanString
                 }); // If building is not Purvine, secret is false
             }
             else {
@@ -239,7 +241,7 @@ express()
             let page = classPages.pages[major];
             if (page != undefined) {
                 var images = readdirSync("public/images/Majors/" + cleanString(page.id));
-                res.render("pages/major", { major: page, images: images, cleanString: cleanString });
+                res.render("pages/major", { major: page, images, cleanString });
                 rendered = true;
             }
         }
@@ -254,8 +256,8 @@ express()
                 let images = readdirSync("public/images/Professors/" + cleanString(professor));
                 res.render("pages/professor", {
                     professor: data,
-                    images: images,
-                    cleanString: cleanString
+                    images,
+                    cleanString
                 });
             }
             else {
@@ -266,22 +268,22 @@ express()
             res.render("pages/404");
         }
     })
-    .get("/update", (req, res) => { 
-        res.render("pages/links", {message: "Attempting to get kiosk data...", redirect: "update2"});
+    .get("/request_update", (req, res) => { 
+        res.render("pages/links", {message: "Attempting to get kiosk data...", redirect: "update"});
     })
-    .get("/update2", (req, res) => {
+    .get("/update", (req, res) => {
         Update().then((callback) => {
-            res.render("pages/links", { message: callback ? "Updated Kiosk Data!" : "Unable to update kiosk data. Please connect to the internet." });
+            res.render("pages/links", { message: callback ? "Updated Kiosk Data!" : "Unable to update kiosk data. Please confirm that you are connected to the internet." });
         });
     })
     .get("/kill", () => {
+        // End the firefox process
         if (firefox != undefined)
         {
             firefox.kill();
         }
         exit(0);
     })
-    .get("/old_building_select", (req, res) => res.render("pages/old_building_select"))
     .get("*", (req, res) => res.render("pages/404")) // 404 Handler
     .disable("x-powered-by") // Prevents end users from knowing that the server is express
     .listen(PORT, () =>
