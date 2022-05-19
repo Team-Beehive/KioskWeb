@@ -10,5 +10,15 @@ export default
             name: "bootstrap"
         },
         plugins: [nodeResolve()]
+    },
+    {
+        input: "./imports/jquery_ui_import.js",
+        output: {
+            file: "./build/jquery_ui.bundle.js",
+            format: "iife",
+            name: "jquery_ui"
+        },
+        treeshake: false,
+        plugins: [nodeResolve()]
     }
 ];
