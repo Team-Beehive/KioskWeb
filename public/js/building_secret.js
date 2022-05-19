@@ -1,4 +1,5 @@
 $(() => {
+    console.log($.ui === undefined);
     $("#secret").draggable();
     $("#secret-drop").droppable(
         {
