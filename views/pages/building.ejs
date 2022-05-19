@@ -41,21 +41,21 @@
                     <h5>Built</h5>
                     <p><%= building.year %></p>
                 <% }
-                if (locals.building.roomTypes && locals.building.roomTypes[0] != "")
+                if (locals.building.roomTypes && locals.building.roomTypes[0])
                 { %>
                     <h5>Rooms</h5>
                     <% building.roomTypes.forEach(room => { %>
                         <p><%= room %></p>
                     <% });
                 }
-                if (locals.building.majors && locals.building.majors[0] != "")
+                if (locals.building.majors && locals.building.majors[0])
                 { %>
                     <h5>Primary Majors</h5>
                     <% building.majors.forEach(major => { %>
                         <p><%= major %></p>
                     <% });
                 } %>
-                <% if (locals.building.professors && locals.building.professors[0] != "") { %>
+                <% if (locals.building.professors && locals.building.professors[0]) { %>
                     <h5>Professors in this building</h5>
                     <% building.professors.forEach(professor => { %>
                         <p><%= professor %></p>
