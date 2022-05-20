@@ -29,11 +29,9 @@
     "jquery-ui": "^1.13.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.2.1",
     "eslint": "^8.13.0",
     "rollup": "^2.70.2",
-    "rollup-plugin-amd": "^4.0.0",
     "sass": "^1.50.0"
   }
 }
