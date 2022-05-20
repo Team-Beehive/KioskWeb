@@ -8,6 +8,16 @@
     }
 }
 
+// img,
+// a {
+//         user-drag: none;
+//         -webkit-user-drag: none;
+//         user-select: none;
+//         -moz-user-select: none;
+//         -webkit-user-select: none;
+//         -ms-user-select: none;
+// }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
     display: none;
@@ -32,7 +42,12 @@ html {
 
     // Disallow selecting of text for a better user experience on the kiosk
     user-select: none;
-    cursor: none;
+    // cursor: none;
+}
+
+html
+{
+    // cursor: none;
 }
 
 @include headings
