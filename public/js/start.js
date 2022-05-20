@@ -54,8 +54,9 @@ $(() => {
 
         // Append the first image to the last spot for 'infinite' scrolling
         $(".scroll").append(inDiv($(first).html()));
-
-        animateThis($(".scroll"), first, 25000 * 2);
+        // scrollWidth = $(".scroll").get(0).scrollWidth;
+        
+        animateThis($(".scroll"), first, scrollWidth / 4 * 10);
     }
     else
     {
