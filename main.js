@@ -14,7 +14,7 @@ function cleanString(string)
     return string.replace(good_chars, "");
 }
 
-var firefox;
+var browser;
 
 var professors = new models.Professors();
 var buildings = new models.Buildings(); 
@@ -278,9 +278,9 @@ express()
     })
     .get("/kill", () => {
         // End the firefox process
-        if (firefox != undefined)
+        if (browser != undefined)
         {
-            firefox.kill();
+            browser.kill();
         }
         exit(0);
     })
@@ -289,6 +289,6 @@ express()
     .listen(PORT, () =>
     {
         console.log(`Started server on http://localhost:${ PORT }`);
-        firefox = exec("env MOZ_USE_XINPUT2=1 firefox http://localhost:8080/start -kiosk");
+        browser = exec("chromium http://localhost:8080/start --kiosk");
     });
 
