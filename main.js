@@ -289,6 +289,6 @@ express()
     .listen(PORT, () =>
     {
         console.log(`Started server on http://localhost:${ PORT }`);
-        browser = exec("chromium-browser http://localhost:8080/start -kiosk");
+        browser = exec("chromium-browser http://localhost:8080/start --kiosk");
     });
 
