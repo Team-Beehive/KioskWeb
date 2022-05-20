@@ -42,12 +42,12 @@ html {
 
     // Disallow selecting of text for a better user experience on the kiosk
     user-select: none;
-    cursor: none;
+    // cursor: none;
 }
 
 html
 {
-    cursor: none;
+    // cursor: none;
 }
 
 @include headings
@@ -111,7 +111,9 @@ html
     padding: 5px 5px !important;
     margin-bottom: 2px;
 
-    height: 100vh;
+    // display: flex !important;
+    // flex-flow: column;
+    // height: 100%;
     
     background-color: $oit_blue;
 

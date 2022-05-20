@@ -133,7 +133,7 @@ function Update()
     });
 }
 
-Update();
+Update().then(() => console.log("Done."));
 
 express()
     .use(express.static(path.join(__dirname, "public")))
