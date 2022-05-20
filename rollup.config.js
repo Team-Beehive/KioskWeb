@@ -1,4 +1,4 @@
-// import commonjs from "@rollup/plugin-commonjs";
+import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 export default
@@ -19,7 +19,6 @@ export default
             format: "iife",
             name: "jquery_ui"
         },
-        treeshake: false,
-        plugins: [nodeResolve()]
+        plugins: [nodeResolve(), commonjs()]
     }
 ];

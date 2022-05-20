@@ -110,9 +110,10 @@
         <div id="secret-drop"></div>
     <% } %>
     
-    <%- // include("nav", {current: "building_select" }) %>
+    <%- include("nav", {current: "building_select" }) %>
     
     <% if (secret) {%>
+        <script>var exports = {};</script>
         <script src="build/jquery_ui.bundle.js"></script>
         <script src="js/building_secret.js"></script>
     <% } %>

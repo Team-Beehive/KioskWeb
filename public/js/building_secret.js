@@ -1,10 +1,10 @@
 $(() => {
     console.log($.ui === undefined);
-    $("#secret").draggable();
+    $("#secret").draggable({revert: true, revertDuration: 0});
     $("#secret-drop").droppable(
         {
             drop: function () {
-                alert("I am dropped");
+                location.href = "/links";
             }
         });
 });
