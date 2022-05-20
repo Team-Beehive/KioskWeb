@@ -289,6 +289,6 @@ express()
     .listen(PORT, () =>
     {
         console.log(`Started server on http://localhost:${ PORT }`);
-        browser = exec("firefox http://localhost:8080/start -kiosk");
+        browser = exec(" env MOZ_USE_XINPUT2=1 firefox http://localhost:8080/start -kiosk");
     });
 
