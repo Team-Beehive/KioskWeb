@@ -1,5 +1,11 @@
 @import "colors.scss";
 
+:root
+{
+    --banner-speed: 60s;
+    --repeat-at: -50%;
+}
+
 .click
 {
     position: fixed;
@@ -27,19 +33,24 @@ a
     overflow: hidden;
 }
 
-.photobanner {
+// Mostly taken from https://stackoverflow.com/a/63454409
+
+.photobanner 
+{
     position: absolute;
     top: 0px;
     left: 0px;
     overflow: hidden;
-    animation: bannermove 30s linear infinite;
+    animation: bannermove var(--banner-speed) linear infinite;
     display: flex;
     justify-content: flex-end;
-}
-img {
-    margin-left: auto;
-    order: 2;
-    height: 100vh;
+
+    img 
+    {
+            margin-left: auto;
+            order: 2;
+            height: 100vh;
+    }
 }
 
 @keyframes bannermove {
@@ -48,6 +59,6 @@ img {
     }
 
     100% {
-        transform: translate(-50%, 0);
+        transform: translate(var(--repeat-at), 0);
     }
 }
