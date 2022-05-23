@@ -31,10 +31,6 @@ $(() => {
         $(".photobanner").append(first.outerHTML);
 
         documentWidth = $(document).width();
-        bannerWidth = $($(".photobanner").get(0)).width();
-
-        // document.documentElement.style
-        //     .setProperty("--start-image-percent", -1 * ((bannerWidth - $(first).width()) / 2 + $(first).width() - documentWidth) / bannerWidth * 100 + "%");
     }
     else
     {

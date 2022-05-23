@@ -1,10 +1,5 @@
 @import "colors.scss";
 
-:root
-{
-    --start-image-percent: -50%
-}
-
 .click
 {
     position: fixed;
@@ -37,11 +32,13 @@ a
     top: 0px;
     left: 0px;
     overflow: hidden;
-    white-space: nowrap;
     animation: bannermove 30s linear infinite;
+    display: flex;
+    justify-content: flex-end;
 }
-
 img {
+    margin-left: auto;
+    order: 2;
     height: 100vh;
 }
 
