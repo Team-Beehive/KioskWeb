@@ -1,16 +1,8 @@
 @import "colors.scss";
 
-.scroll
+:root
 {
-    display: flex;
-    div
-    {
-        img
-        {
-            height: 100vh;
-        }
-        flex: 1;
-    }
+    --start-image-percent: -50%
 }
 
 .click
@@ -30,4 +22,35 @@ a
 {
     color: white;
     text-decoration: none;
+}
+
+
+
+#container {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.photobanner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: bannermove 30s linear infinite;
+}
+
+img {
+    height: 100vh;
+}
+
+@keyframes bannermove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-50%, 0);
+    }
 }

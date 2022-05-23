@@ -8,6 +8,7 @@
     }
 }
 
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
     display: none;
@@ -32,6 +33,12 @@ html {
 
     // Disallow selecting of text for a better user experience on the kiosk
     user-select: none;
+    cursor: none;
+}
+
+html
+{
+    cursor: none;
 }
 
 @include headings
@@ -94,8 +101,17 @@ html {
 {
     padding: 5px 5px !important;
     margin-bottom: 2px;
+
+    // display: flex !important;
+    // flex-flow: column;
+    // height: 100%;
     
     background-color: $oit_blue;
+
+    a:hover
+    {
+        color: white;
+    }
 
     *
     {
@@ -157,7 +173,7 @@ html {
         padding-top: 100%;
     }
 
-    &:hover &-text
+    &:active &-text
     {
         height: 30%;
     }

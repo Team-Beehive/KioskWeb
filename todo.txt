@@ -19,3 +19,5 @@ Welcome to OIT text on start
 chown root
 
 get pi connected to wifi
+
+Finish buildings info

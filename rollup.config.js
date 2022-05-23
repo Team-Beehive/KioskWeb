@@ -1,3 +1,4 @@
+import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 export default
@@ -10,5 +11,14 @@ export default
             name: "bootstrap"
         },
         plugins: [nodeResolve()]
+    },
+    {
+        input: "./imports/jquery_ui_import.js",
+        output: {
+            file: "./build/jquery_ui.bundle.js",
+            format: "iife",
+            name: "jquery_ui"
+        },
+        plugins: [nodeResolve(), commonjs()]
     }
 ];

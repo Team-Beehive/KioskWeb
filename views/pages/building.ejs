@@ -37,25 +37,41 @@
         <tr class="row m-auto">
             <td class="col-4 blue-box">
                 <h4>Quick Facts</h4>
-                <h5>Built</h5>
-                <p>0000</p>
-                <h5>Primary Majors</h5>
-                <p>Software</p>
-                <p>Embedded</p>
-                <p>Electrical</p>
+                <% if (locals.building.year) { %>
+                    <h5>Built</h5>
+                    <p><%= building.year %></p>
+                <% }
+                if (locals.building.roomTypes && locals.building.roomTypes[0])
+                { %>
+                    <h5>Rooms</h5>
+                    <% building.roomTypes.forEach(room => { %>
+                        <p><%= room %></p>
+                    <% });
+                }
+                if (locals.building.majors && locals.building.majors[0])
+                { %>
+                    <h5>Primary Majors</h5>
+                    <% building.majors.forEach(major => { %>
+                        <p><%= major %></p>
+                    <% });
+                } %>
+                <% if (locals.building.professors && locals.building.professors[0]) { %>
+                    <h5>Professors in this building</h5>
+                    <% building.professors.forEach(professor => { %>
+                        <p><%= professor %></p>
+                    <% })
+                } %>
             </td>
             <td class="col-8">
                 <h1 class="title"><%= building.name %></h1>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, molestias praesentium! Minus eum,
-                    eaque laborum nemo quae eos velit aut at mollitia asperiores, sint unde dolorum doloribus
-                    repellendus modi dolores!
+                    <%= building.nameInfo %>
                 </p>
             </td>
         </tr>
 
     <!-- Images for this file are stored in css/building.scss -->
-    <tr class="row m-0">
+    <!-- <tr class="row m-0">
         <td class="col-3 p-1">
             <div class="oit-card" id="card-img-1">
                 <div class="oit-card-text">
@@ -86,14 +102,20 @@
                 </div>
             </div>
             
-        </td>
+        </td> -->
     </tr>
     </table>
     <% if (secret) { %>
-        <a id="secret" href="links"></a>
+        <div id="secret"></div>
+        <div id="secret-drop"></div>
     <% } %>
     
     <%- include("nav", {current: "building_select" }) %>
-    <%- include("tail"); %>
+    
+    <% if (secret) {%>
+        <script>var exports = {};</script>
+        <script src="build/jquery_ui.bundle.js"></script>
+        <script src="js/building_secret.js"></script>
+    <% } %>
 </body>
 </html>

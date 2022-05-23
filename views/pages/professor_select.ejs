@@ -11,19 +11,20 @@
 <div class="container-fluid m-0 p-0">
     <div class="row m-0">
         <div class="col-3 p-0 m-0 center">
-            <a href="/professor_select">
-                <div class="prof-card">
-                    <p class="name m-0">Sort by name</p>
-                </div>
-            </a>
-        </div>
-        <div class="col-3 p-0 m-0 center">
             <a href="/professor_select?sort=department">
                 <div class="prof-card">
                     <p class="name m-0">Sort by department</p>
                 </div>
             </a>
         </div>
+        <div class="col-3 p-0 m-0 center">
+            <a href="/professor_select">
+                <div class="prof-card">
+                    <p class="name m-0">Sort by name</p>
+                </div>
+            </a>
+        </div>
+        
         
         
     </div>
@@ -60,6 +61,6 @@ ordered.forEach((professor) => { %>
 
 <% }); %>
 <%- include("nav", {current: "professor_select"}); %>
-<%- include("tail"); %>    
+<script src="js/professor_select.js"></script>
 </body>
 </html>
