@@ -8,13 +8,15 @@
 </head>
 
 <body>
-    <div class="scroll">
-        <% if (locals.images.length !=0) {
-            images.forEach(image=> { %>
-                <div><img src="images/Slides/<%- image %>"></div>
-            <% }) 
-        } %>
+    <div id="container">
+        <div class="photobanner">
+            <% if (locals.images.length !=0) { images.forEach(image=> { %>
+                <img src="images/Slides/<%- image %>">
+                <% }) 
+            } %>
+        </div>
     </div>
+    
     <footer>
         <a href="/">
             <h1 class="click">Tap here to start!</h1>
