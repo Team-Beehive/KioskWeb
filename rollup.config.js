@@ -19,6 +19,7 @@ export default
             format: "iife",
             name: "jquery_ui"
         },
+        treeshake: false,
         plugins: [nodeResolve(), commonjs()]
     }
 ];
