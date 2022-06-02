@@ -19,21 +19,20 @@
     border-radius: 5000px;
 }
 
-a 
-{
+a {
     color: white;
     text-decoration: none;
 }
 
 
+// Mostly taken from https://stackoverflow.com/a/63454409
 
-#container {
+#container 
+{
     height: 100vh;
     position: relative;
     overflow: hidden;
 }
-
-// Mostly taken from https://stackoverflow.com/a/63454409
 
 .photobanner 
 {
@@ -53,7 +52,8 @@ a
     }
 }
 
-@keyframes bannermove {
+@keyframes bannermove 
+{
     0% {
         transform: translate(0, 0);
     }

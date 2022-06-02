@@ -41,5 +41,4 @@ $(() => {
     {
         $(".photobanner").append("<p>There are no images in the Slides folder!<br>Please add some.</p>");
     }
-    
 });

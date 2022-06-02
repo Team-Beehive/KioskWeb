@@ -33,12 +33,12 @@ html {
 
     // Disallow selecting of text for a better user experience on the kiosk
     user-select: none;
-    cursor: none;
+    // cursor: none;
 }
 
 html
 {
-    cursor: none;
+    // cursor: none;
 }
 
 @include headings

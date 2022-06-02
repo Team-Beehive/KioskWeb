@@ -33,6 +33,4 @@ function init() {
     document.addEventListener("touchcancel", touchHandler, true);
 }
 
-
-
 export { init };
