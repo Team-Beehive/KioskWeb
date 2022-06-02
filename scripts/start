@@ -7,7 +7,7 @@
 
 cd ../KioskWeb
 
-git pull origin
+git pull origin main
 
 chmod +x scripts/start
 chmod +x scripts/get-login
