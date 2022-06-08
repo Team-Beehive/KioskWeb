@@ -20,3 +20,5 @@ else
     # Otherwise, print the default Termux ssh port
     echo "Port: 8022" # While it's not the default port for most ssh configurations, it is for Termux
 fi
+
+read -n 1 -s -r -p "Press any key to continue"

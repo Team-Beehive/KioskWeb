@@ -3,9 +3,9 @@ sudo n i lts
 
 install firefox or other browser?
 
-sed touchscreen catchall
+copy libinput file from raspberry pi
 Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
-40-libinput.conf
+/usr/share/X11/xorg.conf.d/40-libinput.conf
 
 
 Get power supply x 2

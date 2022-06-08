@@ -5,15 +5,20 @@
 # apt update
 # apt -o Dpkg::Options::='--force-confold' -y upgrade
 
+# If one doesn't work than the other one should.
 cd ../KioskWeb
+cd KioskWeb
 
 git pull origin main
 
 chmod +x scripts/start
 chmod +x scripts/get-login
 
-mv scripts/start ../Desktop
-mv scripts/get-login ../Desktop
+cp scripts/start ../Desktop
+cp scripts/get-login ../Desktop
+
+cp scripts/start ../
+cp scripts/get-login ../
 
 npm i
 
