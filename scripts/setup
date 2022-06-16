@@ -7,7 +7,7 @@ apt -o Dpkg::Options::='--force-confold' -y upgrade # force-confold makes it so 
 # Install nessasary packages to run kiosk
 apt -y install nodejs
 apt -y install openssh # Openssh will allow filezilla to connect to kiosk
-apt -y install termux-auth # Makes passwd available 
+apt -y install termux-auth # Makes passwd available for termux
 apt -y install firefox-esr # Firefox is needed for a better scroll
 
 npm i n --global
