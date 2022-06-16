@@ -18,7 +18,7 @@
             </a>
         </div>
         <div class="col-3 p-0 m-0 center">
-            <a href="/professor_select">
+            <a href="/professor_select?sort=name">
                 <div class="prof-card">
                     <p class="name m-0">Sort by name</p>
                 </div>
@@ -32,14 +32,14 @@
    
 <%
 let ordered;
-if (sort == undefined)
+if (sort == "name")
 {
     ordered = Object.values(professors).sort((a, b) => {
     // I don't know how this works but it does. Should return the same as c strcmp though.
         return ( ( a.last_name == b.last_name ) ? 0 : ( ( a.last_name > b.last_name ) ? 1 : -1 ) );
     });
 }
-else if (sort == "department")
+else if (sort == "department" || sort == undefined)
 {
     ordered = Object.values(professors).sort((a, b) => {
     // I don't know how this works but it does. Should return the same as c strcmp though.
